@@ -1,7 +1,7 @@
 package com.example.shop.controller.item;
 
 import com.example.shop.controller.item.rqrs.CreateItemRq;
-import com.example.shop.domain.Item;
+import com.example.shop.domain.Item.Item;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
 import lombok.extern.slf4j.Slf4j;
@@ -10,14 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

@@ -1,6 +1,6 @@
 package com.example.shop.dao.item;
 
-import com.example.shop.domain.Item;
+import com.example.shop.domain.Item.Item;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 

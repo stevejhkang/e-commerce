@@ -1,7 +1,7 @@
 package com.example.shop.dao.order;
 
-import com.example.shop.domain.Delivery;
-import com.example.shop.domain.status.OrderStatus;
+import com.example.shop.domain.delivery.Delivery;
+import com.example.shop.domain.value.status.OrderStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;

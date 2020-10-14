@@ -2,8 +2,8 @@ package com.example.shop.service;
 
 import com.example.shop.controller.user.rqrs.CreateUserRq;
 import com.example.shop.controller.user.rqrs.LoginUserRq;
-import com.example.shop.domain.User;
-import com.example.shop.domain.UserRepository;
+import com.example.shop.domain.user.User;
+import com.example.shop.domain.user.UserRepository;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;

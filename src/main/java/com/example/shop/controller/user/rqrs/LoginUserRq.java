@@ -1,6 +1,5 @@
 package com.example.shop.controller.user.rqrs;
 
-import com.example.shop.domain.User;
 import lombok.Data;
 import lombok.ToString;
 

@@ -1,15 +1,15 @@
-package com.example.shop.dao.user;
+package com.example.shop.domain.user;
 
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.order.Order;
-import com.example.shop.domain.user.User;
+import lombok.Builder;
 import lombok.Data;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
+@Builder
 @Data
-public class UserDto {
+public class User {
     private int userSn;
     private String userId;
     private String password;
@@ -17,11 +17,4 @@ public class UserDto {
     private String phoneNumber;
     private List<Order> orderList;
     private List<Delivery> deliveryList;
-
-    public static ModelMapper modelMapper = new ModelMapper();
-
-    public static UserDto of(User user) {
-        return modelMapper.map(user,UserDto.class);
-    }
-
 }

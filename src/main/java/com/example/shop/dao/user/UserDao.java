@@ -1,11 +1,8 @@
 package com.example.shop.dao.user;
 
-import com.example.shop.domain.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 @Component
 public class UserDao {

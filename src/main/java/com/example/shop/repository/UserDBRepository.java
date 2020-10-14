@@ -1,11 +1,9 @@
 package com.example.shop.repository;
 
-import com.example.shop.dao.order.OrderDao;
-import com.example.shop.dao.order.OrderDto;
 import com.example.shop.dao.user.UserDao;
 import com.example.shop.dao.user.UserDto;
-import com.example.shop.domain.User;
-import com.example.shop.domain.UserRepository;
+import com.example.shop.domain.user.User;
+import com.example.shop.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

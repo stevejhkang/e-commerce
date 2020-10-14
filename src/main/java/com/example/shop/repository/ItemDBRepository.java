@@ -2,10 +2,10 @@ package com.example.shop.repository;
 
 import com.example.shop.dao.item.ItemDao;
 import com.example.shop.dao.item.ItemDto;
-import com.example.shop.domain.Item;
-import com.example.shop.domain.ItemRepository;
-import com.example.shop.domain.option.DeliveryOption;
-import com.example.shop.domain.option.DisplayOption;
+import com.example.shop.domain.Item.Item;
+import com.example.shop.domain.Item.ItemRepository;
+import com.example.shop.domain.value.option.DeliveryOption;
+import com.example.shop.domain.value.option.DisplayOption;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
