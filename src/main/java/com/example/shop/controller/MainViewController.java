@@ -32,16 +32,15 @@ public class MainViewController {
     @GetMapping("/checkout")
     public String checkout() { return "order/checkout";}
 
-    @GetMapping("/product")
+    @GetMapping("/item/detail")
     public String product(@RequestParam("itemNo") int itemNo, Model model) {
         model.addAttribute("item", itemService.findItem(itemNo));
-        return "product";
+        return "item/detail";
     }
 
     @GetMapping("/store")
     public String store(@RequestParam("page") int page, Model model) {
-        Paging paging = new Paging();
-        paging.setPageIndex(page);
+        Paging paging = new Paging(page);
         paging.setPageCount(9);
 
         model.addAttribute("paging",paging);

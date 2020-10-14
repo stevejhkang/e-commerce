@@ -26,4 +26,10 @@
             user_id = #{userId}
             and password = #{password}
     </select>
+    <select id="selectByUserSn" parameterType="user_sn">
+        select *
+        from shop.users
+        where
+            user_sn = #{user_sn}
+    </select>
 </mapper>

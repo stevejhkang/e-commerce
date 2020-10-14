@@ -1,8 +1,8 @@
 package com.example.shop.controller.admin;
 
 import com.example.shop.controller.item.rqrs.CreateItemRq;
-import com.example.shop.domain.values.option.DeliveryOption;
-import com.example.shop.domain.values.option.DisplayOption;
+import com.example.shop.domain.Item.DeliveryOption;
+import com.example.shop.domain.Item.DisplayOption;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,7 @@ public class adminViewController {
 
     @GetMapping("/item/register")
     public String registerItem(Model model) {
-        CreateItemRq rq = new CreateItemRq();
-        rq.setDeliveryOption(DeliveryOption.ShippingCostNotInclude);
-        rq.setDisplayOption(DisplayOption.NONE);
-
+        CreateItemRq rq = new CreateItemRq(DeliveryOption.ShippingCostNotInclude, DisplayOption.NONE);
         model.addAttribute("createItemRq", rq);
 
         return "admin/item/register";
@@ -32,8 +29,7 @@ public class adminViewController {
 
     @GetMapping("/item/list")
     public String findItemList(@RequestParam("page") int page, Model model) {
-        Paging paging = new Paging();
-        paging.setPageIndex(page);
+        Paging paging = new Paging(page);
 
         model.addAttribute("paging", paging);
         model.addAttribute("itemlist", itemService.findAll(paging));

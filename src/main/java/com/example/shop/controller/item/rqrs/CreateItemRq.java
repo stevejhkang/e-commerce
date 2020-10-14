@@ -1,7 +1,7 @@
 package com.example.shop.controller.item.rqrs;
 
-import com.example.shop.domain.values.option.DeliveryOption;
-import com.example.shop.domain.values.option.DisplayOption;
+import com.example.shop.domain.Item.DeliveryOption;
+import com.example.shop.domain.Item.DisplayOption;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import lombok.ToString;
@@ -27,5 +27,10 @@ public class CreateItemRq {
     private DisplayOption displayOption;
     @Positive
     private int stock;
+
+    public CreateItemRq(DeliveryOption deliveryOption, DisplayOption displayOption) {
+        this.deliveryOption = deliveryOption;
+        this.displayOption = displayOption;
+    }
 
 }

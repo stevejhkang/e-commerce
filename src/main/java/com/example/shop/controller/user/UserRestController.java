@@ -44,7 +44,7 @@ public class UserRestController {
     public ResponseEntity<String> login(HttpServletRequest request, @ModelAttribute LoginUserRq rq, HttpServletResponse response){
         ResponseEntity<String> entity = null;
         try{
-            User user = userService.findByIdAndPassword(rq);
+            User user = userService.findByIdAndPassword(rq.getUserId(),rq.getPassword());
             HttpSession session = (HttpSession) request.getSession();
             session.setAttribute("islogined",true);
             entity=successResponse();

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security
+			http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- resource 제외 -->
+    <sec:http pattern="/resources/**" security="none"/>
+
+    <sec:authentication-manager id="adminAuthenticationManager">
+        <sec:authentication-provider ref="adminSecurityConfig"/>
+    </sec:authentication-manager>
+    <bean id="adminSecurityConfig" class="com.example.shop.config.AdminSecurityConfig"/>
+
+    <!-- 관리자 페이지 적용 -->
+    <sec:http pattern="/admin/**"
+              auto-config="true"
+              use-expressions="true"
+              authentication-manager-ref="adminAuthenticationManager">
+        <sec:csrf disabled="true"/>
+
+        <sec:intercept-url pattern="/admin/**" access="hasAnyRole('SELLER')"/>
+    </sec:http>
+
+    <sec:http pattern="/order/**"
+              auto-config="true"
+              use-expressions="true"
+              authentication-manager-ref="adminAuthenticationManager">
+        <sec:csrf disabled="true"/>
+
+        <sec:intercept-url pattern="/order/**" access="hasAnyRole('BUYER')"/>
+    </sec:http>
+</beans>

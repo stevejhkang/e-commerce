@@ -17,4 +17,5 @@ public class User {
     private String phoneNumber;
     private List<Order> orderList;
     private List<Delivery> deliveryList;
+    private UserType userType;
 }

@@ -17,6 +17,7 @@ public class UserDto {
     private String phoneNumber;
     private List<Order> orderList;
     private List<Delivery> deliveryList;
+    private String userType;
 
     public static ModelMapper modelMapper = new ModelMapper();
 

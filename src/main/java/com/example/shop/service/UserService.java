@@ -33,10 +33,10 @@ public class UserService {
         }
     }
 
-    public User findByIdAndPassword(LoginUserRq rq){
+    public User findByIdAndPassword(String id, String password){
         User user = User.builder()
-                        .userId(rq.getUserId())
-                        .password(rq.getPassword())
+                        .userId(id)
+                        .password(password)
                         .build();
         User result = userRepository.findByIdAndPassword(user);
         if(result==null){

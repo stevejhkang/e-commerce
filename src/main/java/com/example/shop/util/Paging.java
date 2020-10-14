@@ -2,6 +2,8 @@ package com.example.shop.util;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component("paging")
 public class Paging {
     private final int DEFAULT_PAGING_INDEX=1;
@@ -18,6 +20,11 @@ public class Paging {
     private int nextPageIndex;
     private int finalPageIndex;
     private int totalCount;
+
+
+    public Paging(int pageIndex) {
+        this.pageIndex = pageIndex;
+    }
 
     public void printPageProperty(){
         System.out.println("pageCount:"+this.pageCount );
