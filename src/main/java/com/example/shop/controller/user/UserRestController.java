@@ -3,6 +3,7 @@ package com.example.shop.controller.user;
 import com.example.shop.controller.user.rqrs.CreateUserRq;
 import com.example.shop.controller.user.rqrs.LoginUserRq;
 import com.example.shop.domain.User;
+import com.example.shop.exception.RestException;
 import com.example.shop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

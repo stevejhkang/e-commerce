@@ -1,12 +1,13 @@
 package com.example.shop.domain;
 
-import com.example.shop.domain.status.DeliveryOption;
-import com.example.shop.domain.status.DisplayOption;
-import lombok.Builder;
-import lombok.Data;
+import com.example.shop.domain.option.DeliveryOption;
+import com.example.shop.domain.option.DisplayOption;
+import lombok.*;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Item {
     private int itemSn;
     private String itemName;

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500"
+          rel="stylesheet"/>
+    <!-- Bootstrap href="css/bootstrap.min.css"-->
+    <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" type="text/css"/>
+    <script
+            crossorigin="anonymous"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- PLUGINS CSS STYLE -->
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/toaster/toastr.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/nprogress/nprogress.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/flag-icons/css/flag-icon.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/jvectormap/jquery-jvectormap-2.0.3.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/ladda/ladda.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/select2/css/select2.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/resources/css/vendor/daterangepicker/daterangepicker.css}" type="text/css"/>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- SLEEK CSS -->
+    <link id="sleek-css" rel="stylesheet" th:href="@{/resources/css/sleek.css}" type="text/css"/>
+
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" th:href="@{/resources/img/favicon.png}"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9] -->
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--    <script src="/assets/vendor/nprogress/nprogress.js"></script>-->
+
+    <style>
+        .accordion-header-border-bottom .card-header .btn, .accordion-header-border-bottom .card-header a {
+            padding: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper">
+            <h1>상품목록</h1>
+        </div>
+
+        <div class="col-lg-12" id="itemlist">
+
+            <div class="card card-default text-center">
+
+                    <div class="card-header card-header-border-bottom ">
+                        <h2>상품 목록</h2>
+
+                    </div>
+
+                <th:block th:if="${itemlist!=null}">
+                    <div class="card-body">
+                        <table class="table table-hover " id="list" th:fragment="list">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">상품명</th>
+                                <th scope="col">상품가격</th>
+                                <th scope="col">배송정보</th>
+                                <th scope="col">재고</th>
+                                <th scope="col">설명</th>
+                                <th scope="col">제작사</th>
+                                <th scope="col">상품 공개여부</th>
+                                <th scope="col">변경</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item: ${itemlist}">
+                                <td th:text="${item.itemSn}" th:value="${item.itemSn}"></td>
+                                <td><a th:href="@{'/admin/item/detail?itemNo=' + ${item.itemSn}}" th:text="${item.itemName}"></a></td>
+                                <td th:text="${item.price}"></td>
+                                <td th:text="${item.deliveryOption}"></td>
+                                <td th:text="${item.stock}"></td>
+                                <td th:text="${item.description}"></td>
+                                <td th:text="${item.manufacturer}"></td>
+                                <td th:text="${item.displayOption}"></td>
+
+
+                                <td style="padding: 3px;">
+                                    <div class="dropdown show d-inline-block widget-dropdown">
+                                        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle iconbox-18"
+                                           data-display="static" data-toggle="dropdown"
+                                           href="" id="dropdown-recent-order1" role="button"></a>
+                                        <ul aria-labelledby="dropdown-recent-order1"
+                                            class="dropdown-menu dropdown-menu-right" style="top: 28px;">
+                                            <li class="dropdown-item">
+                                                <a th:href="'/admin/item/edit?itemNo='+${item.itemSn}">수정</a>
+                                            </li>
+                                            <li class="dropdown-item">
+                                                <a th:href="'/item/deleteItem?itemNo='+${item.itemSn}">제거</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="text-center display: d-inline align-middle">
+                            <nav aria-label="Page navigation example"  class="text-center align-middle">
+                                <li class="pagination page-item" style="float: left;" th:value="${paging.prevPageIndex}"><a
+                                        class="page-link" id="prevPage" name="pageNo" th:href="@{'?page=' + ${paging.prevPageIndex}}">Previous</a>
+                                </li>
+                                <ul class="pagination" style="float: left;"
+                                    th:each="page : ${#numbers.sequence(paging.startPageIndex,paging.endPageIndex)} ">
+                                    <li class="page-item" th:value="${page}"><a name="pageNo" th:href="@{'?page=' + ${page}}"
+                                                                                th:text="${page}"></a></li>
+                                </ul>
+                                <li class="pagination page-item" style="float: left;" th:value="${paging.nextPageIndex}"><a
+                                        class="page-link" id="nextPage" name="pageNo"
+                                        th:href="@{'?page=' + ${paging.nextPageIndex}}">Next</a></li>
+
+                            </nav>
+                            <button class="btn btn-primary col-sm-1 float-right align-middle" th:onclick="location.href='/admin/item/register'" type="button">상품 등록</button>
+                        </div>
+                    </div>
+
+
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer mt-auto">
+
+    <script>
+        var d = new Date();
+        var year = d.getFullYear();
+        document.getElementById("copy-year").innerHTML = year;
+    </script>
+</footer>
+
+</div>
+
+<script th:inline="javascript">
+    var data = {
+        "searcher": {
+            "pageCount": 10,
+            "pageSize": 10,
+            "firstPageIndex": 1,
+            "prevPageIndex": 1,
+            "startPageIndex": 1,
+            "pageIndex": 1,
+            "endPageIndex": 3,
+            "nextPageIndex": 2,
+            "finalPageIndex": 3,
+            "totalCount": 0,
+        }
+    }
+
+    $(document).ready(function () {
+        var productadd = $("#productadd");
+        var categoryadd = $("#categoryadd");
+        var optionlistform = $("#optionlistform");
+
+        var optionUse = $("input:radio[name=option_use]");
+        var stockUse = $("input:radio[name=stock_use]");
+        var pageItem = $(".page-item");
+
+        var paging = [[${paging}]];
+        console.log(paging);
+        console.log([[${itemlist}]]);
+
+
+        // pageItem.click(function(e){
+        //     var pageNo = parseInt($(this).val());
+        //     console.log(pageNo);
+        //     paging.pageIndex=pageNo;
+        //     // console.log(paging);
+        //     $.ajax({
+        //         url: '/item/itemlist'
+        //         , type: 'POST'
+        //         , contentType: "application/json; charset=UTF-8"
+        //         , data: JSON.stringify(paging)
+        //         , success: function(fragment){
+        //             // console.log(fragment);
+        //             $("#list").replaceWith(fragment.itemlist);
+        //             console.log("success");
+        //             // console.log([[${paging}]]);
+        //             // paging = [[${paging}]];
+        //             // console.log(fragment);
+        //             console.log([[${itemlist}]]);
+        //             console.log("$paging");
+        //             console.log([[${paging}]]);
+        //             console.log("paging");
+        //             console.log(paging);
+        //         }, error: function(){
+        //             console.log("error");
+        //         }
+        //     }) ;
+        // });
+
+        optionUse.change(function (e) {
+            e.preventDefault();
+
+            if ($(this).val() == 0) {
+                $("#optionform2").html("");
+                $("#optionlist").attr("style", "display:none;");
+            } else {
+                $("input:radio[name=stock_use][value='0']").prop('checked', true);
+                $("#stockform2").html("");
+                $("#optionform2").html($("#optionform1").html());
+                $("#optionlist").attr("style", "");
+            }
+        });
+
+        stockUse.change(function (e) {
+            e.preventDefault();
+
+            if ($(this).val() == 0) {
+                $("#stockform2").html("");
+            } else {
+                $("input:radio[name=option_use][value='0']").prop('checked', true);
+                $("#optionform2").html("");
+                $("#optionlist").attr("style", "display:none;");
+                $("#stockform2").html($("#stockform1").html());
+            }
+
+            //
+        });
+
+        $("#productaddBtn").click(function (e) {
+            e.preventDefault();
+            productadd.attr("action", "/manager/product").attr("method", "post").submit();
+        });
+
+        $("#optionBtn").click(function (e) {
+            e.preventDefault();
+
+        });
+
+        $(".categoryListBtn").click(function (e) {
+            e.preventDefault();
+            var no = $(this).data('no');
+            var categoryNoId = '#category' + $(this).data('no');
+
+            $.ajax({
+                url: '/manager/lowlist',
+                type: 'GET',
+                data: {'parent': no},
+                success: function (result) {
+                    $(categoryNoId).html("");
+                    result.data.forEach(function (item, index) {
+                        $(categoryNoId).append('<li style="padding-left: 20px; margin-bottom: 10px;">' + item.category_name + '</li>');
+                    });
+
+                },
+                fail: function (e) {
+                    console.log("fail categoryListBtn");
+                }
+            });// end ajax
+        });//end categoryListBtn
+
+        $("#categoryadd_btn").click(function (e) {
+            e.preventDefault();
+            categoryadd.attr("action", "/manager/categoryadd").attr("method", "post").submit();
+        });
+    });
+</script>
+</body>
+</html>

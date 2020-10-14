@@ -4,12 +4,18 @@ import com.example.shop.controller.item.rqrs.CreateItemRq;
 import com.example.shop.domain.Item;
 import com.example.shop.domain.ItemRepository;
 import com.example.shop.util.FileUtils;
+import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 public class ItemService {
+
+    private static final int SUCCESS=1;
+
     @Autowired
     private ItemRepository itemRepository;
 
@@ -32,5 +38,48 @@ public class ItemService {
         int result = itemRepository.createItem(item);
 
         return result;
+    }
+
+    public int findTotalCount(){
+        return itemRepository.findTotalCount();
+    }
+
+    public List<Item> findAll(Paging paging){
+        int totalCount = findTotalCount();
+        paging.setTotalCount(totalCount);
+        return itemRepository.findAll(paging);
+    }
+
+    public Item findItem(int itemSn) {
+        return itemRepository.findItem(itemSn);
+    }
+
+    public String updateItem(Item item, MultipartFile mainImg) {
+        String fileName= itemRepository.findItem(item.getItemSn()).getImgSrc();
+        FileUtils.deleteFile(fileName);
+
+        String filePath = FileUtils.uploadToLocalStorage(mainImg);
+        item.setImgSrc(filePath);
+
+        int result = itemRepository.updateItem(item);
+        if(result==SUCCESS){
+            return "success";
+        }
+        else{
+            return "failure";
+        }
+    }
+
+    public String deleteItem(int itemSn) {
+        String fileName= itemRepository.findItem(itemSn).getImgSrc();
+        FileUtils.deleteFile(fileName);
+
+        int result= itemRepository.deleteItem(itemSn);
+        if(result==SUCCESS){
+            return "success";
+        }
+        else{
+            return "failure";
+        }
     }
 }

@@ -1,7 +1,9 @@
 package com.example.shop.controller.user.rqrs;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;

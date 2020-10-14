@@ -1,5 +1,7 @@
 package com.example.shop.repository;
 
+import com.example.shop.dao.order.OrderDao;
+import com.example.shop.dao.order.OrderDto;
 import com.example.shop.dao.user.UserDao;
 import com.example.shop.dao.user.UserDto;
 import com.example.shop.domain.User;

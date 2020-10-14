@@ -1,5 +1,6 @@
 package com.example.shop.util;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -7,7 +8,7 @@ import java.io.IOException;
 
 
 public class FileUtils {
-    private static final String filePath = "C:\\file\\";
+    private static final String filePath = "C:\\ShopMVC\\src\\main\\webapp\\resources\\img\\";
 
     public static String uploadToLocalStorage(MultipartFile multipartFile) {
 
@@ -28,6 +29,17 @@ public class FileUtils {
             return null;
         }
 
-        return filePath+storedFileName;
+        return storedFileName;
+    }
+    public static String deleteFile(String fileName){
+        File file = new File(filePath+fileName);
+        if(file.exists()){
+            if(file.delete()) {
+                return "deleted";
+            } else {
+                return "not deleted";
+            }
+        }
+        return "";
     }
 }

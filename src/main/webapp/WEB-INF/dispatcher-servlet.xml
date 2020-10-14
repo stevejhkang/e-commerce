@@ -47,6 +47,15 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
         <constructor-arg name="sqlSessionFactory" ref="SqlSessionFactory"/>
     </bean>
+    <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
+
+    </bean>
+    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html">
+    </mvc:resources>
+    <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**">
+    </mvc:resources>
+
+
 
 
 </beans>

@@ -7,4 +7,58 @@
         insert into shop.items(item_name, price,delivery_option, display_option, stock, manufacturer, description, img_src)
         values (#{itemName}, #{price}, #{deliveryOption}, #{displayOption}, #{stock}, #{manufacturer}, #{description}, #{imgSrc})
     </insert>
+
+    <select id="selectCount" resultType = "integer">
+        select count(*)
+        from shop.items
+    </select>
+
+    <select id="selectAll" parameterType="Paging" resultType="ItemDto">
+        select
+            R.RNUM
+            , R.*
+        from
+        (
+            select
+                T.*
+                , @ROWNUM := @ROWNUM +1 AS RNUM
+            from
+                shop.items T
+                , (select @ROWNUM :=0 ) A
+            order by T.item_sn desc
+        ) R
+        where R.RNUM between ${((pageIndex-1) * pageCount) + 1} and ${((pageIndex-1) * pageCount) + pageCount }
+    </select>
+
+    <select id="selectItem" parameterType="integer" resultType="ItemDto">
+        select
+            *
+        from
+            shop.items
+        where
+            item_sn = #{itemSn}
+    </select>
+
+    <update id="updateItem" parameterType="ItemDto">
+        update
+            shop.items
+        set
+            item_name = #{itemName}
+            , price = #{price}
+            , delivery_option = #{deliveryOption}
+            , display_option = #{displayOption}
+            , stock = #{stock}
+            , manufacturer = #{manufacturer}
+            , description = #{description}
+            , img_src = #{imgSrc}
+        where
+            item_sn = #{itemSn}
+    </update>
+
+    <delete id="deleteItem" parameterType="integer">
+        delete from
+            shop.items
+        where
+            item_sn = #{id}
+    </delete>
 </mapper>

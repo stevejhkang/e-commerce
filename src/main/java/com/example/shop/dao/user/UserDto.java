@@ -5,6 +5,8 @@ import com.example.shop.domain.Order;
 import com.example.shop.domain.User;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

@@ -19,4 +19,5 @@ public class ItemDto {
     public static ModelMapper modelMapper = new ModelMapper();
 
     public static ItemDto of(Item item) { return modelMapper.map(item, ItemDto.class);}
+
 }
