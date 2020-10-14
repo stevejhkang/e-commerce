@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 public class Order {
-    Long orderSn;
-    String orderId;
-    LocalDateTime orderDate;
-    OrderStatus orderStatus;
-    Delivery delivery;
+        private int orderSn;
+        private String orderId;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Delivery delivery;
 }

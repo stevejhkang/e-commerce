@@ -7,10 +7,10 @@ import lombok.Data;
 @Builder
 @Data
 public class Item {
-    Long itemSn;
-    String itemName;
-    int price;
-    String manufacturer;
-    DeliveryOption deliveryOption;
-    String description;
+    private int itemSn;
+    private String itemName;
+    private int price;
+    private String manufacturer;
+    private DeliveryOption deliveryOption;
+    private String description;
 }

@@ -1,11 +1,10 @@
-package com.example.shop.domain;
+package com.example.shop.dao.delivery;
 
-import lombok.Builder;
+import com.example.shop.domain.User;
 import lombok.Data;
 
 @Data
-@Builder
-public class Delivery {
+public class DeliveryDto {
     private int deliverySn;
     private String receiver;
     private String address;
