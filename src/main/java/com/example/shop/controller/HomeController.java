@@ -12,4 +12,17 @@ public class HomeController {
         model.addAttribute("name", name);
         return "hello";
     }
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
+    @GetMapping("/product")
+    public String product() {
+        return "product";
+    }
+    @GetMapping("/store")
+    public String store() {
+        return "store";
+    }
+
 }
