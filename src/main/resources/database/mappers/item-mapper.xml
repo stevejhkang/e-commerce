@@ -2,6 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.shop.ItemMapper">
-
+<mapper namespace="com.example.shop.ItemMapper">
+    <insert id="insert" parameterType="ItemDto">
+        insert into shop.items(item_name, price,delivery_option, display_option, stock, manufacturer, description, img_src)
+        values (#{itemName}, #{price}, #{deliveryOption}, #{displayOption}, #{stock}, #{manufacturer}, #{description}, #{imgSrc})
+    </insert>
 </mapper>

@@ -3,9 +3,9 @@ package com.example.shop.service;
 import com.example.shop.controller.user.rqrs.CreateUserRq;
 import com.example.shop.controller.user.rqrs.LoginUserRq;
 import com.example.shop.domain.User;
+import com.example.shop.domain.UserRepository;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
-import com.example.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
