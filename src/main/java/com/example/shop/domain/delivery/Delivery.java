@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 public class Delivery {
     private int deliverySn;
-    private String receiver;
+    private String receiverName;
     private String address;
     private String phoneNumber1;
     private User user;

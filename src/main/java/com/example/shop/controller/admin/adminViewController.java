@@ -29,7 +29,8 @@ public class adminViewController {
 
     @GetMapping("/item/list")
     public String findItemList(@RequestParam("page") int page, Model model) {
-        Paging paging = new Paging(page);
+        Paging paging = new Paging();
+        paging.setPageIndex(page);
 
         model.addAttribute("paging", paging);
         model.addAttribute("itemlist", itemService.findAll(paging));

@@ -19,4 +19,8 @@ public class UserDao {
     public UserDto findByIdAndPassword(UserDto dto) {
         return sqlSession.selectOne(NAMESPACE+"selectByIdAndPassword",dto);
     }
+
+    public UserDto findByUserSn(int userSn) {
+        return sqlSession.selectOne(NAMESPACE+"selectByUserSn",userSn);
+    }
 }

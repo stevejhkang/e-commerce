@@ -45,6 +45,9 @@ public class UserService {
         return result;
     }
 
+    public User findByUserSn(int userSn) {
+        return userRepository.findByUserSn(userSn);
+    }
 
 
 }

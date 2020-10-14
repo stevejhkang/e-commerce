@@ -3,5 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.shop.OrderMapper">
+    <insert id="insert" parameterType="OrderDto">
+        insert into
+            shop.orders
+            (
+                order_id
+                , order_date
+                , order_status
+                , price
+                , delivery_sn
+                , user_sn
+            )
+        values
+            (
+                #{orderId}
+                , now()
+                , #{orderStatus}
+                , #{price}
+                , #{delivery.deliverySn}
+                , #{user.userSn}
+            )
+    </insert>
 
+    <select id="selectSequenceNumber">
+        select
+            order_seq.NEXTVAL
+        from
+            shop.order_seq;
+    </select>
 </mapper>

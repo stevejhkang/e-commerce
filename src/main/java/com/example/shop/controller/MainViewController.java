@@ -40,7 +40,8 @@ public class MainViewController {
 
     @GetMapping("/store")
     public String store(@RequestParam("page") int page, Model model) {
-        Paging paging = new Paging(page);
+        Paging paging = new Paging();
+        paging.setPageIndex(page);
         paging.setPageCount(9);
 
         model.addAttribute("paging",paging);

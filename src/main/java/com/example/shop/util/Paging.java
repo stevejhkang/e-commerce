@@ -22,10 +22,6 @@ public class Paging {
     private int totalCount;
 
 
-    public Paging(int pageIndex) {
-        this.pageIndex = pageIndex;
-    }
-
     public void printPageProperty(){
         System.out.println("pageCount:"+this.pageCount );
         System.out.println("pageSize:"+this.pageSize );

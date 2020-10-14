@@ -19,6 +19,7 @@
             ,#{phoneNumber}
         )
     </insert>
+
     <select id="selectByIdAndPassword" parameterType="UserDto" resultType="UserDto">
         select *
         from shop.users
@@ -26,10 +27,12 @@
             user_id = #{userId}
             and password = #{password}
     </select>
-    <select id="selectByUserSn" parameterType="user_sn">
+
+    <select id="selectByUserSn" parameterType="integer" resultType="UserDto">
         select *
         from shop.users
         where
-            user_sn = #{user_sn}
+            user_sn = #{userSn}
     </select>
+
 </mapper>
