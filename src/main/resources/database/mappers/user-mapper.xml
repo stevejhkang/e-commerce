@@ -19,4 +19,11 @@
             ,#{phoneNumber}
         )
     </insert>
+    <select id="selectByIdAndPassword" parameterType="UserDto" resultType="UserDto">
+        select *
+        from shop.users
+        where
+            user_id = #{userId}
+            and password = #{password}
+    </select>
 </mapper>

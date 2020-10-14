@@ -30,4 +30,8 @@ public class HomeController {
     public String register() {
         return "register";
     }
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.shop.service;
 
 import com.example.shop.controller.user.rqrs.CreateUserRq;
+import com.example.shop.controller.user.rqrs.LoginUserRq;
 import com.example.shop.domain.User;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
@@ -30,6 +31,18 @@ public class UserService {
         if(!password.equals(confirmPassword)){
             throw new RestException(RestError.USER_NOT_EQUAL_CONFIRM_PASSWORD);
         }
+    }
+
+    public User findByIdAndPassword(LoginUserRq rq){
+        User user = User.builder()
+                        .userId(rq.getUserId())
+                        .password(rq.getPassword())
+                        .build();
+        User result = userRepository.findByIdAndPassword(user);
+        if(result==null){
+            throw new RestException(RestError.CANNOT_FIND_ACCOUNT);
+        }
+        return result;
     }
 
 

@@ -18,6 +18,11 @@ public class UserRepository {
         return userDao.createUser(UserDto.of(user));
     }
 
+    public User findByIdAndPassword(User user) {
+        UserDto dto = userDao.findByIdAndPassword(UserDto.of(user));
+        return toUser(dto);
+    }
+
 //    public User findUser(String id ) {
 //         UserDto userDto = userDao.find(id);
 //         OrderDto orderDto = orderDao.find(userDto.getUserId());
@@ -27,4 +32,15 @@ public class UserRepository {
 //    private User toUser(UserDto userDto, OrderDto orderDto) {
 //        return new User(userDto.get)
 //    }
+
+    public User toUser(UserDto dto){
+        return User.builder()
+            .userId(dto.getUserId())
+            .password(dto.getPassword())
+            .userName(dto.getUserName())
+            .phoneNumber(dto.getPhoneNumber())
+            .deliveryList(dto.getDeliveryList())
+            .orderList(dto.getOrderList())
+            .build();
+    }
 }

@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public enum RestError {
-    USER_NOT_EQUAL_CONFIRM_PASSWORD("01-00");
+    USER_NOT_EQUAL_CONFIRM_PASSWORD("01-00"),
+    CANNOT_FIND_ACCOUNT("01-01")
+    ;
 
     private final HttpStatus status;
     private final String code;

@@ -1,15 +1,17 @@
 package com.example.shop.controller.user;
 
 import com.example.shop.controller.user.rqrs.CreateUserRq;
+import com.example.shop.controller.user.rqrs.LoginUserRq;
+import com.example.shop.domain.User;
+import com.example.shop.exception.RestException;
 import com.example.shop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -26,19 +28,35 @@ public class UserRestController {
             int result = userService.createUser(rq);
             entity=successResponse();
         }
-        catch(Exception e){
+        catch(RuntimeException e){
             e.printStackTrace();
+            e.getMessage();
             entity=failureResponse(e);
         }
 
-         return entity;
+        return entity;
+    }
+
+    @PostMapping("/loginAction")
+    public ResponseEntity<String> login(@ModelAttribute LoginUserRq rq){
+        ResponseEntity<String> entity = null;
+        try{
+            User user = userService.findByIdAndPassword(rq);
+            entity=successResponse();
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+            e.getMessage();
+            entity=failureResponse(e);
+        }
+
+        return entity;
     }
 
     public ResponseEntity<String> successResponse(){
         return new ResponseEntity<>("success",HttpStatus.OK);
     }
-    public ResponseEntity<String> failureResponse(Exception e){
-        e.printStackTrace();
-        return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> failureResponse(RuntimeException e){
+        return new ResponseEntity<>("failure",HttpStatus.BAD_REQUEST);
     }
 }
