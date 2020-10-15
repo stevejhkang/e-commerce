@@ -1,7 +1,5 @@
-package com.example.shop.domain;
+package com.example.shop.domain.item;
 
-import com.example.shop.domain.option.DeliveryOption;
-import com.example.shop.domain.option.DisplayOption;
 import lombok.*;
 
 @Builder

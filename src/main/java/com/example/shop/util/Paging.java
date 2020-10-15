@@ -2,7 +2,6 @@ package com.example.shop.util;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 
 @Component("paging")
 public class Paging {

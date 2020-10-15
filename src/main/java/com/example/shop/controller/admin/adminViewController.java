@@ -1,8 +1,8 @@
 package com.example.shop.controller.admin;
 
 import com.example.shop.controller.item.rqrs.CreateItemRq;
-import com.example.shop.domain.Item.DeliveryOption;
-import com.example.shop.domain.Item.DisplayOption;
+import com.example.shop.domain.item.DeliveryOption;
+import com.example.shop.domain.item.DisplayOption;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;

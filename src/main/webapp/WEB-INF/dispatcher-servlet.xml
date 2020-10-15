@@ -39,13 +39,13 @@
         <property name="username" value="developer"/>
         <property name="password" value="1234"/>
     </bean>
-    <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:/database/mappers/*-mapper.xml"/>
         <property name="configLocation" value="classpath:/database/mybatis-config.xml"/>
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-        <constructor-arg name="sqlSessionFactory" ref="SqlSessionFactory"/>
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
     <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
 

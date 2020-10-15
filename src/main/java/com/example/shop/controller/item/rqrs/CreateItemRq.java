@@ -1,7 +1,7 @@
 package com.example.shop.controller.item.rqrs;
 
-import com.example.shop.domain.Item.DeliveryOption;
-import com.example.shop.domain.Item.DisplayOption;
+import com.example.shop.domain.item.DeliveryOption;
+import com.example.shop.domain.item.DisplayOption;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import lombok.ToString;

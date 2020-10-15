@@ -1,4 +1,4 @@
-package com.example.shop.domain.Item;
+package com.example.shop.domain.item;
 
 public enum DisplayOption {
     DISPLAY, NONE

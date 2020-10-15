@@ -127,36 +127,36 @@
                         <a class="review-link" href="#">10 Review(s) | Add your review</a>
                     </div>
                     <div>
-                        <h3 class="product-price" th:text="${item.price}">$980.00 </h3>
+                        <h3 class="product-price" th:text="${#numbers.formatCurrency(item.price)}">$980.00 </h3>
                         <span class="product-available">In Stock</span>
                     </div>
                     <!--							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
 
-<!--                    <div class="product-options">-->
-<!--                        <label>-->
-<!--                            Size-->
-<!--                            <select class="input-select">-->
-<!--                                <option value="0">X</option>-->
-<!--                            </select>-->
-<!--                        </label>-->
-<!--                        <label>-->
-<!--                            Color-->
-<!--                            <select class="input-select">-->
-<!--                                <option value="0">Red</option>-->
-<!--                            </select>-->
-<!--                        </label>-->
-<!--                    </div>-->
+                    <!--                    <div class="product-options">-->
+                    <!--                        <label>-->
+                    <!--                            Size-->
+                    <!--                            <select class="input-select">-->
+                    <!--                                <option value="0">X</option>-->
+                    <!--                            </select>-->
+                    <!--                        </label>-->
+                    <!--                        <label>-->
+                    <!--                            Color-->
+                    <!--                            <select class="input-select">-->
+                    <!--                                <option value="0">Red</option>-->
+                    <!--                            </select>-->
+                    <!--                        </label>-->
+                    <!--                    </div>-->
 
                     <div class="add-to-cart">
                         <div class="qty-label">
                             Qty
                             <div class="input-number">
-                                <input type="number">
-<!--                                <span class="qty-up">+</span>-->
-<!--                                <span class="qty-down">-</span>-->
+                                <input id="quantity" name="quantity" type="number">
+                                <!--                                <span class="qty-up">+</span>-->
+                                <!--                                <span class="qty-down">-</span>-->
                             </div>
                         </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-credit-card"></i> Buy </button>
+                        <button class="add-to-cart-btn" id="buy"><i class="fa fa-credit-card"></i> Buy</button>
                     </div>
 
                     <ul class="product-btns">
@@ -188,12 +188,12 @@
                     <!-- product tab nav -->
                     <ul class="tab-nav">
                         <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-<!--                        <li><a data-toggle="tab" href="#tab2">Details</a></li>-->
-<!--                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>-->
+                        <!--                        <li><a data-toggle="tab" href="#tab2">Details</a></li>-->
+                        <!--                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>-->
                     </ul>
                     <!-- /product tab nav -->
 
-					<div class="row" th:text="${item.description}"/>
+                    <div class="row" th:text="${item.description}"/>
 
                     <!-- product tab content -->
                     <div class="tab-content">
@@ -614,4 +614,29 @@
 
 
 </body>
+<script th:inline="javascript">
+
+    var item = /*[[${item}]]*/;
+
+    $(document).ready(function () {
+        $("#buy").click(function () {
+            var data = {};
+            data["quantity"] = $("#quantity").val();
+            data["item"] = item;
+            console.log(data);
+            $.ajax({
+                url: '/order/createOrder',
+                type: 'post',
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    console.log("success");
+                    console.log(data);
+                }
+            })
+        });
+    })
+
+
+</script>
 </html>

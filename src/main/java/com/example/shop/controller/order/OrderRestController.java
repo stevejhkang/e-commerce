@@ -1,6 +1,7 @@
 package com.example.shop.controller.order;
 
-import com.example.shop.domain.Item.Item;
+import com.example.shop.controller.order.rqrs.CreateOrderRq;
+import com.example.shop.domain.item.Item;
 import com.example.shop.domain.user.User;
 import com.example.shop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,16 @@ public class OrderRestController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping
-    public ResponseEntity<String> createOrder(@SessionAttribute User user, @ModelAttribute Item item, int quantity) {
+    @PostMapping("/createOrder")
+    public ResponseEntity<String> createOrder(@RequestBody CreateOrderRq data) {
+        //@SessionAttribute User user,
+        //, int quantity
         ResponseEntity<String> entity = null;
+        Item item = data.getItem();
+        int quantity = data.getQuantity();
         try{
-            int userSn = user.getUserSn();
-            int result =orderService.createOrder(user,item,quantity);
+//            int userSn = user.getUserSn();
+//            int result =orderService.createOrder(user,item,quantity);
             entity=successResponse();
         }
         catch(RuntimeException e){

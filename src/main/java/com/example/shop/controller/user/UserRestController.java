@@ -48,7 +48,7 @@ public class UserRestController {
             HttpSession session = (HttpSession) request.getSession();
             session.setAttribute("islogined",true);
             entity=successResponse();
-            response.sendRedirect("/home/store");
+            response.sendRedirect("/store?page=1");
         }
         catch(RuntimeException | IOException e){
             e.printStackTrace();

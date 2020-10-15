@@ -1,7 +1,7 @@
 package com.example.shop.controller.item;
 
 import com.example.shop.controller.item.rqrs.CreateItemRq;
-import com.example.shop.domain.Item.Item;
+import com.example.shop.domain.item.Item;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
 import lombok.extern.slf4j.Slf4j;

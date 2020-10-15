@@ -1,4 +1,4 @@
-package com.example.shop.domain.Item;
+package com.example.shop.domain.item;
 
 import com.example.shop.util.Paging;
 

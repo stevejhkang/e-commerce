@@ -1,6 +1,6 @@
 package com.example.shop.controller.order.rqrs;
 
-import com.example.shop.domain.Item.Item;
+import com.example.shop.domain.item.Item;
 import lombok.Data;
 import lombok.ToString;
 
@@ -8,5 +8,5 @@ import lombok.ToString;
 @ToString
 public class CreateOrderRq {
     Item item;
-
+    int quantity;
 }

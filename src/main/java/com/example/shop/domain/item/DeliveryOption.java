@@ -1,4 +1,4 @@
-package com.example.shop.domain.values.option;
+package com.example.shop.domain.item;
 
 public enum DeliveryOption {
     ShippingCostInclude,
