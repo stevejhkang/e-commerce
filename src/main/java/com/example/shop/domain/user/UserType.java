@@ -1,5 +1,7 @@
 package com.example.shop.domain.user;
 
+import org.springframework.security.core.Authentication;
+
 public enum UserType {
-    BUYER, SELLER;
+    ROLE_BUYER, ROLE_SELLER;
 }

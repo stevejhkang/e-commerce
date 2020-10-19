@@ -1,37 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns="http://www.springframework.org/schema/security"
        xsi:schemaLocation="
 			http://www.springframework.org/schema/beans
 			http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/security
-			http://www.springframework.org/schema/security/spring-security.xsd">
+			http://www.springframework.org/schema/security/spring-security.xsd"
+             xmlns:context="http://www.springframework.org/schema/context">
 
-    <!-- resource 제외 -->
-    <sec:http pattern="/resources/**" security="none"/>
+    <http pattern="/resources/**" security="none"/>
+    <global-method-security secured-annotations="enabled" />
 
-    <sec:authentication-manager id="adminAuthenticationManager">
-        <sec:authentication-provider ref="adminSecurityConfig"/>
-    </sec:authentication-manager>
-    <bean id="adminSecurityConfig" class="com.example.shop.config.AdminSecurityConfig"/>
+    <!-- AuthenticationProvider 상속받은 UserAuthenticationProvider를 AuthenticationManager로 등록 -->
+    <authentication-manager id="userAuthenticationManager">
+        <authentication-provider ref="userAuthenticationProvider"/>
+    </authentication-manager>
+    <beans:bean id="userAuthenticationProvider" class="com.example.shop.config.security.user.UserAuthenticationProvider"/>
+    <beans:bean id="userLogoutSuccessHandler" class="com.example.shop.config.security.user.UserLogoutSuccessHandler"/>
+    <beans:bean id="userAuthSuccessHandler" class="com.example.shop.config.security.user.UserAuthSuccessHandler"/>
+    <beans:bean id="userAuthFailureHandler" class="com.example.shop.config.security.user.UserAuthFailureHandler"/>
 
-    <!-- 관리자 페이지 적용 -->
-    <sec:http pattern="/admin/**"
-              auto-config="true"
-              use-expressions="true"
-              authentication-manager-ref="adminAuthenticationManager">
-        <sec:csrf disabled="true"/>
+    <!-- 관리자 페이지 적용 "SELLER" 권한을 가져야만 들어올 수 있다.-->
+    <http pattern="/admin/**"
+          auto-config="true"
+          use-expressions="true"
+          authentication-manager-ref="userAuthenticationManager">
+        <csrf disabled="true"/>
 
-        <sec:intercept-url pattern="/admin/**" access="hasAnyRole('SELLER')"/>
-    </sec:http>
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SELLER')"/>
 
-    <sec:http pattern="/order/**"
-              auto-config="true"
-              use-expressions="true"
-              authentication-manager-ref="adminAuthenticationManager">
-        <sec:csrf disabled="true"/>
+        <form-login
+                login-page="/login"
+                username-parameter="userId"
+                password-parameter="password"
+                login-processing-url="/user/loginAction"
+                authentication-success-handler-ref="userAuthSuccessHandler"
+                authentication-failure-handler-ref="userAuthFailureHandler"
+        />
+        <logout
+                logout-url="/logoutAction"
+                success-handler-ref="userLogoutSuccessHandler"
+                invalidate-session="true"
 
-        <sec:intercept-url pattern="/order/**" access="hasAnyRole('BUYER')"/>
-    </sec:http>
-</beans>
+        />
+<!--        <session-management invalid-session-url="/login">-->
+<!--            <concurrency-control max-sessions="1" expired-url="/login"/>-->
+<!--        </session-management>-->
+
+    </http>
+
+    <!-- 구매자의 구매 기능 "BUYER" 권한을 가져야만 들어올 수 있다. -->
+    <http pattern="/**"
+          auto-config="true"
+          use-expressions="true"
+          authentication-manager-ref="userAuthenticationManager">
+        <csrf disabled="true"/>
+
+        <intercept-url pattern="/**" access="permitAll"/>
+        <intercept-url pattern="/order/**" access="hasAnyRole('ROLE_BUYER')"/>
+        <intercept-url pattern="/my/**" access="hasAnyRole('ROLE_BUYER')"/>
+        <form-login login-page="/login"
+            username-parameter="userId"
+            password-parameter="password"
+            login-processing-url="/user/loginAction"
+            authentication-success-handler-ref="userAuthSuccessHandler"
+                    authentication-failure-url="/login"
+        />
+        <logout
+                logout-url="/logoutAction"
+                invalidate-session="true"
+                logout-success-url="/login"
+        />
+        <session-management invalid-session-url="/login">
+            <concurrency-control max-sessions="1" expired-url="/login"/>
+        </session-management>
+
+    </http>
+</beans:beans>
+

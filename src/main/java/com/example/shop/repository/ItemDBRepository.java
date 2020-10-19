@@ -30,7 +30,7 @@ public class ItemDBRepository implements ItemRepository {
     @Override
     public List<Item> findAll(Paging paging) {
         List<ItemDto> dtoList = itemDao.findAll(paging);
-        return dtoList.stream().map(this::toItem).collect(Collectors.toList());
+        return dtoList.stream().map(ItemDBRepository::toItem).collect(Collectors.toList());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ItemDBRepository implements ItemRepository {
         return itemDao.deleteItem(itemSn);
     }
 
-    private Item toItem(ItemDto dto) {
+    private static Item toItem(ItemDto dto) {
         return Item.builder()
                    .itemSn(dto.getItemSn())
                    .itemName(dto.getItemName())

@@ -21,7 +21,7 @@ public class DeliveryDBRepository implements DeliveryRepository {
         return toDelivery(dto);
     }
 
-    public Delivery toDelivery(DeliveryDto deliveryDto) {
+    public static Delivery toDelivery(DeliveryDto deliveryDto) {
         User user = User.builder()
             .userSn(deliveryDto.getUserSn())
             .userId(deliveryDto.getUserId())

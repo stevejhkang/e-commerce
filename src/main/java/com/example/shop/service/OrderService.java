@@ -12,6 +12,8 @@ import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderService {
     @Autowired
@@ -44,5 +46,9 @@ public class OrderService {
 
         //반환한다.
         return result;
+    }
+
+    public List<Order> findAllOrdersByUserSn(int userSn) {
+        return orderRepository.findAllOrdersByUserSn(userSn);
     }
 }

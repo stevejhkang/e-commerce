@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <!-- HEADER -->
     <header th:fragment="commonHeader">
         <!-- TOP HEADER -->
@@ -12,8 +12,9 @@
                 </ul>
                 <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li th:if="${session.islogined!=true}"><i class="fa fa-user-o"></i> <a href="/login">Sign in</a> / <a href="/signup">Sign up</a>/li>
-                    <li th:if="${session.islogined==true}"><i class="fa fa-user-o"></i> <a href="/user/logoutAction">Logout</a>/li>
+<!--                    <li th:text="${userSession}"></li>-->
+                    <li sec:authorize access="isAnonymous()"><i class="fa fa-key"></i> <a sec:authorize="isAnonymous()" href="/login">Sign in</a> / <a href="/signup">Sign up</a></li>
+                    <li sec:authorize access="hasRole('ROLE_BUYER')"><a sec:authorize="hasRole('ROLE_SELLER')" href="/user/logoutAction">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -28,7 +29,7 @@
                     <!-- LOGO -->
                     <div class="col-md-3">
                         <div class="header-logo">
-                            <a href="#" class="logo">
+                            <a href="/store?page=1" class="logo">
                                 <img th:src="@{/resources/img/logo.png}" alt="">
                             </a>
                         </div>
@@ -54,15 +55,7 @@
                     <!-- ACCOUNT -->
                     <div class="col-md-3 clearfix">
                         <div class="header-ctn">
-                            <!-- Wishlist -->
-                            <div>
-                                <a href="#">
-                                    <i class="fa fa-heart-o"></i>
-                                    <span>Your Wishlist</span>
-                                    <div class="qty">2</div>
-                                </a>
-                            </div>
-                            <!-- /Wishlist -->
+
 
                             <!-- Cart -->
                             <div class="dropdown">
@@ -106,6 +99,24 @@
                                 </div>
                             </div>
                             <!-- /Cart -->
+
+<!--                            &lt;!&ndash; Wishlist &ndash;&gt;-->
+<!--                            <div>-->
+<!--                                <a href="#">-->
+<!--                                    <i class="fa fa-heart-o"></i>-->
+<!--                                    <span>Your Wishlist</span>-->
+<!--                                    <div class="qty">2</div>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; /Wishlist &ndash;&gt;-->
+
+                            <div>
+                                <a href="/order/myorders">
+                                    <i class="fa fa-user-o"></i>
+                                    <span>My Page</span>
+                                    <div class="qty">2</div>
+                                </a>
+                            </div>
 
                             <!-- Menu Toogle -->
                             <div class="menu-toggle">

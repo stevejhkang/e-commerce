@@ -20,8 +20,8 @@
                 , now()
                 , #{orderStatus}
                 , #{price}
-                , #{delivery.deliverySn}
-                , #{user.userSn}
+                , #{deliverySn}
+                , #{userSn}
             )
     </insert>
 
@@ -31,4 +31,29 @@
         from
             shop.order_seq;
     </select>
+
+    <select id="selectByUserSn" parameterType="integer" resultType="OrderDto">
+        select
+            o.*
+            , d.receiver_name
+            , d.address
+            , d.phone_number1
+
+            , u.user_id
+            , u.password
+            , u.user_name
+            , u.phone_number
+            , u.user_type
+        from
+            shop.orders o
+            inner join
+            shop.deliveries d
+            on o.delivery_sn = d.delivery_sn
+            inner join
+            users u
+            on o.user_sn = u.user_sn
+        where
+            o.user_sn=#{userSn}
+    </select>
+
 </mapper>

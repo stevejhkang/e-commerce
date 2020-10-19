@@ -60,5 +60,9 @@ public class MainViewController {
         return "user/login";
     }
 
+    @GetMapping("/ordersuccess")
+    public String orderSuccess(){
+        return "order/ordersuccess";
+    }
 
 }

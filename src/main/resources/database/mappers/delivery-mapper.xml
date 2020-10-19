@@ -19,4 +19,16 @@
             u.user_sn = #{userSn}
     </select>
 
+
+    <select id="selectBySn" parameterType="integer" resultType="DeliveryDto">
+        select
+           *
+        from
+            shop.deliveries
+        where
+            delivery_sn = #{deliverySn}
+    </select>
+
+
+
 </mapper>

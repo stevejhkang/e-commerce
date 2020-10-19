@@ -15,4 +15,8 @@ public class DeliveryDao {
         return sqlSession.selectOne(NAMESPACE+"selectByUserSn",userSn);
     }
 
+    public DeliveryDto findBySn(int deliverySn) {
+        return sqlSession.selectOne(NAMESPACE+"selectBySn",deliverySn);
+    }
+
 }
