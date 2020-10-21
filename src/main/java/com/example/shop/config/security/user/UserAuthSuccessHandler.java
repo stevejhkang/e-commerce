@@ -46,7 +46,7 @@ public class UserAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
 
         }
         else if(userType.equals("ROLE_SELLER")) {
-            targetUrl= "/store?page=1";
+            targetUrl= "/admin/item/list?page=1";
         }
         redirectStrategy.sendRedirect(request,response,targetUrl);
     }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class MainViewController {
+    static final int NUMBER_OF_ITEMS = 9;
 
     @Autowired
     ItemService itemService;
@@ -21,48 +22,16 @@ public class MainViewController {
         model.addAttribute("name", name);
         return "hello";
     }
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
-
-    @GetMapping("/config")
-    public String config() { return "config";}
-
-    @GetMapping("/checkout")
-    public String checkout() { return "order/checkout";}
-
-    @GetMapping("/item/detail")
-    public String product(@RequestParam("itemNo") int itemNo, Model model) {
-        model.addAttribute("item", itemService.findItem(itemNo));
-        return "item/detail";
-    }
 
     @GetMapping("/store")
     public String store(@RequestParam("page") int page, Model model) {
         Paging paging = new Paging();
         paging.setPageIndex(page);
-        paging.setPageCount(9);
+        paging.setPageCount(NUMBER_OF_ITEMS);
 
         model.addAttribute("paging",paging);
-        model.addAttribute("itemlist",itemService.findAll(paging));
+        model.addAttribute("itemlist",itemService.findAllItems(paging));
 
         return "store";
     }
-
-    @GetMapping("/signup")
-    public String register() {
-        return "user/signup";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "user/login";
-    }
-
-    @GetMapping("/ordersuccess")
-    public String orderSuccess(){
-        return "order/ordersuccess";
-    }
-
 }

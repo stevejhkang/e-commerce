@@ -9,6 +9,7 @@ import com.example.shop.domain.order.OrderRepository;
 import com.example.shop.domain.order.OrderStatus;
 import com.example.shop.domain.user.User;
 import com.example.shop.domain.user.UserType;
+import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,9 +32,14 @@ public class OrderDBRepository implements OrderRepository {
     }
 
     @Override
-    public List<Order> findAllOrdersByUserSn(int userSn) {
-        List<OrderDto> dtoList = orderDao.findOrderByUserSn(userSn);
+    public List<Order> findAllOrdersByUserSn(int userSn, Paging paging) {
+        List<OrderDto> dtoList = orderDao.findAllOrdersByUserSn(userSn, paging);
         return dtoList.stream().map(OrderDBRepository::toOrder).collect(Collectors.toList());
+    }
+
+    @Override
+    public int findTotalCountByUserSn(int userSn) {
+        return orderDao.findTotalCountByUserSn(userSn);
     }
 
     public static Order toOrder(OrderDto orderDto){

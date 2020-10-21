@@ -28,8 +28,8 @@ public class ItemDBRepository implements ItemRepository {
     }
 
     @Override
-    public List<Item> findAll(Paging paging) {
-        List<ItemDto> dtoList = itemDao.findAll(paging);
+    public List<Item> findAllItems(Paging paging) {
+        List<ItemDto> dtoList = itemDao.findAllItems(paging);
         return dtoList.stream().map(ItemDBRepository::toItem).collect(Collectors.toList());
     }
 

@@ -12,15 +12,15 @@ public class UserDao {
     protected static final String NAMESPACE = "com.example.shop.UserMapper.";
 
     public int createUser(UserDto dto) {
-        return sqlSession.insert(NAMESPACE+"insert",dto);
+        return sqlSession.insert(NAMESPACE+"createUser",dto);
     }
 
 
-    public UserDto findByIdAndPassword(UserDto dto) {
-        return sqlSession.selectOne(NAMESPACE+"selectByIdAndPassword",dto);
+    public UserDto findUserByIdAndPassword(UserDto dto) {
+        return sqlSession.selectOne(NAMESPACE+"findUserByIdAndPassword",dto);
     }
 
-    public UserDto findByUserSn(int userSn) {
-        return sqlSession.selectOne(NAMESPACE+"selectByUserSn",userSn);
+    public UserDto findUserByUserSn(int userSn) {
+        return sqlSession.selectOne(NAMESPACE+"findUserByUserSn",userSn);
     }
 }

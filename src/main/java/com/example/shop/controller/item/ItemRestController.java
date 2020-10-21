@@ -4,16 +4,18 @@ import com.example.shop.controller.item.rqrs.CreateItemRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
+import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,72 +27,47 @@ public class ItemRestController {
     @Autowired
     ItemService itemService;
 
-    //createProduct
     @PostMapping("/createItem")
-    public void createItem(@ModelAttribute("createItemRq") @Valid CreateItemRq createItemRq,
-                                              @RequestParam("mainImg") MultipartFile mainImg,
-                                              Model model,
-                                             HttpServletResponse response){
-//        @RequestParam("mainImg") MultipartFile mainImg,
-//        itemService.createItem()
-        System.out.println("createItem");
-//        model.addAttribute("createItemRq",new CreateItemRq());
+    public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid CreateItemRq createItemRq,
+                           @RequestParam("mainImg") MultipartFile mainImg){
 
-        ResponseEntity<String> entity = null;
         int result = itemService.createItem(createItemRq,mainImg);
 
-        try {
-            response.sendRedirect("/admin/item/list?page=1");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        String newURL = "/admin/item/list?page=1";
+        return ResponseEntityUtil.redirectResponse(newURL);
     }
 
-
-    //updateItem
     @PostMapping("/updateItem")
-    public void updateItem(@ModelAttribute("item") Item item,
-                          @RequestParam("mainImg") MultipartFile mainImg,
-                          Model model,
-                           HttpServletResponse response) {
-        System.out.println("updateItem");
+    public ResponseEntity updateItem(@ModelAttribute("item") Item item,
+                          @RequestParam("mainImg") MultipartFile mainImg) {
+
         String result = itemService.updateItem(item, mainImg);
 
-        try {
-//            response.sendRedirect("/admin/item/detail?itemNo="+item.getItemSn());
-            response.sendRedirect("/admin/item/list?page=1");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        String newURL = "/admin/item/list?page=1";
+        return ResponseEntityUtil.redirectResponse(newURL);
     }
 
-    //findAll
     @PostMapping("/itemlist")
-    public Map<String, Object> findAll(@RequestBody Paging paging, Model model) {
+    public ResponseEntity findAll(@RequestBody Paging paging, Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("itemlist",itemService.findAll(paging));
+        map.put("itemlist",itemService.findAllItems(paging));
         map.put("paging",paging);
-        return map;
+
+        return ResponseEntityUtil.successResponse(map);
     }
 
     @GetMapping("/itemTotalCount")
-    public String findTotalCount(Model model){
+    public ResponseEntity findTotalCount(Model model){
         model.addAttribute("totalCount", itemService.findTotalCount());
-        return "success";
+        return ResponseEntityUtil.successResponse();
     }
 
     //deleteItem
     @GetMapping("/deleteItem")
-    public void deleteItem(@RequestParam("itemNo") int itemNo, HttpServletResponse response){
+    public ResponseEntity deleteItem(@RequestParam("itemNo") int itemNo){
         String result = itemService.deleteItem(itemNo);
 
-        try {
-            response.sendRedirect("/admin/item/list?page=1");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        String newURL = "/admin/item/list?page=1";
+        return ResponseEntityUtil.redirectResponse(newURL);
     }
 }

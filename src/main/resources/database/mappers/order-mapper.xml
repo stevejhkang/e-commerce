@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.shop.OrderMapper">
-    <insert id="insert" parameterType="OrderDto">
+    <insert id="createOrder" parameterType="OrderDto">
         insert into
             shop.orders
             (
@@ -25,35 +25,51 @@
             )
     </insert>
 
-    <select id="selectSequenceNumber">
+    <select id="createSequenceNumber">
         select
             order_seq.NEXTVAL
         from
             shop.order_seq;
     </select>
 
-    <select id="selectByUserSn" parameterType="integer" resultType="OrderDto">
-        select
-            o.*
-            , d.receiver_name
-            , d.address
-            , d.phone_number1
+    <select id="findTotalCount" parameterType="integer" resultType = "integer">
+        select count(*)
+        from shop.orders
+        where user_sn=#{userSn}
+    </select>
 
-            , u.user_id
-            , u.password
-            , u.user_name
-            , u.phone_number
-            , u.user_type
+    <select id="findAllOrdersByUserSn" parameterType="hashMap" resultType="OrderDto">
+        select
+            R.RNUM
+            , R.*
         from
-            shop.orders o
-            inner join
-            shop.deliveries d
-            on o.delivery_sn = d.delivery_sn
-            inner join
-            users u
-            on o.user_sn = u.user_sn
+        (
+            select
+                o.*
+                , d.receiver_name
+                , d.address
+                , d.phone_number1
+
+                , u.user_id
+                , u.password
+                , u.user_name
+                , u.phone_number
+                , u.user_type
+                , @ROWNUM := @ROWNUM +1 AS RNUM
+            from
+                shop.orders o
+                inner join
+                shop.deliveries d
+                on o.delivery_sn = d.delivery_sn
+                inner join
+                users u
+                on o.user_sn = u.user_sn
+                 , (select @ROWNUM :=0 ) A
+        ) R
         where
-            o.user_sn=#{userSn}
+            R.RNUM between ${((paging.pageIndex-1) * paging.pageCount) + 1} and ${((paging.pageIndex-1) * paging.pageCount) + paging.pageCount }
+            and
+            R.user_sn=#{userSn}
     </select>
 
 </mapper>

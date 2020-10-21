@@ -20,14 +20,14 @@ public class UserDBRepository implements UserRepository {
         return userDao.createUser(UserDto.of(user));
     }
 
-    public User findByIdAndPassword(User user) {
-        UserDto dto = userDao.findByIdAndPassword(UserDto.of(user));
+    public User findUserByIdAndPassword(User user) {
+        UserDto dto = userDao.findUserByIdAndPassword(UserDto.of(user));
         return toUser(dto);
     }
 
     @Override
     public User findByUserSn(int userSn) {
-        return toUser(userDao.findByUserSn(userSn));
+        return toUser(userDao.findUserByUserSn(userSn));
     }
 
 //    public User findUser(String id ) {

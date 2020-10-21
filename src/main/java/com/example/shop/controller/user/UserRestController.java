@@ -4,6 +4,7 @@ import com.example.shop.controller.user.rqrs.CreateUserRq;
 import com.example.shop.controller.user.rqrs.LoginUserRq;
 import com.example.shop.domain.user.User;
 import com.example.shop.service.UserService;
+import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -24,63 +26,44 @@ public class UserRestController {
     UserService userService;
 
     @PostMapping("/createUser")
-    public ResponseEntity<String> createUser(@ModelAttribute CreateUserRq rq,HttpServletResponse response){
+    public ResponseEntity createUser(@ModelAttribute CreateUserRq rq){
         ResponseEntity<String> entity = null;
-        try{
-            int result = userService.createUser(rq);
-            entity=successResponse();
-            response.sendRedirect("/home/store");
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            e.getMessage();
-            entity=failureResponse(e);
-        }
 
-         return entity;
-    }
-
-    @PostMapping("/loginAction")
-    public ResponseEntity<String> login(HttpServletRequest request, @ModelAttribute LoginUserRq rq, HttpServletResponse response){
-        ResponseEntity<String> entity = null;
-        try{
-            User user = userService.findByIdAndPassword(rq.getUserId(),rq.getPassword());
-            HttpSession session = (HttpSession) request.getSession();
-            session.setAttribute("islogined",true);
-            entity=successResponse();
-            response.sendRedirect("/store?page=1");
+        String result = userService.createUser(rq);
+        if(result.equals("suceess")){
+            entity= ResponseEntityUtil.successResponse();
         }
-        catch(RuntimeException | IOException e){
-            e.printStackTrace();
-            e.getMessage();
-            entity=failureResponse(e);
+        else {
+            entity=ResponseEntityUtil.failureResponse();
         }
         return entity;
     }
 
+    @PostMapping("/loginAction")
+    public ResponseEntity login(HttpServletRequest request, @ModelAttribute LoginUserRq rq){
+        ResponseEntity<String> entity = null;
+
+        User user = userService.findUserByIdAndPassword(rq.getUserId(), rq.getPassword());
+
+        HttpSession session = (HttpSession) request.getSession();
+        session.setAttribute("islogined",true);
+
+        String url = "/store?page=1";
+        entity=ResponseEntityUtil.redirectResponse(url);
+
+        return entity;
+    }
+
     @GetMapping("/logoutAction")
-    public ResponseEntity<String> logout(HttpServletRequest request, @ModelAttribute LoginUserRq rq, HttpServletResponse response) {
+    public ResponseEntity logout(HttpServletRequest request, @ModelAttribute LoginUserRq rq) {
         ResponseEntity<String> entity= null;
 
         HttpSession session = (HttpSession) request.getSession();
         session.invalidate();
 
-        entity= successResponse();
-
-        try {
-            response.sendRedirect("/home/store");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        String url = "/store";
+        entity = ResponseEntityUtil.redirectResponse(url);
 
         return entity;
-    }
-
-    public ResponseEntity<String> successResponse(){
-        return new ResponseEntity<>("success",HttpStatus.OK);
-    }
-    public ResponseEntity<String> failureResponse(Exception e){
-        return new ResponseEntity<>("failure",HttpStatus.BAD_REQUEST);
     }
 }

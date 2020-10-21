@@ -35,7 +35,7 @@ public class UserServiceTest extends TestCase {
         rq.setPassword("asd123f");
         rq.setUserName("asdfa123sdf");
         rq.setPhoneNumber("123123123123");
-        int result =userService.createUser(rq);
-        assertEquals(1,result);
+        String result =userService.createUser(rq);
+        assertEquals("success",result);
     }
 }

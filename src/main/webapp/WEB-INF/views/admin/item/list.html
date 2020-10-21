@@ -58,15 +58,17 @@
 <div class="content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper">
-            <h1>상품목록</h1>
+            <h1>관리자 페이지</h1>
+
         </div>
 
         <div class="col-lg-12" id="itemlist">
 
             <div class="card card-default text-center">
 
-                    <div class="card-header card-header-border-bottom ">
+                    <div class="card-header card-header-border-bottom">
                         <h2>상품 목록</h2>
+
 
                     </div>
 
@@ -119,7 +121,7 @@
                             </tbody>
                         </table>
 
-                        <div class="text-center display: d-inline align-middle">
+                        <div class="text-center display: d-inline align-middle" align="center">
                             <nav aria-label="Page navigation example"  class="text-center align-middle">
                                 <li class="pagination page-item" style="float: left;" th:value="${paging.prevPageIndex}"><a
                                         class="page-link" id="prevPage" name="pageNo" th:href="@{'?page=' + ${paging.prevPageIndex}}">Previous</a>
@@ -142,7 +144,9 @@
                 </th:block>
             </div>
         </div>
+
     </div>
+    <div class="float-right pr-3" align="right" ><a class="text-center float-right page-link" href="/user/logoutAction">log out</a></div>
 </div>
 
 <footer class="footer mt-auto">

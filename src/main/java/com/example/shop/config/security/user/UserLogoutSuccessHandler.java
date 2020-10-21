@@ -19,7 +19,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
                                 HttpServletResponse httpServletResponse,
                                 Authentication authentication) throws IOException, ServletException {
         try {
-            httpServletResponse.sendRedirect("/login");
+            httpServletResponse.sendRedirect("/store?page=1");
         }
         catch (IOException e) {
             log.error("[userLogoutSuccessHandler] : " + e.getMessage());

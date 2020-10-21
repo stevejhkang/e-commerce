@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("admin")
 public class adminViewController {
-
     @Autowired
     ItemService itemService;
 
     @GetMapping("/item/register")
     public String registerItem(Model model) {
-        CreateItemRq rq = new CreateItemRq(DeliveryOption.ShippingCostNotInclude, DisplayOption.NONE);
+        CreateItemRq rq = new CreateItemRq();
         model.addAttribute("createItemRq", rq);
 
         return "admin/item/register";
@@ -33,7 +32,7 @@ public class adminViewController {
         paging.setPageIndex(page);
 
         model.addAttribute("paging", paging);
-        model.addAttribute("itemlist", itemService.findAll(paging));
+        model.addAttribute("itemlist", itemService.findAllItems(paging));
 
         return "admin/item/list";
     }

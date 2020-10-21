@@ -9,12 +9,17 @@ import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public int createUser(CreateUserRq rq){
+    private static final int SUCCESS=1;
+
+    public String createUser(CreateUserRq rq){
         checkConfirmPassword(rq.getPassword(),rq.getConfirmPassword());
 
         User user = User.builder()
@@ -24,7 +29,13 @@ public class UserService {
                         .phoneNumber(rq.getPhoneNumber())
             .build();
 
-        return userRepository.createUser(user);
+        int result = userRepository.createUser(user);
+        if(result == SUCCESS){
+            return "success";
+        }
+        else {
+            return "failure";
+        }
     }
 
     public void checkConfirmPassword(String password, String confirmPassword){
@@ -33,21 +44,18 @@ public class UserService {
         }
     }
 
-    public User findByIdAndPassword(String id, String password){
+    public User findUserByIdAndPassword(String id, String password){
         User user = User.builder()
                         .userId(id)
                         .password(password)
                         .build();
-        User result = userRepository.findByIdAndPassword(user);
-        if(result==null){
-            throw new RestException(RestError.CANNOT_FIND_ACCOUNT);
-        }
-        return result;
+
+        Optional<User> result = Optional.ofNullable(userRepository.findUserByIdAndPassword(user));
+
+        return result.orElseThrow(() -> new RestException(RestError.CANNOT_FIND_ACCOUNT));
     }
 
     public User findByUserSn(int userSn) {
         return userRepository.findByUserSn(userSn);
     }
-
-
 }

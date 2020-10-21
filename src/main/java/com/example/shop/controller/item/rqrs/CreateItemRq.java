@@ -28,9 +28,9 @@ public class CreateItemRq {
     @Positive
     private int stock;
 
-    public CreateItemRq(DeliveryOption deliveryOption, DisplayOption displayOption) {
-        this.deliveryOption = deliveryOption;
-        this.displayOption = displayOption;
+    public CreateItemRq() {
+        this.deliveryOption = DeliveryOption.ShippingCostNotInclude;
+        this.displayOption = DisplayOption.NONE;
     }
 
 }

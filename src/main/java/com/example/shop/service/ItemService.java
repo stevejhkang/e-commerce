@@ -44,10 +44,10 @@ public class ItemService {
         return itemRepository.findTotalCount();
     }
 
-    public List<Item> findAll(Paging paging){
+    public List<Item> findAllItems(Paging paging){
         int totalCount = findTotalCount();
         paging.setTotalCount(totalCount);
-        return itemRepository.findAll(paging);
+        return itemRepository.findAllItems(paging);
     }
 
     public Item findItem(int itemSn) {

@@ -31,7 +31,7 @@
         <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SELLER')"/>
 
         <form-login
-                login-page="/login"
+                login-page="/user/login"
                 username-parameter="userId"
                 password-parameter="password"
                 login-processing-url="/user/loginAction"
@@ -40,7 +40,7 @@
         />
         <logout
                 logout-url="/logoutAction"
-                success-handler-ref="userLogoutSuccessHandler"
+                logout-success-url="/user/login"
                 invalidate-session="true"
 
         />
@@ -60,20 +60,20 @@
         <intercept-url pattern="/**" access="permitAll"/>
         <intercept-url pattern="/order/**" access="hasAnyRole('ROLE_BUYER')"/>
         <intercept-url pattern="/my/**" access="hasAnyRole('ROLE_BUYER')"/>
-        <form-login login-page="/login"
+        <form-login login-page="/user/login"
             username-parameter="userId"
             password-parameter="password"
             login-processing-url="/user/loginAction"
             authentication-success-handler-ref="userAuthSuccessHandler"
-                    authentication-failure-url="/login"
+                    authentication-failure-url="/user/login"
         />
         <logout
                 logout-url="/logoutAction"
                 invalidate-session="true"
-                logout-success-url="/login"
+                logout-success-url="/store?page=1"
         />
-        <session-management invalid-session-url="/login">
-            <concurrency-control max-sessions="1" expired-url="/login"/>
+        <session-management invalid-session-url="/user/login">
+            <concurrency-control max-sessions="1" expired-url="/user/login"/>
         </session-management>
 
     </http>

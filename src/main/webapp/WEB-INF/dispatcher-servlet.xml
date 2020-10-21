@@ -28,6 +28,11 @@
     <bean id="templateEngine"
           class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
+        <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect"></bean>
+            </set>
+        </property>
     </bean>
     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
         <property name="characterEncoding" value="UTF-8"/>

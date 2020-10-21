@@ -33,10 +33,8 @@ public class OrderServiceTest extends TestCase {
         Item item = itemService.findItem(1);
         int quantity = 3;
 
-        int result = orderService.createOrder(user,item,quantity);
+        String result = orderService.createOrder(user,item,quantity);
         
-        assertEquals(1,result);
+        assertEquals("success",result);
     }
-
-
 }

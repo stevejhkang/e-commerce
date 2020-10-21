@@ -21,7 +21,8 @@ public class ItemDao {
     public int findTotalCount(){
         return sqlSession.selectOne(NAMESPACE+"selectCount");
     }
-    public List<ItemDto> findAll(Paging paging) {
+
+    public List<ItemDto> findAllItems(Paging paging) {
         return sqlSession.selectList(NAMESPACE+"selectAll",paging);
     }
 

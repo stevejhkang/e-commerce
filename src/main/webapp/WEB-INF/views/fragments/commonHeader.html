@@ -13,8 +13,8 @@
                 <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
 <!--                    <li th:text="${userSession}"></li>-->
-                    <li sec:authorize access="isAnonymous()"><i class="fa fa-key"></i> <a sec:authorize="isAnonymous()" href="/login">Sign in</a> / <a href="/signup">Sign up</a></li>
-                    <li sec:authorize access="hasRole('ROLE_BUYER')"><a sec:authorize="hasRole('ROLE_SELLER')" href="/user/logoutAction">Logout</a></li>
+                    <li sec:authorize="isAnonymous()"><i class="fa fa-key"></i> <a sec:authorize="isAnonymous()" href="/user/login">Sign in</a> / <a href="/user/signup">Sign up</a></li>
+                    <li sec:authorize="hasAnyRole('ROLE_SELLER','ROLE_BUYER')"><a href="/user/logoutAction">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -62,7 +62,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Your Cart</span>
-                                    <div class="qty">3</div>
+<!--                                    <div class="qty">3</div>-->
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="cart-list">
@@ -111,10 +111,10 @@
 <!--                            &lt;!&ndash; /Wishlist &ndash;&gt;-->
 
                             <div>
-                                <a href="/order/myorders">
+                                <a href="/order/myorders?page=1">
                                     <i class="fa fa-user-o"></i>
                                     <span>My Page</span>
-                                    <div class="qty">2</div>
+<!--                                    <div class="qty">2</div>-->
                                 </a>
                             </div>
 

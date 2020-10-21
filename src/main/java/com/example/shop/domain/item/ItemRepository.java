@@ -7,7 +7,7 @@ import java.util.List;
 public interface ItemRepository {
     public int createItem(Item item);
     public int findTotalCount();
-    public List<Item> findAll(Paging paging);
+    public List<Item> findAllItems(Paging paging);
 
     public Item findItem(int itemSn);
 

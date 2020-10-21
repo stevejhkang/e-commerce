@@ -45,7 +45,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         if(userService==null) {
             userService= ApplicationContextUtil.getBean(UserService.class);
         }
-        User user = userService.findByIdAndPassword(id, password);
+        User user = userService.findUserByIdAndPassword(id, password);
         if(user==null){
             throw new BadCredentialsException("아이디 혹은 비밀번호가 틀렸습니다.");
         }

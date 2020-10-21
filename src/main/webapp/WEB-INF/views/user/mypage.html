@@ -9,6 +9,16 @@
     <title>Electro - HTML Ecommerce Template</title>
 
     <th:block th:replace="fragments/commonHead.html"></th:block>
+    <script
+            crossorigin="anonymous"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -17,6 +27,7 @@
 <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" rel="stylesheet">
+
 
 
 <!--&lt;!&ndash; catg header banner section &ndash;&gt;-->
@@ -61,6 +72,21 @@
 
 
                             </table>
+                            <div class="text-center display: d-inline align-middle" align="center">
+                                <nav aria-label="Page navigation example"  class="text-center align-middle">
+                                    <li class="pagination page-item" style="float: left;" th:value="${paging.prevPageIndex}"><a
+                                            class="page-link" id="prevPage" name="pageNo" th:href="@{'?page=' + ${paging.prevPageIndex}}">Previous</a>
+                                    </li>
+                                    <ul class="pagination" style="float: left;"
+                                        th:each="page : ${#numbers.sequence(paging.startPageIndex,paging.endPageIndex)} ">
+                                        <li class="page-item" th:value="${page}"><a name="pageNo" th:href="@{'?page=' + ${page}}"
+                                                                                    th:text="${page}"></a></li>
+                                    </ul>
+                                    <li class="pagination page-item" style="float: left;" th:value="${paging.nextPageIndex}"><a
+                                            class="page-link" id="nextPage" name="pageNo"
+                                            th:href="@{'?page=' + ${paging.nextPageIndex}}">Next</a></li>
+                                </nav>
+                            </div>
                         </div>
 
                     </div>
@@ -93,6 +119,12 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        var paging = [[${paging}]];
+       console.log(paging);
+    });
+</script>
 </body>
 </html>
 

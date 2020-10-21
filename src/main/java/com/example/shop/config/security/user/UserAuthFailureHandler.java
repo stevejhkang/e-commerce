@@ -17,6 +17,6 @@ public class UserAuthFailureHandler
                                         HttpServletResponse httpServletResponse,
                                         AuthenticationException e) throws IOException, ServletException {
         httpServletRequest.setAttribute("msg", e.getMessage());
-        httpServletRequest.getRequestDispatcher("/login").forward(httpServletRequest, httpServletResponse);
+        httpServletRequest.getRequestDispatcher("/user/login").forward(httpServletRequest, httpServletResponse);
     }
 }
