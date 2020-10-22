@@ -26,15 +26,15 @@ public class OrderServiceTest extends TestCase {
     @Autowired
     private ItemService itemService;
 
-    @Test
-    public void createTest(){
-        //User, Item, quantity
-        User user = userService.findByUserSn(1);
-        Item item = itemService.findItem(1);
-        int quantity = 3;
-
-        String result = orderService.createOrder(user,item,quantity);
-        
-        assertEquals("success",result);
-    }
+//    @Test
+//    public void createTest(){
+//        //User, Item, quantity
+//        User user = userService.findByUserSn(1);
+//        Item item = itemService.findItem(1);
+//        int quantity = 3;
+//
+////        String result = orderService.createOrder(user,item,quantity);
+//
+//        assertEquals("success",result);
+//    }
 }

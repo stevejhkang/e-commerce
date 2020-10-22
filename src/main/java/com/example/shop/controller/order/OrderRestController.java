@@ -26,17 +26,13 @@ public class OrderRestController {
 
     @PostMapping("/createOrder")
     public ResponseEntity createOrder(HttpServletRequest request, HttpServletResponse response, @RequestBody CreateOrderRq data) {
-        //@SessionAttribute User user,
-        //, int quantity
-        ResponseEntity entity = null;
 
-        Item item = data.getItem();
-        int quantity = data.getQuantity();
+        ResponseEntity entity = null;
 
         HttpSession session = request.getSession();
         User user = ((UserSession) session.getAttribute("userSession")).getUser();
 
-        String result =orderService.createOrder(user,item,quantity);
+        String result = orderService.createOrder(user,data);
 
         if(result.equals("success")) {
             String url = "/order/ordersuccess";

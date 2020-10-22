@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.controller.order.rqrs.CreateOrderRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.delivery.DeliveryRepository;
@@ -23,7 +24,10 @@ public class OrderService {
     @Autowired
     private DeliveryRepository deliveryRepository;
 
-    public String createOrder(User user, Item item, int quantity) {
+    public String createOrder(User user, CreateOrderRq data) {
+        Item item = data.getItem();
+        int quantity = data.getQuantity();
+
         Delivery delivery = deliveryRepository.findByUserSn(user.getUserSn());
 
         LocalDateTime now = new LocalDateTime();

@@ -14,4 +14,6 @@ public interface ItemRepository {
     public int updateItem(Item item);
 
     public int deleteItem(int itemSn);
+
+    public int updateStocks(List<Item> keyset);
 }

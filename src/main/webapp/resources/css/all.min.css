@@ -1,0 +1,22 @@
+.fa-trash:before {
+    content: "\f1f8"
+}
+
+.fa-trash-alt:before {
+    content: "\f2ed"
+}
+
+.fa-trash-restore:before {
+    content: "\f829"
+}
+
+.fa-trash-restore-alt:before {
+    content: "\f82a"
+}
+.fa-sync:before {
+    content: "\f021"
+}
+
+.fa-sync-alt:before {
+    content: "\f2f1"
+}

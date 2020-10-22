@@ -1,5 +1,6 @@
 package com.example.shop.dao.item;
 
+import com.example.shop.domain.item.Item;
 import com.example.shop.util.Paging;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,9 @@ public class ItemDao {
 
     public int deleteItem(int itemSn){
         return sqlSession.delete(NAMESPACE+"deleteItem",itemSn);
+    }
+
+    public int updateStocks(List<ItemDto> itemDtos) {
+        return sqlSession.update(NAMESPACE+"updateStocks",itemDtos);
     }
 }

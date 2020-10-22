@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+
+    <th:block th:replace="fragments/commonHead.html"></th:block>
+
+
+</head>
+<body>
+<!-- HEADER -->
+<header th:replace="fragments/commonHeader :: commonHeader"> </header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<!--		<nav id="navigation">-->
+<!--			&lt;!&ndash; container &ndash;&gt;-->
+<!--			<div class="container">-->
+<!--				&lt;!&ndash; responsive-nav &ndash;&gt;-->
+<!--				<div id="responsive-nav">-->
+<!--					&lt;!&ndash; NAV &ndash;&gt;-->
+<!--					<ul class="main-nav nav navbar-nav">-->
+<!--						<li class="active"><a href="#">Home</a></li>-->
+<!--						<li><a href="#">Hot Deals</a></li>-->
+<!--						<li><a href="#">Categories</a></li>-->
+<!--						<li><a href="#">Laptops</a></li>-->
+<!--						<li><a href="#">Smartphones</a></li>-->
+<!--						<li><a href="#">Cameras</a></li>-->
+<!--						<li><a href="#">Accessories</a></li>-->
+<!--					</ul>-->
+<!--					&lt;!&ndash; /NAV &ndash;&gt;-->
+<!--				</div>-->
+<!--				&lt;!&ndash; /responsive-nav &ndash;&gt;-->
+<!--			</div>-->
+<!--			&lt;!&ndash; /container &ndash;&gt;-->
+<!--		</nav>-->
+<!-- /NAVIGATION -->
+
+<!--
+  Bootstrap docs: https://getbootstrap.com/docs
+  Get more snippet on https://bootstraptor.com/snippets
+-->
+
+<section class="pt-5 pb-5">
+    <div class="container">
+        <div class="row w-100">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h3 class="display-5 mb-2">Shopping Cart</h3>
+                <p class="mb-5">
+                    <i class="text-info font-weight-bold">3</i> items in your cart</p>
+                <table id="shoppingCart" class="table table-condensed table-responsive">
+                    <thead>
+                    <tr>
+                        <th style="width:60%">Product</th>
+                        <th style="width:12%">Price</th>
+                        <th style="width:10%">Quantity</th>
+                        <th style="width:16%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item: ${items.entrySet()}">
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-md-3 text-left">
+                                    <img th:src="@{'/resources/img/'+${item.getKey().imgSrc}}" alt="https://via.placeholder.com/250x250/5fa9f8/ffffff" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                </div>
+                                <div class="col-md-9 text-left mt-sm-2">
+                                    <h4 th:inline="text">[[${item.getKey().itemName}]]</h4>
+                                    <p class="font-weight-light" th:text="${item.getKey().manufacturer}" >Brand &amp; Name</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price" th:text="${#numbers.formatCurrency(item.getKey().price)}">$49.00</td>
+                        <td data-th="Quantity" >
+                            <input type="number" class="form-control form-control-lg text-center" th:value="${item.getValue()}">
+                        </td>
+                        <td class="actions" data-th="">
+                            <div class="text-right">
+<!--                                <a th:href="@{'/cart/deleteItem/'+product.getKey().itemSn}" class="col-md-1">-->
+<!--                                <button class="btn btn-white border-secondary bg-white btn-md mb-2">-->
+<!--                                    <i class="fas">수량 변경</i>-->
+<!--                                </button>-->
+<!--                                </a>-->
+                                <a th:href="@{'/cart/deleteItem/{itemSn}'(itemSn=${item.getKey().itemSn})}" class="col-md-1">
+                                    <button class="btn btn-white border-secondary bg-white btn-md mb-2" id="delete_in_cart">
+                                        <i class="fas">삭제</i>
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="float-right text-right">
+                    <h4>Subtotal:</h4>
+                    <h1 th:text="${#numbers.formatCurrency(total_price)}">$99.00</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 d-flex align-items-center">
+            <div class="col-sm-6 order-md-2 text-right">
+                <a href="/cart/checkout " class="btn btn-danger mb-4 btn-lg pl-5 pr-5">Checkout</a>
+            </div>
+            <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                <a href="catalog.html">
+                    <i class="fas fa-arrow-left mr-2"></i> Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer th:replace="fragments/commonFooter ::commonFooter"></footer>
+<!-- /FOOTER -->
+
+
+<!-- jQuery Plugins -->
+<th:block th:replace="fragments/commonJs.html"></th:block>
+<script th:src="@{/resources/js/popper.min.js}"/>
+<!--<script>-->
+<!--    $( document ).ready(function() {-->
+<!--        console.log( "ready!" );-->
+<!--        $("#delete_in_cart").click(function(){-->
+<!--            console.log("click");-->
+<!--            $.ajax({-->
+<!--                url: '/cart/delete/'+$(this).val(),-->
+<!--                type: 'GET',-->
+<!--                success: function (data){-->
+<!--                    console.log(data);-->
+<!--                    console.log(data.status);-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+</body>
+</html>

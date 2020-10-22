@@ -55,6 +55,17 @@
             item_sn = #{itemSn}
     </update>
 
+    <update id="updateStocks" parameterType="java.util.List">
+       <foreach collection="list" item="ItemDto" open="" close="" separator=";" >
+           update
+            shop.items
+           set
+            stock = #{ItemDto.stock}
+           where
+            item_sn = #{ItemDto.itemSn}
+       </foreach>
+    </update>
+
     <delete id="deleteItem" parameterType="integer">
         delete from
             shop.items

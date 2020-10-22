@@ -3,6 +3,8 @@ package com.example.shop.service;
 import com.example.shop.controller.item.rqrs.CreateItemRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.item.ItemRepository;
+import com.example.shop.exception.RestError;
+import com.example.shop.exception.RestException;
 import com.example.shop.util.FileUtils;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -51,7 +54,9 @@ public class ItemService {
     }
 
     public Item findItem(int itemSn) {
-        return itemRepository.findItem(itemSn);
+        Optional<Item> item =  Optional.ofNullable(itemRepository.findItem(itemSn));
+
+        return item.orElseThrow(() -> new RestException(RestError.NO_SUCH_ITEM));
     }
 
     public String updateItem(Item item, MultipartFile mainImg) {

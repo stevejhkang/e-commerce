@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 
 public enum RestError {
     USER_NOT_EQUAL_CONFIRM_PASSWORD("01-00"),
-    CANNOT_FIND_ACCOUNT("01-01")
-    ;
+    CANNOT_FIND_ACCOUNT("01-01"),
+
+    NO_SUCH_ITEM("02-00"),
+    NOT_ENOUGH_ITEM("02-01");
 
     private final HttpStatus status;
     private final String code;

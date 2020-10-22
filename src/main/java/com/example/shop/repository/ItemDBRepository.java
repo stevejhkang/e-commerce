@@ -48,6 +48,12 @@ public class ItemDBRepository implements ItemRepository {
         return itemDao.deleteItem(itemSn);
     }
 
+    @Override
+    public int updateStocks(List<Item> items) {
+        List<ItemDto> itemDtos =items.stream().map(ItemDto::of).collect(Collectors.toList());
+        return itemDao.updateStocks(itemDtos);
+    }
+
     private static Item toItem(ItemDto dto) {
         return Item.builder()
                    .itemSn(dto.getItemSn())

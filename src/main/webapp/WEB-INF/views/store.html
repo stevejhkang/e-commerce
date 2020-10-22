@@ -307,7 +307,7 @@
 												</div>
 											</div>
 											<div class="add-to-cart">
-												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+												<button class="add-to-cart-btn" id="addToCart" th:value="${item.itemSn}"><i class="fa fa-shopping-cart"></i> add to cart</button>
 											</div>
 										</div>
 									<!-- /product -->
@@ -386,6 +386,21 @@
 
 		<!-- jQuery Plugins -->
 		<th:block th:replace="fragments/commonJs.html"></th:block>
-
+		<script>
+			$( document ).ready(function() {
+				console.log( "ready!" );
+				$(".add-to-cart-btn").click(function(){
+					console.log("click"+$(this).val());
+					$.ajax({
+						url: '/cart/addItemAction/'+$(this).val(),
+						type: 'GET',
+						success: function (data){
+							console.log(data);
+							console.log(data.status);
+						}
+					});
+				});
+			});
+		</script>
 	</body>
 </html>
