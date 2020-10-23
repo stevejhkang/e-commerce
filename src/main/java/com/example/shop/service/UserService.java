@@ -1,7 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.controller.user.rqrs.CreateUserRq;
-import com.example.shop.controller.user.rqrs.LoginUserRq;
+import com.example.shop.controller.user.rqrs.createUserRq;
 import com.example.shop.domain.user.User;
 import com.example.shop.domain.user.UserRepository;
 import com.example.shop.exception.RestError;
@@ -9,7 +8,6 @@ import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -19,7 +17,7 @@ public class UserService {
 
     private static final int SUCCESS=1;
 
-    public String createUser(CreateUserRq rq){
+    public String createUser(createUserRq rq){
         checkConfirmPassword(rq.getPassword(),rq.getConfirmPassword());
 
         User user = User.builder()

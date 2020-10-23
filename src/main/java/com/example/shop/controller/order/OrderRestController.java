@@ -1,7 +1,6 @@
 package com.example.shop.controller.order;
 
-import com.example.shop.controller.order.rqrs.CreateOrderRq;
-import com.example.shop.domain.item.Item;
+import com.example.shop.controller.order.rqrs.createOrderOneItemRq;
 import com.example.shop.domain.user.User;
 import com.example.shop.service.OrderService;
 import com.example.shop.session.UserSession;
@@ -25,7 +24,7 @@ public class OrderRestController {
     private OrderService orderService;
 
     @PostMapping("/createOrder")
-    public ResponseEntity createOrder(HttpServletRequest request, HttpServletResponse response, @RequestBody CreateOrderRq data) {
+    public ResponseEntity createOrder(HttpServletRequest request, HttpServletResponse response, @RequestBody createOrderOneItemRq data) {
 
         ResponseEntity entity = null;
 

@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @ToString
-public class CreateUserRq {
+public class createUserRq {
     @NotBlank @Size(min = 2, max=32, message = "2자이상 32자 이하")
     private String userId;
     @NotBlank @Size(min = 10, max=32, message = "10자이상 32자 이하")

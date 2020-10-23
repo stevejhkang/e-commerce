@@ -58,8 +58,10 @@
         <csrf disabled="true"/>
 
         <intercept-url pattern="/**" access="permitAll"/>
-        <intercept-url pattern="/order/**" access="hasAnyRole('ROLE_BUYER')"/>
-        <intercept-url pattern="/my/**" access="hasAnyRole('ROLE_BUYER')"/>
+        <intercept-url pattern="/cart/**"  access="hasRole('ROLE_BUYER')"/>
+        <intercept-url pattern="/order/**" access="hasRole('ROLE_BUYER')"/>
+
+
         <form-login login-page="/user/login"
             username-parameter="userId"
             password-parameter="password"

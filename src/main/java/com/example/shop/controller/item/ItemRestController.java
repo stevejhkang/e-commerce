@@ -1,21 +1,18 @@
 package com.example.shop.controller.item;
 
-import com.example.shop.controller.item.rqrs.CreateItemRq;
+import com.example.shop.controller.item.rqrs.createItemRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
 import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +25,7 @@ public class ItemRestController {
     ItemService itemService;
 
     @PostMapping("/createItem")
-    public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid CreateItemRq createItemRq,
+    public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid createItemRq createItemRq,
                            @RequestParam("mainImg") MultipartFile mainImg){
 
         int result = itemService.createItem(createItemRq,mainImg);

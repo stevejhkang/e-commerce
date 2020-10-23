@@ -156,7 +156,8 @@
                                 <!--                                <span class="qty-down">-</span>-->
                             </div>
                         </div>
-                        <button class="add-to-cart-btn" id="buy"><i class="fa fa-credit-card"></i> Buy</button>
+                        <button class="add-to-cart-btn" id="add-to-cart" th:value="${item.itemSn}"><i class="fa fa-shopping-cart"></i>Add To Cart</button>
+                        <button class="add-to-cart-btn" id="buy"><i class="fa fa-credit-card"></i>Buy</button>
                     </div>
 
                     <ul class="product-btns">
@@ -427,39 +428,6 @@
                     <h3 class="title">Related Products</h3>
                 </div>
             </div>
-
-            <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img alt="" th:src="@{/resources/img/product01.png}">
-                        <div class="product-label">
-                            <span class="sale">-30%</span>
-                        </div>
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00
-                            <del class="product-old-price">$990.00</del>
-                        </h4>
-                        <div class="product-rating">
-                        </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
-                            </button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
-                            </button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <!-- /product -->
-
             <!-- product -->
             <div class="col-md-3 col-xs-6">
                 <div class="product">
@@ -471,9 +439,9 @@
                     </div>
                     <div class="product-body">
                         <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00
-                            <del class="product-old-price">$990.00</del>
+                        <h3 class="product-name"><a href="#">16인치 맥북</a></h3>
+                        <h4 class="product-price">￦3,000,000
+                            <del class="product-old-price">￦3,500,000</del>
                         </h4>
                         <div class="product-rating">
                             <i class="fa fa-star"></i>
@@ -507,9 +475,9 @@
                     </div>
                     <div class="product-body">
                         <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00
-                            <del class="product-old-price">$990.00</del>
+                        <h3 class="product-name"><a href="#">젠하이저 헤드폰</a></h3>
+                        <h4 class="product-price">￦1,000,000
+                            <del class="product-old-price">￦1,100,000</del>
                         </h4>
                         <div class="product-rating">
                             <i class="fa fa-star"></i>
@@ -541,9 +509,9 @@
                     </div>
                     <div class="product-body">
                         <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00
-                            <del class="product-old-price">$990.00</del>
+                        <h3 class="product-name"><a href="#">13인치 맥북</a></h3>
+                        <h4 class="product-price">￦2,000,000
+                            <del class="product-old-price">￦2,300,000</del>
                         </h4>
                         <div class="product-rating">
                         </div>
@@ -561,7 +529,37 @@
                 </div>
             </div>
             <!-- /product -->
-
+            <!-- product -->
+            <div class="col-md-3 col-xs-6">
+                <div class="product">
+                    <div class="product-img">
+                        <img alt="" th:src="@{/resources/img/product01.png}">
+                        <div class="product-label">
+                            <span class="sale">-30%</span>
+                        </div>
+                    </div>
+                    <div class="product-body">
+                        <p class="product-category">Category</p>
+                        <h3 class="product-name"><a href="#">소니 테블릿PC</a></h3>
+                        <h4 class="product-price">￦100,000
+                            <del class="product-old-price">￦150,000</del>
+                        </h4>
+                        <div class="product-rating">
+                        </div>
+                        <div class="product-btns">
+                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                            </button>
+                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                            </button>
+                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                        </div>
+                    </div>
+                    <div class="add-to-cart">
+                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /product -->
         </div>
         <!-- /row -->
     </div>
@@ -636,7 +634,21 @@
                 }
             })
         });
+        $("#add-to-cart").click(function(){
+            console.log("click"+$(this).val());
+            console.log("qty: "+$("#quantity").val())
+            var qty = $("#quantity").val();
+            $.ajax({
+                url: '/cart/addItemAction/'+$(this).val()+'?qty='+qty,
+                type: 'GET',
+                success: function (data){
+                    console.log(data);
+                    console.log(data.status);
+                }
+            });
+        });
     })
+
 
 
 </script>

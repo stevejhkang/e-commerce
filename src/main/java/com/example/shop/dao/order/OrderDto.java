@@ -6,6 +6,7 @@ import com.example.shop.domain.user.User;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,7 +15,7 @@ public class OrderDto {
     private String orderId;
     private LocalDateTime orderDate;
     private String orderStatus;
-    private int price;
+    private BigDecimal price;
 
     private int deliverySn;
     private String receiverName;

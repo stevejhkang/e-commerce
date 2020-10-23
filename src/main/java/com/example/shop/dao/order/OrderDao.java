@@ -21,7 +21,8 @@ public class OrderDao {
     }
 
     public int createOrder(OrderDto orderDto) {
-        return sqlSession.insert(NAMESPACE+"createOrder", orderDto);
+        int result = sqlSession.insert(NAMESPACE+"createOrder", orderDto);
+        return orderDto.getOrderSn();
     }
 
     public List<OrderDto> findAllOrdersByUserSn(int userSn, Paging paging) {

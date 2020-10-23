@@ -1,6 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.controller.item.rqrs.CreateItemRq;
+import com.example.shop.controller.item.rqrs.createItemRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.item.ItemRepository;
 import com.example.shop.exception.RestError;
@@ -22,7 +22,7 @@ public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
 
-    public int createItem(CreateItemRq rq, MultipartFile mainImg){
+    public int createItem(createItemRq rq, MultipartFile mainImg){
 
         String filePath = FileUtils.uploadToLocalStorage(mainImg);
 

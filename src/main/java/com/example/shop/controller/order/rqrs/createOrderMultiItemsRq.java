@@ -1,13 +1,12 @@
-package com.example.shop.controller.item.rqrs;
+package com.example.shop.controller.order.rqrs;
 
 import com.example.shop.domain.item.DeliveryOption;
 import com.example.shop.domain.item.DisplayOption;
+import com.example.shop.domain.item.Item;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY,
                 getterVisibility = JsonAutoDetect.Visibility.NONE,
@@ -15,22 +14,15 @@ import javax.validation.constraints.Positive;
 
 @Data
 @ToString
-public class CreateItemRq {
-    @NotBlank
+public class createOrderMultiItemsRq {
+    private int itemSn;
     private String itemName;
-    @Positive
     private int price;
     private DeliveryOption deliveryOption;
-    @NotBlank
-    private String description;
-    private String manufacturer;
     private DisplayOption displayOption;
-    @Positive
     private int stock;
-
-    public CreateItemRq() {
-        this.deliveryOption = DeliveryOption.ShippingCostNotInclude;
-        this.displayOption = DisplayOption.NONE;
-    }
-
+    private String manufacturer;
+    private String description;
+    private String imgSrc;
+    int quantity;
 }

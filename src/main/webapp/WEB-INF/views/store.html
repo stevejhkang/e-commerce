@@ -392,7 +392,7 @@
 				$(".add-to-cart-btn").click(function(){
 					console.log("click"+$(this).val());
 					$.ajax({
-						url: '/cart/addItemAction/'+$(this).val(),
+						url: '/cart/addItemAction/'+$(this).val()+'?qty=1',
 						type: 'GET',
 						success: function (data){
 							console.log(data);

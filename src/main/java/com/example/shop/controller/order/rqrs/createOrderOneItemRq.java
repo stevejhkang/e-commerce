@@ -12,7 +12,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class CreateOrderRq {
+public class createOrderOneItemRq {
     Item item;
     int quantity;
 }

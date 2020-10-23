@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @ToString
-public class LoginUserRq {
+public class loginUserRq {
     @NotBlank
     private String userId;
     @NotBlank

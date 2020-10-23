@@ -45,8 +45,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                <h2>주문 내역</h2>
                 <div class="aa-product-catg-content">
-
                     <div class="aa-product-catg-body">
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -66,7 +66,7 @@
                                     <td th:text="${order.delivery.address}"></td>
                                     <td th:text="${order.delivery.phoneNumber1}"></td>
                                     <td th:text="${order.orderStatus}"></td>
-                                    <td><a class="btn btn-outline-danger" href="MacaronicsServlet?command=order_detail&oseq=${orderVO.oseq}">조회</a>
+                                    <td><a class="btn btn-outline-danger" href="/">조회</a>
                                     </td>
                                 </tr>
 
@@ -106,9 +106,8 @@
                     <div class="">
                         <h3>나의 페이지</h3>
                         <ul class="sidebar-collapse">
-                            <li><a href="MacaronicsServlet?command=cart_list">장바구니(cart)내역</a></li>
-                            <li><a href="MacaronicsServlet?command=mypage">진행중인 주문내역</a></li>
-                            <li><a href="MacaronicsServlet?command=order_all">총 주문내역</a></li>
+                            <li><a href="/order/myorders?page=1">주문내역</a></li>
+                            <li><a href="/cart/cart">장바구니(cart)내역</a></li>
                         </ul>
                     </div>
                 </aside>

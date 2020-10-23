@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shop.OrderItemMapper">
+    <insert id="createOrderItems" parameterType="hashmap">
+        insert into
+            shop.orderitems(item_sn, order_sn, quantity)
+        values
+            <foreach item="item" collection="items" index="key" open="(" separator="),(" close=")">
+                #{key},#{orderSn}, #{item}
+            </foreach>
+    </insert>
+
+</mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("order")
@@ -26,8 +27,14 @@ public class OrderViewController {
     @GetMapping("/myorders")
     public String myOrders(@RequestParam("page") int page, HttpServletRequest request, Model model){
 
-        UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
-        int userSn = userSession.getUser().getUserSn();
+//        UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
+        Optional<UserSession> userSession = Optional.ofNullable((UserSession) request.getSession().getAttribute("userSession"));
+
+        if(!userSession.isPresent()) {
+            return "/user/login";
+        }
+
+        int userSn = userSession.get().getUser().getUserSn();
 
         Paging paging = new Paging();
         paging.setPageIndex(page);

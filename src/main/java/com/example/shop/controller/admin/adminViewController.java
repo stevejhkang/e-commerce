@@ -1,8 +1,6 @@
 package com.example.shop.controller.admin;
 
-import com.example.shop.controller.item.rqrs.CreateItemRq;
-import com.example.shop.domain.item.DeliveryOption;
-import com.example.shop.domain.item.DisplayOption;
+import com.example.shop.controller.item.rqrs.createItemRq;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ public class adminViewController {
 
     @GetMapping("/item/register")
     public String registerItem(Model model) {
-        CreateItemRq rq = new CreateItemRq();
+        createItemRq rq = new createItemRq();
         model.addAttribute("createItemRq", rq);
 
         return "admin/item/register";

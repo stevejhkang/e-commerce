@@ -1,21 +1,17 @@
 package com.example.shop.controller.user;
 
-import com.example.shop.controller.user.rqrs.CreateUserRq;
-import com.example.shop.controller.user.rqrs.LoginUserRq;
+import com.example.shop.controller.user.rqrs.createUserRq;
+import com.example.shop.controller.user.rqrs.loginUserRq;
 import com.example.shop.domain.user.User;
 import com.example.shop.service.UserService;
 import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -26,7 +22,7 @@ public class UserRestController {
     UserService userService;
 
     @PostMapping("/createUser")
-    public ResponseEntity createUser(@ModelAttribute CreateUserRq rq){
+    public ResponseEntity createUser(@ModelAttribute createUserRq rq){
         ResponseEntity<String> entity = null;
 
         String result = userService.createUser(rq);
@@ -40,7 +36,7 @@ public class UserRestController {
     }
 
     @PostMapping("/loginAction")
-    public ResponseEntity login(HttpServletRequest request, @ModelAttribute LoginUserRq rq){
+    public ResponseEntity login(HttpServletRequest request, @ModelAttribute loginUserRq rq){
         ResponseEntity<String> entity = null;
 
         User user = userService.findUserByIdAndPassword(rq.getUserId(), rq.getPassword());
@@ -55,7 +51,7 @@ public class UserRestController {
     }
 
     @GetMapping("/logoutAction")
-    public ResponseEntity logout(HttpServletRequest request, @ModelAttribute LoginUserRq rq) {
+    public ResponseEntity logout(HttpServletRequest request, @ModelAttribute loginUserRq rq) {
         ResponseEntity<String> entity= null;
 
         HttpSession session = (HttpSession) request.getSession();
