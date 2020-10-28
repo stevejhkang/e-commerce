@@ -66,7 +66,10 @@
                                     <td th:text="${order.delivery.address}"></td>
                                     <td th:text="${order.delivery.phoneNumber1}"></td>
                                     <td th:text="${order.orderStatus}"></td>
-                                    <td><a class="btn btn-outline-danger" href="/">조회</a>
+
+                                    <td>
+                                        <a class="btn btn-outline-success " th:value="${order.orderSn}" th:onclick="|javascript:orderconfirm('${order.orderSn}')|">구매결정</a>
+                                        <a class="btn btn-outline-danger" th:href="'/order/orderdetail/'+${order.orderSn}">조회</a>
                                     </td>
                                 </tr>
 
@@ -118,10 +121,31 @@
     </div>
 </div>
 
-<script>
+<script th:inline="javascript">
+
+    function orderconfirm(orderId){
+        if(confirm("구매 확정하시겠습니까?")==true) {
+            console.log("confirmed!");
+            location.href = '/order/orderconfirm?orderId='+orderId;
+        }
+        else {
+            alert("취소되었습니다.");
+            console.log("no");
+        }
+    }
+
     $(document).ready(function () {
-        var paging = [[${paging}]];
-       console.log(paging);
+       //  var paging = [[${paging}]];
+       // console.log(paging)
+       $(".orderconfirm").click(function(){
+
+           if(confirm("구매 확정하시겠습니까?")==true){
+               alert("구매 확정되었습니다.")
+               location.href = '/order/orderconfirm?orderId='+$(this).val();
+           } else {
+               alert("취소 되었습니다.");
+           }
+       });
     });
 </script>
 </body>

@@ -110,4 +110,19 @@
             limit #{paging.pageCount} offset ${((paging.pageIndex-1) * paging.pageCount)}
     </select>
 
+    <select id="findOrderByOrderSn" parameterType="integer" resultType="OrderDto">
+        select
+            *
+        from shop.orders
+        where
+            order_sn=#{orderSn}
+    </select>
+
+    <update id = "confirmOrder" parameterType="integer">
+        update shop.orders
+        set
+            order_status = 'ORDER_CONFIRMED'
+        where
+            order_sn=#{orderSn}
+    </update>
 </mapper>

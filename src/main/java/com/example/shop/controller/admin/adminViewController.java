@@ -2,7 +2,7 @@ package com.example.shop.controller.admin;
 
 import com.example.shop.controller.item.rqrs.createItemRq;
 import com.example.shop.service.ItemService;
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("admin")
 public class adminViewController {
+    private static final int NUMBER_OF_ITEMS_IN_A_PAGE = 20;
     @Autowired
     ItemService itemService;
 
@@ -26,11 +27,12 @@ public class adminViewController {
 
     @GetMapping("/item/list")
     public String findItemList(@RequestParam("page") int page, Model model) {
-        Paging paging = new Paging();
-        paging.setPageIndex(page);
+        PagingSearchAndSort pagingSearchAndSort = new PagingSearchAndSort();
+        pagingSearchAndSort.setPageIndex(page);
+        pagingSearchAndSort.setPageCount(NUMBER_OF_ITEMS_IN_A_PAGE);
 
-        model.addAttribute("paging", paging);
-        model.addAttribute("itemlist", itemService.findAllItems(paging));
+        model.addAttribute("paging", pagingSearchAndSort);
+        model.addAttribute("itemlist", itemService.findAllItems(pagingSearchAndSort));
 
         return "admin/item/list";
     }
@@ -46,6 +48,4 @@ public class adminViewController {
         model.addAttribute("item", itemService.findItem(itemNo));
         return "admin/item/edit";
     }
-
-
 }

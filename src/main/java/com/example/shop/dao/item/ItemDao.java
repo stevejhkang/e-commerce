@@ -1,7 +1,6 @@
 package com.example.shop.dao.item;
 
-import com.example.shop.domain.item.Item;
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,12 +18,16 @@ public class ItemDao {
         return sqlSession.insert(NAMESPACE+"insert",dto);
     }
 
-    public int findTotalCount(){
-        return sqlSession.selectOne(NAMESPACE+"selectCount");
+    public int findTotalCount(PagingSearchAndSort pagingSearchAndSort){
+        return sqlSession.selectOne(NAMESPACE+"selectCount", pagingSearchAndSort);
     }
 
-    public List<ItemDto> findAllItems(Paging paging) {
-        return sqlSession.selectList(NAMESPACE+"selectAll",paging);
+    public List<ItemDto> findAllItems(PagingSearchAndSort pagingSearchAndSort) {
+        return sqlSession.selectList(NAMESPACE+"selectAll", pagingSearchAndSort);
+    }
+
+    public List<ItemDto> findAllDisplayedItems(PagingSearchAndSort pagingSearchAndSort) {
+    return sqlSession.selectList(NAMESPACE+"selectAllDisplayedItems", pagingSearchAndSort);
     }
 
     public ItemDto findItem(int itemSn) {

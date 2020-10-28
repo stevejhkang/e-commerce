@@ -3,7 +3,7 @@ package com.example.shop.controller.item;
 import com.example.shop.controller.item.rqrs.createItemRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.service.ItemService;
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,17 +45,17 @@ public class ItemRestController {
     }
 
     @PostMapping("/itemlist")
-    public ResponseEntity findAll(@RequestBody Paging paging, Model model) {
+    public ResponseEntity findAll(@RequestBody PagingSearchAndSort pagingSearchAndSort, Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("itemlist",itemService.findAllItems(paging));
-        map.put("paging",paging);
+        map.put("itemlist",itemService.findAllItems(pagingSearchAndSort));
+        map.put("paging", pagingSearchAndSort);
 
         return ResponseEntityUtil.successResponse(map);
     }
 
     @GetMapping("/itemTotalCount")
-    public ResponseEntity findTotalCount(Model model){
-        model.addAttribute("totalCount", itemService.findTotalCount());
+    public ResponseEntity findTotalCount(Model model, PagingSearchAndSort pagingSearchAndSort){
+        model.addAttribute("totalCount", itemService.findTotalCount(pagingSearchAndSort));
         return ResponseEntityUtil.successResponse();
     }
 

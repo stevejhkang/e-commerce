@@ -42,7 +42,7 @@ public class UserAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
     protected void handle(HttpServletRequest request, HttpServletResponse response, String userType) throws IOException {
         String targetUrl="";
         if(userType.equals("ROLE_BUYER")) {
-            targetUrl= "/store?page=1";
+            targetUrl= "/store?pageIndex=1";
 
         }
         else if(userType.equals("ROLE_SELLER")) {

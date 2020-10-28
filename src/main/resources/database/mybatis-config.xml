@@ -25,6 +25,8 @@
         <typeAlias type="com.example.shop.dao.order.OrderDto" alias="OrderDto"/>
         <typeAlias type="com.example.shop.dao.user.UserDto" alias="UserDto"/>
         <typeAlias type="com.example.shop.util.Paging" alias="Paging"/>
+        <typeAlias type="com.example.shop.util.PagingSearchAndSort" alias="PagingSearchAndSort"/>
+        <typeAlias type="com.example.shop.dao.orderitem.OrderItemDto" alias="OrderItemDto"/>
     </typeAliases>
 
 </configuration>

@@ -2,7 +2,6 @@ package com.example.shop.service;
 
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.item.ItemRepository;
-import com.example.shop.domain.order.OrderRepository;
 import com.example.shop.domain.user.User;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;

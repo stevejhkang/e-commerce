@@ -24,6 +24,5 @@ public class CartRestController {
 
         return ResponseEntityUtil.successResponse();
     }
-
-
 }
+

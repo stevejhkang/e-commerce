@@ -8,12 +8,25 @@
         values (#{itemName}, #{price}, #{deliveryOption}, #{displayOption}, #{stock}, #{manufacturer}, #{description}, #{imgSrc})
     </insert>
 
-    <select id="selectCount" resultType = "integer">
+    <select id="selectCount" parameterType="PagingSearchAndSort" resultType = "integer">
         select count(*)
         from shop.items
+        <where>
+            <if test="searchText !=null and searchText != '' ">
+                <choose>
+                    <when test="'itemName'.equals(searchType)">
+                        item_name like concat('%',#{searchText},'%');
+                    </when>
+                    <when test="'manufacturer'.equals(searchType)">
+                        manufacturer like concat('%',#{searchText},'%');
+                    </when>
+                </choose>
+            </if>
+        </where>
+
     </select>
 
-    <select id="selectAll" parameterType="Paging" resultType="ItemDto">
+    <select id="selectAll" parameterType="PagingSearchAndSort" resultType="ItemDto">
         select
             R.RNUM
             , R.*
@@ -23,11 +36,80 @@
                 T.*
                 , @ROWNUM := @ROWNUM +1 AS RNUM
             from
-                shop.items T
+                (
+                    select *
+                    from shop.items
+                    <if test="searchText !=null and searchText != ''">
+                        <where>
+                            <choose>
+                                <when test="'itemName'.equals(searchType)">
+                                    item_name like concat('%',#{searchText},'%')
+                                </when>
+                                <when test="'manufacturer'.equals(searchType)">
+                                    manufacturer like concat('%',#{searchText},'%')
+                                </when>
+                            </choose>
+                        </where>
+                    </if>
+
+                ) T
                 , (select @ROWNUM :=0 ) A
-            order by T.item_sn desc
+            order by
+            <choose>
+                <when test="orderBy eq 'RegisterDate'">T.item_sn desc</when>
+                <when test="orderBy eq 'AlphabetASC'">T.item_name</when>
+                <when test="orderBy eq 'AlphabetDESC'">T.item_name desc</when>
+                <when test="orderBy eq 'PriceASC'">T.price</when>
+                <when test="orderBy eq 'PriceDESC'">T.price desc</when>
+                <otherwise>T.item_sn desc</otherwise>
+            </choose>
         ) R
-        where R.RNUM between ${((pageIndex-1) * pageCount) + 1} and ${((pageIndex-1) * pageCount) + pageCount }
+
+        where
+            R.RNUM between ${((pageIndex-1) * pageCount) + 1} and ${((pageIndex-1) * pageCount) + pageCount }
+    </select>
+
+    <select id="selectAllDisplayedItems" parameterType="PagingSearchAndSort" resultType="ItemDto">
+        select
+        R.RNUM
+        , R.*
+        from
+        (
+        select
+        T.*
+        , @ROWNUM := @ROWNUM +1 AS RNUM
+        from
+        (
+        select *
+        from shop.items
+        where
+            display_option = 'DISPLAY'
+        <if test="searchText !=null and searchText != ''">
+           and
+                <choose>
+                    <when test="'itemName'.equals(searchType)">
+                        item_name like concat('%',#{searchText},'%')
+                    </when>
+                    <when test="'manufacturer'.equals(searchType)">
+                        manufacturer like concat('%',#{searchText},'%')
+                    </when>
+                </choose>
+        </if>
+        ) T
+        , (select @ROWNUM :=0 ) A
+        order by
+        <choose>
+            <when test="orderBy eq 'RegisterDate'">T.item_sn desc</when>
+            <when test="orderBy eq 'AlphabetASC'">T.item_name</when>
+            <when test="orderBy eq 'AlphabetDESC'">T.item_name desc</when>
+            <when test="orderBy eq 'PriceASC'">T.price</when>
+            <when test="orderBy eq 'PriceDESC'">T.price desc</when>
+            <otherwise>T.item_sn desc</otherwise>
+        </choose>
+        ) R
+
+        where
+        R.RNUM between ${((pageIndex-1) * pageCount) + 1} and ${((pageIndex-1) * pageCount) + pageCount }
     </select>
 
     <select id="selectItem" parameterType="integer" resultType="ItemDto">
@@ -72,4 +154,12 @@
         where
             item_sn = #{id}
     </delete>
+
+    <select id="findOrderByOrderSn" parameterType="integer">
+        select
+            *
+        from shop.orders
+        where
+            order_sn = #{orderSn}
+    </select>
 </mapper>

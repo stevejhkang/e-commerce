@@ -8654,9 +8654,6 @@ div.copied {
   border: 1px solid #e5e9f2; }
 
 /*===== PAGINATION =====*/
-.pagination .page-item:first-child .page-link,
-.pagination .page-item:last-child .page-link {
-  height: 51px; }
 
 .pagination .page-link {
   color: #8a909d; }
@@ -8814,7 +8811,6 @@ div.copied {
   overflow: hidden;
   height: 100%;
   z-index: 1050;
-  min-height: 100vh;
   position: relative; }
   .sidebar .sidebar-inner {
     display: flex;
@@ -9447,7 +9443,7 @@ div.copied {
 /* Right Sidebar */
 .right-sidebar {
   width: 60px;
-  min-height: 100vh;
+  min-height: 10vh;
   position: fixed;
   right: -60px;
   top: 0;

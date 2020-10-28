@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+    <title>Electro - HTML Ecommerce Template</title>
 
-		<th:block th:replace="fragments/commonHead.html"></th:block>
+    <th:block th:replace="fragments/commonHead.html"></th:block>
 
-    </head>
-	<body>
-		<!-- HEADER -->
-		<header th:replace="fragments/commonHeader :: commonHeader"> </header>
-		<!-- /HEADER -->
+</head>
+<body>
+<!-- HEADER -->
+<header th:replace="fragments/commonHeader :: commonHeader"></header>
+<!-- /HEADER -->
 
-		<!-- NAVIGATION -->
+<!-- NAVIGATION -->
 <!--		<nav id="navigation">-->
 <!--			&lt;!&ndash; container &ndash;&gt;-->
 <!--			<div class="container">-->
@@ -38,369 +38,411 @@
 <!--			</div>-->
 <!--			&lt;!&ndash; /container &ndash;&gt;-->
 <!--		</nav>-->
-		<!-- /NAVIGATION -->
+<!-- /NAVIGATION -->
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">All Categories</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li class="active">Headphones (227,490 Results)</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+<!-- BREADCRUMB -->
+<div class="section" id="breadcrumb">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">All Categories</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li class="active">Headphones (227,490 Results)</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
 
-		<!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-<!--					&lt;!&ndash; ASIDE &ndash;&gt;-->
-<!--					<div id="aside" class="col-md-3">-->
-<!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
-<!--						<div class="aside">-->
-<!--							<h3 class="aside-title">Categories</h3>-->
-<!--							<div class="checkbox-filter">-->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!--					&lt;!&ndash; ASIDE &ndash;&gt;-->
+            <!--					<div id="aside" class="col-md-3">-->
+            <!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
+            <!--						<div class="aside">-->
+            <!--							<h3 class="aside-title">Categories</h3>-->
+            <!--							<div class="checkbox-filter">-->
 
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="category-1">-->
-<!--									<label for="category-1">-->
-<!--										<span></span>-->
-<!--										Laptops-->
-<!--										<small>(120)</small>-->
-<!--									</label>-->
-<!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="category-1">-->
+            <!--									<label for="category-1">-->
+            <!--										<span></span>-->
+            <!--										Laptops-->
+            <!--										<small>(120)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
 
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="category-2">-->
-<!--									<label for="category-2">-->
-<!--										<span></span>-->
-<!--										Smartphones-->
-<!--										<small>(740)</small>-->
-<!--									</label>-->
-<!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="category-2">-->
+            <!--									<label for="category-2">-->
+            <!--										<span></span>-->
+            <!--										Smartphones-->
+            <!--										<small>(740)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
 
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="category-3">-->
-<!--									<label for="category-3">-->
-<!--										<span></span>-->
-<!--										Cameras-->
-<!--										<small>(1450)</small>-->
-<!--									</label>-->
-<!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="category-3">-->
+            <!--									<label for="category-3">-->
+            <!--										<span></span>-->
+            <!--										Cameras-->
+            <!--										<small>(1450)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
 
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="category-4">-->
-<!--									<label for="category-4">-->
-<!--										<span></span>-->
-<!--										Accessories-->
-<!--										<small>(578)</small>-->
-<!--									</label>-->
-<!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="category-4">-->
+            <!--									<label for="category-4">-->
+            <!--										<span></span>-->
+            <!--										Accessories-->
+            <!--										<small>(578)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
 
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="category-5">-->
-<!--									<label for="category-5">-->
-<!--										<span></span>-->
-<!--										Laptops-->
-<!--										<small>(120)</small>-->
-<!--									</label>-->
-<!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="category-5">-->
+            <!--									<label for="category-5">-->
+            <!--										<span></span>-->
+            <!--										Laptops-->
+            <!--										<small>(120)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
 
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="category-6">-->
-<!--									<label for="category-6">-->
-<!--										<span></span>-->
-<!--										Smartphones-->
-<!--										<small>(740)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="category-6">-->
+            <!--									<label for="category-6">-->
+            <!--										<span></span>-->
+            <!--										Smartphones-->
+            <!--										<small>(740)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--							</div>-->
+            <!--						</div>-->
+            <!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
 
-<!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
-<!--						<div class="aside">-->
-<!--							<h3 class="aside-title">Price</h3>-->
-<!--							<div class="price-filter">-->
-<!--								<div id="price-slider"></div>-->
-<!--								<div class="input-number price-min">-->
-<!--									<input id="price-min" type="number">-->
-<!--									<span class="qty-up">+</span>-->
-<!--									<span class="qty-down">-</span>-->
-<!--								</div>-->
-<!--								<span>-</span>-->
-<!--								<div class="input-number price-max">-->
-<!--									<input id="price-max" type="number">-->
-<!--									<span class="qty-up">+</span>-->
-<!--									<span class="qty-down">-</span>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
+            <!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
+            <!--						<div class="aside">-->
+            <!--							<h3 class="aside-title">Price</h3>-->
+            <!--							<div class="price-filter">-->
+            <!--								<div id="price-slider"></div>-->
+            <!--								<div class="input-number price-min">-->
+            <!--									<input id="price-min" type="number">-->
+            <!--									<span class="qty-up">+</span>-->
+            <!--									<span class="qty-down">-</span>-->
+            <!--								</div>-->
+            <!--								<span>-</span>-->
+            <!--								<div class="input-number price-max">-->
+            <!--									<input id="price-max" type="number">-->
+            <!--									<span class="qty-up">+</span>-->
+            <!--									<span class="qty-down">-</span>-->
+            <!--								</div>-->
+            <!--							</div>-->
+            <!--						</div>-->
+            <!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
 
-<!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
-<!--						<div class="aside">-->
-<!--							<h3 class="aside-title">Brand</h3>-->
-<!--							<div class="checkbox-filter">-->
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="brand-1">-->
-<!--									<label for="brand-1">-->
-<!--										<span></span>-->
-<!--										SAMSUNG-->
-<!--										<small>(578)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="brand-2">-->
-<!--									<label for="brand-2">-->
-<!--										<span></span>-->
-<!--										LG-->
-<!--										<small>(125)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="brand-3">-->
-<!--									<label for="brand-3">-->
-<!--										<span></span>-->
-<!--										SONY-->
-<!--										<small>(755)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="brand-4">-->
-<!--									<label for="brand-4">-->
-<!--										<span></span>-->
-<!--										SAMSUNG-->
-<!--										<small>(578)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="brand-5">-->
-<!--									<label for="brand-5">-->
-<!--										<span></span>-->
-<!--										LG-->
-<!--										<small>(125)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--								<div class="input-checkbox">-->
-<!--									<input type="checkbox" id="brand-6">-->
-<!--									<label for="brand-6">-->
-<!--										<span></span>-->
-<!--										SONY-->
-<!--										<small>(755)</small>-->
-<!--									</label>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
+            <!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
+            <!--						<div class="aside">-->
+            <!--							<h3 class="aside-title">Brand</h3>-->
+            <!--							<div class="checkbox-filter">-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="brand-1">-->
+            <!--									<label for="brand-1">-->
+            <!--										<span></span>-->
+            <!--										SAMSUNG-->
+            <!--										<small>(578)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="brand-2">-->
+            <!--									<label for="brand-2">-->
+            <!--										<span></span>-->
+            <!--										LG-->
+            <!--										<small>(125)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="brand-3">-->
+            <!--									<label for="brand-3">-->
+            <!--										<span></span>-->
+            <!--										SONY-->
+            <!--										<small>(755)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="brand-4">-->
+            <!--									<label for="brand-4">-->
+            <!--										<span></span>-->
+            <!--										SAMSUNG-->
+            <!--										<small>(578)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="brand-5">-->
+            <!--									<label for="brand-5">-->
+            <!--										<span></span>-->
+            <!--										LG-->
+            <!--										<small>(125)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--								<div class="input-checkbox">-->
+            <!--									<input type="checkbox" id="brand-6">-->
+            <!--									<label for="brand-6">-->
+            <!--										<span></span>-->
+            <!--										SONY-->
+            <!--										<small>(755)</small>-->
+            <!--									</label>-->
+            <!--								</div>-->
+            <!--							</div>-->
+            <!--						</div>-->
+            <!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
 
-<!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
-<!--						<div class="aside">-->
-<!--							<h3 class="aside-title">Top selling</h3>-->
-<!--							<div class="product-widget">-->
-<!--								<div class="product-img">-->
-<!--									<img th:src="@{/resources/img/product01.png}" alt="">-->
-<!--								</div>-->
-<!--								<div class="product-body">-->
-<!--									<p class="product-category">Category</p>-->
-<!--									<h3 class="product-name"><a href="#">product name goes here</a></h3>-->
-<!--									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
-<!--								</div>-->
-<!--							</div>-->
+            <!--						&lt;!&ndash; aside Widget &ndash;&gt;-->
+            <!--						<div class="aside">-->
+            <!--							<h3 class="aside-title">Top selling</h3>-->
+            <!--							<div class="product-widget">-->
+            <!--								<div class="product-img">-->
+            <!--									<img th:src="@{/resources/img/product01.png}" alt="">-->
+            <!--								</div>-->
+            <!--								<div class="product-body">-->
+            <!--									<p class="product-category">Category</p>-->
+            <!--									<h3 class="product-name"><a href="#">product name goes here</a></h3>-->
+            <!--									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
+            <!--								</div>-->
+            <!--							</div>-->
 
-<!--							<div class="product-widget">-->
-<!--								<div class="product-img">-->
-<!--									<img th:src="@{/resources/img/product02.png}" alt="">-->
-<!--								</div>-->
-<!--								<div class="product-body">-->
-<!--									<p class="product-category">Category</p>-->
-<!--									<h3 class="product-name"><a href="#">product name goes here</a></h3>-->
-<!--									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
-<!--								</div>-->
-<!--							</div>-->
+            <!--							<div class="product-widget">-->
+            <!--								<div class="product-img">-->
+            <!--									<img th:src="@{/resources/img/product02.png}" alt="">-->
+            <!--								</div>-->
+            <!--								<div class="product-body">-->
+            <!--									<p class="product-category">Category</p>-->
+            <!--									<h3 class="product-name"><a href="#">product name goes here</a></h3>-->
+            <!--									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
+            <!--								</div>-->
+            <!--							</div>-->
 
-<!--							<div class="product-widget">-->
-<!--								<div class="product-img">-->
-<!--									<img th:src="@{/resources/img/product03.png}" alt="">-->
-<!--								</div>-->
-<!--								<div class="product-body">-->
-<!--									<p class="product-category">Category</p>-->
-<!--									<h3 class="product-name"><a href="#">product name goes here</a></h3>-->
-<!--									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
-<!--					</div>-->
-<!--					&lt;!&ndash; /ASIDE &ndash;&gt;-->
+            <!--							<div class="product-widget">-->
+            <!--								<div class="product-img">-->
+            <!--									<img th:src="@{/resources/img/product03.png}" alt="">-->
+            <!--								</div>-->
+            <!--								<div class="product-body">-->
+            <!--									<p class="product-category">Category</p>-->
+            <!--									<h3 class="product-name"><a href="#">product name goes here</a></h3>-->
+            <!--									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>-->
+            <!--								</div>-->
+            <!--							</div>-->
+            <!--						</div>-->
+            <!--						&lt;!&ndash; /aside Widget &ndash;&gt;-->
+            <!--					</div>-->
+            <!--					&lt;!&ndash; /ASIDE &ndash;&gt;-->
 
-					<!-- STORE -->
-					<div id="store" class="col-md-12">
-						<!-- store top filter -->
-						<div class="store-filter clearfix">
-							<div class="store-sort">
-								<label>
-									Sort By:
-									<select class="input-select">
-										<option value="0">Popular</option>
-										<option value="1">Position</option>
-									</select>
-								</label>
+            <!-- STORE -->
+            <div class="col-md-12" id="store" th:object="${paging}" th:with="info=${paging}">
+                <!-- store top filter -->
+                <div class="store-filter clearfix">
+                    <div class="store-sort">
+                        <label>
+                            Sort By:
+                            <select class="input-select" name="orderBy" id="orderBy" th:field="${paging.orderBy}">
+                                <option th:value="'RegisterDate'">등록일 순</option>
+                                <option th:value="'AlphabetASC'">가나다 오름차 순</option>
+                                <option th:value="'AlphabetDESC'">가나다 내림차 순</option>
+                                <option th:value="'PriceASC'">낮은 가격 순</option>
+                                <option th:value="'PriceDESC'">높은 가격 순</option>
+                            </select>
+                        </label>
+<!--                        <label>-->
+<!--                            Show:-->
+<!--                            <select class="input-select">-->
+<!--                                <option value="0">20</option>-->
+<!--                                <option value="1">50</option>-->
+<!--                            </select>-->
+<!--                        </label>-->
+                    </div>
+                    <ul class="store-grid">
+                        <li class="active"><i class="fa fa-th"></i></li>
+                        <li><a href="#"><i class="fa fa-th-list"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /store top filter -->
 
-								<label>
-									Show:
-									<select class="input-select">
-										<option value="0">20</option>
-										<option value="1">50</option>
-									</select>
-								</label>
-							</div>
-							<ul class="store-grid">
-								<li class="active"><i class="fa fa-th"></i></li>
-								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
-							</ul>
-						</div>
-						<!-- /store top filter -->
+                <th:block th:with="partitions=${T(org.apache.commons.collections4.ListUtils).partition(itemlist,3)}">
+                    <div class="row" th:each="partition: ${partitions}">
+                        <div class="col-sm-4" th:each="item: ${partition}">
+                            <div class="product" >
+                                <div class="product-img">
+                                    <a th:href="@{'/item/detail?itemNo=' + ${item.itemSn}}">
+                                        <img alt="" class="img-fluid" th:src="@{'/resources/img/'+${item.imgSrc}}">
+                                    </a>
+                                    <div class="product-label">
+                                        <span class="new">NEW</span>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">Category</p>
+                                    <h3 class="product-name"><a th:href="@{'/item/detail?itemNo=' + ${item.itemSn}}"
+                                                                th:text="${item.itemName}">product name goes here</a></h3>
+                                    <h4 class="product-price" th:text="${#numbers.formatCurrency(item.price)}">$980.00 </h4>
+                                    <!--										<del class="product-old-price" >$990.00</del>-->
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-btns">
+                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                class="tooltipp">add to wishlist</span></button>
+                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                class="tooltipp">add to compare</span></button>
+                                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button class="add-to-cart-btn" id="addToCart" th:value="${item.itemSn}"><i
+                                            class="fa fa-shopping-cart"></i> add to cart
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /product -->
 
-						<th:block th:with="partitions=${T(org.apache.commons.collections4.ListUtils).partition(itemlist,3)}">
-							<div class="row" th:each="partition: ${partitions}">
-								<div class="col-sm-4" th:each="item: ${partition}">
+                            <div class="clearfix visible-sm visible-xs"></div>
+                        </div>
+                    </div>
+                </th:block>
 
-										<div class="product">
-											<div class="product-img">
-												<a th:href="@{'/item/detail?itemNo=' + ${item.itemSn}}">
-													<img class="img-fluid" th:src="@{'/resources/img/'+${item.imgSrc}}" alt="">
-												</a>
-												<div class="product-label">
-													<span class="new">NEW</span>
-												</div>
-											</div>
-											<div class="product-body">
-												<p class="product-category">Category</p>
-												<h3 class="product-name"><a th:href="@{'/item/detail?itemNo=' + ${item.itemSn}}" th:text="${item.itemName}">product name goes here</a></h3>
-												<h4 class="product-price" th:text="${#numbers.formatCurrency(item.price)}">$980.00 </h4>
-												<!--										<del class="product-old-price" >$990.00</del>-->
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="product-btns">
-													<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-												</div>
-											</div>
-											<div class="add-to-cart">
-												<button class="add-to-cart-btn" id="addToCart" th:value="${item.itemSn}"><i class="fa fa-shopping-cart"></i> add to cart</button>
-											</div>
-										</div>
-									<!-- /product -->
+                <!-- store bottom filter -->
+<!--                <div class="store-filter clearfix text-center" th:object="${paging}" th:with="info=${paging}">-->
+                <div class="store-filter clearfix text-center" >
 
-									<div class="clearfix visible-sm visible-xs"></div>
-								</div>
-							</div>
-						</th:block>
+                    <!--							<span class="store-qty">Showing 20-100 products</span>-->
+                    <nav class="text-center align-middle">
+<!--                        <ul class="pagination dis-inline-block float-left">-->
+                        <li class="pagination page-item" style="float: left;" th:onclick="movePage('/store',[[${info.makeQueryString(info.prevPageIndex)}]])"
+                            th:value="${paging.prevPageIndex}">
+                            <a class="page-link" href="javascript:void(0)" id="prevPage" name="pageNo">
+                                Previous
+                            </a>
+                            <!--								th:href="@{'?page=' + ${paging.prevPageIndex}}"-->
+                        </li>
+                        <ul class="pagination" style="float: left;">
+                            <li id="page"
+                                th:each="page : ${#numbers.sequence(paging.startPageIndex, paging.endPageIndex)}" th:classappend="${page eq paging.pageIndex}?'active'">
 
-						<!-- store bottom filter -->
-						<div class="store-filter clearfix text-center">
-<!--							<span class="store-qty">Showing 20-100 products</span>-->
-							<li class="pagination page-item" style="float: left;" th:value="${paging.prevPageIndex}"><a
-									class="page-link" id="prevPage" name="pageNo" th:href="@{'?page=' + ${paging.prevPageIndex}}"><i class="fa fa-angle-left"></i></a>
-							</li>
-							<ul class="pagination dis-inline-block float-left"
-								th:each="page : ${#numbers.sequence(paging.startPageIndex,paging.endPageIndex)} ">
-								<li class="page-item " th:value="${page}"><a name="pageNo" th:href="@{'?page=' + ${page}}"
-																			th:text="${page}"></a></li>
-							</ul>
-							<li class="pagination page-item" style="float: left;" th:value="${paging.nextPageIndex}"><a
-									class="page-link" id="nextPage" name="pageNo"
-									th:href="@{'?page=' + ${paging.nextPageIndex}}"><i class="fa fa-angle-right"></i></a></li>
-<!--							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
-						</div>
-						<!-- /store bottom filter -->
-					</div>
-					<!-- /STORE -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
+                                <a  th:text="${page}"
+                                    th:href="${paging.searchText} ? @{/store(pageIndex=${page},searchType=${paging.searchType}, searchText=${paging.searchText}, orderBy=${paging.orderBy})}: @{/store(pageIndex=${page}, orderBy=${paging.orderBy})}"
 
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
+                                   name="pageNo" ></a>
+    <!--							href="javascript:void(0)"-->
+                                <!--							th:href="@{/store(pageIndex=${page}, searchText=${paging.searchText}, searchType=${paging.searchType})}"-->
+                                <!--							   th:onclick="movePage([[${#request.requestURI}]],[[${info.makeQueryString(page)}]])"-->
+                            </li>
+                        </ul>
+                        <!--								th:href="@{'?page=' + ${page}}"-->
 
-		<!-- FOOTER -->
-		<footer th:replace="fragments/commonFooter ::commonFooter"></footer>
-		<!-- /FOOTER -->
+                        <li class="pagination  page-item" style="float: left;" th:onclick="movePage('/store',[[${paging.makeQueryString(paging.nextPageIndex)}]])"
+                            th:value="${paging.nextPageIndex}">
+                            <a class="page-link" href="javascript:void(0)" id="nextPage" name="pageNo">
+                                Next
+                            </a>
+                        </li>
+                    </nav>
+                    <!--							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>-->
+                    <!--							th:href="@{'?page=' + ${paging.nextPageIndex}}"-->
+                </div>
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- NEWSLETTER -->
+<div class="section" id="newsletter">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" placeholder="Enter Your Email" type="email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer th:replace="fragments/commonFooter ::commonFooter"></footer>
+<!-- /FOOTER -->
 
 
-		<!-- jQuery Plugins -->
-		<th:block th:replace="fragments/commonJs.html"></th:block>
-		<script>
-			$( document ).ready(function() {
-				console.log( "ready!" );
-				$(".add-to-cart-btn").click(function(){
-					console.log("click"+$(this).val());
-					$.ajax({
-						url: '/cart/addItemAction/'+$(this).val()+'?qty=1',
-						type: 'GET',
-						success: function (data){
-							console.log(data);
-							console.log(data.status);
-						}
-					});
-				});
-			});
-		</script>
-	</body>
+<!-- jQuery Plugins -->
+<th:block th:replace="fragments/commonJs.html"></th:block>
+
+<script>
+    $(document).ready(function () {
+        console.log("ready!");
+        $(".add-to-cart-btn").click(function () {
+            console.log("click" + $(this).val());
+            $.ajax({
+                url: '/cart/addItemAction/' + $(this).val() + '?qty=1',
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    console.log(data.status);
+                }
+            });
+        });
+
+        $("#orderBy").change(function(){
+            location.href = '/store?pageIndex=1&orderBy=' +$(this).val();
+        });
+
+
+    });
+
+    function movePage(uri, queryString) {
+        console.log(uri + queryString);
+        location.href = uri + queryString;
+    }
+</script>
+</body>
 </html>

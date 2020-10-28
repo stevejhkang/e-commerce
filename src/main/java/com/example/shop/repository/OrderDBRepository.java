@@ -1,8 +1,11 @@
 package com.example.shop.repository;
 
 import com.example.shop.dao.delivery.DeliveryDao;
+import com.example.shop.dao.delivery.DeliveryDto;
 import com.example.shop.dao.order.OrderDao;
 import com.example.shop.dao.order.OrderDto;
+import com.example.shop.dao.user.UserDao;
+import com.example.shop.dao.user.UserDto;
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.order.Order;
 import com.example.shop.domain.order.OrderRepository;
@@ -20,6 +23,10 @@ import java.util.stream.Collectors;
 public class OrderDBRepository implements OrderRepository {
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private DeliveryDao deliveryDao;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public String createSequnceNumber() {
@@ -34,7 +41,7 @@ public class OrderDBRepository implements OrderRepository {
     @Override
     public List<Order> findAllOrdersByUserSn(int userSn, Paging paging) {
         List<OrderDto> dtoList = orderDao.findAllOrdersByUserSn(userSn, paging);
-        return dtoList.stream().map(OrderDBRepository::toOrder).collect(Collectors.toList());
+        return dtoList.stream().map(this::toOrder).collect(Collectors.toList());
     }
 
     @Override
@@ -42,29 +49,36 @@ public class OrderDBRepository implements OrderRepository {
         return orderDao.findTotalCountByUserSn(userSn);
     }
 
-    public static Order toOrder(OrderDto orderDto){
+    @Override
+    public Order findOrderByOrderSn(int orderSn) {
+        OrderDto dto = orderDao.findOrderByOrderSn(orderSn);
+        return toOrder(dto);
+    }
+
+    @Override
+    public int confirmOrder(int orderSn) {
+        return orderDao.confirmOrder(orderSn);
+    }
+
+    private Order toOrder(OrderDto orderDto){
+
+        DeliveryDto deliveryDto = deliveryDao.findByUserSn(orderDto.getUserSn());
         Delivery delivery = Delivery.builder()
-                                    .deliverySn(orderDto.getDeliverySn())
-                                    .receiverName(orderDto.getReceiverName())
-                                    .address(orderDto.getAddress())
-                                    .phoneNumber1(orderDto.getPhoneNumber1())
-                                    .build();
-        User user = User.builder()
-                        .userSn(orderDto.getUserSn())
-                        .userId(orderDto.getUserId())
-                        .password(orderDto.getPassword())
-                        .phoneNumber(orderDto.getPhoneNumber())
-                        .userType(UserType.valueOf(orderDto.getUserType())).build();
+                                    .receiverName(deliveryDto.getReceiverName())
+                                    .phoneNumber1(deliveryDto.getPhoneNumber1())
+                                    .address(deliveryDto.getAddress())
+                                    .deliverySn(deliveryDto.getDeliverySn()).build();
 
         Order order = Order.builder()
-                            .orderSn(orderDto.getOrderSn())
-                            .orderId(orderDto.getOrderId())
-                            .orderDate(orderDto.getOrderDate())
-                            .orderStatus(OrderStatus.valueOf(orderDto.getOrderStatus()))
-                            .price(orderDto.getPrice())
-                            .delivery(delivery)
-                            .user(user)
-                            .build();
+                           .orderSn(orderDto.getOrderSn())
+                           .orderId(orderDto.getOrderId())
+                           .orderDate(orderDto.getOrderDate())
+                           .orderStatus(OrderStatus.valueOf(orderDto.getOrderStatus()))
+                           .price(orderDto.getPrice())
+                           .userSn(orderDto.getUserSn())
+                           .deliverySn(orderDto.getDeliverySn())
+                           .delivery(delivery)
+                           .build();
         return order;
     }
 }

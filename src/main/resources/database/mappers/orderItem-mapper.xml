@@ -11,5 +11,12 @@
                 #{key},#{orderSn}, #{item}
             </foreach>
     </insert>
-
+    <select id="findOrderItemListByOrderSn" parameterType="integer" resultType="OrderItemDto">
+        select
+            *
+        from
+            shop.orderitems
+        where
+            order_sn = #{orderSn}
+    </select>
 </mapper>

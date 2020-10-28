@@ -16,4 +16,6 @@ public class Item {
     private String manufacturer;
     private String description;
     private String imgSrc;
+
+
 }

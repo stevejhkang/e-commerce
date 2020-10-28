@@ -1,13 +1,17 @@
 package com.example.shop.domain.item;
 
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 
 import java.util.List;
 
 public interface ItemRepository {
     public int createItem(Item item);
-    public int findTotalCount();
-    public List<Item> findAllItems(Paging paging);
+
+    public int findTotalCount(PagingSearchAndSort pagingSearchAndSort);
+
+    public List<Item> findAllItems(PagingSearchAndSort pagingSearchAndSort);
+
+    public List<Item> findAllDisplayedItems(PagingSearchAndSort pagingSearchAndSort);
 
     public Item findItem(int itemSn);
 

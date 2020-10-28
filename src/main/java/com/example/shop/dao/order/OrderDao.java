@@ -36,4 +36,11 @@ public class OrderDao {
     public int findTotalCountByUserSn(int userSn) {
         return sqlSession.selectOne(NAMESPACE+"findTotalCount", userSn);
     }
+
+    public OrderDto findOrderByOrderSn(int orderSn) {
+        return sqlSession.selectOne(NAMESPACE+"findOrderByOrderSn", orderSn);
+    }
+    public int confirmOrder(int orderSn) {
+        return sqlSession.update(NAMESPACE+"confirmOrder",orderSn);
+    }
 }

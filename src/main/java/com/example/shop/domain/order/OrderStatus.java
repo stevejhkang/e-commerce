@@ -7,5 +7,6 @@ public enum OrderStatus {
     DELIVERED,
     IN_RETURN,
     RETURNED,
-    REFUND_COMPLETED
+    REFUND_COMPLETED,
+    ORDER_CONFIRMED
 }

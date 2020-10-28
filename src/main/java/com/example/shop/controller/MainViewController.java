@@ -1,11 +1,12 @@
 package com.example.shop.controller;
 
 import com.example.shop.service.ItemService;
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,13 +25,14 @@ public class MainViewController {
     }
 
     @GetMapping("/store")
-    public String store(@RequestParam("page") int page, Model model) {
-        Paging paging = new Paging();
-        paging.setPageIndex(page);
-        paging.setPageCount(NUMBER_OF_ITEMS);
+//    public String store()@RequestParam("page") int page, @RequestParam("searchType") String searchType,
+//    @RequestParam("searchText" String searchText, Model model) {
+    public String store(@ModelAttribute("paging") PagingSearchAndSort pagingSearchAndSortParams, Model model) {
 
-        model.addAttribute("paging",paging);
-        model.addAttribute("itemlist",itemService.findAllItems(paging));
+        pagingSearchAndSortParams.setPageCount(NUMBER_OF_ITEMS);
+
+        model.addAttribute("itemlist",itemService.findAllDisplayedItems(pagingSearchAndSortParams));
+        model.addAttribute("paging", pagingSearchAndSortParams);
 
         return "store";
     }

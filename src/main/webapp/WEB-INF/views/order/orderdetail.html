@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+
+    <th:block th:replace="fragments/commonHead.html"></th:block>
+    <script
+            crossorigin="anonymous"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<header th:replace="fragments/commonHeader :: commonHeader"></header>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" rel="stylesheet">
+
+
+<!--&lt;!&ndash; catg header banner section &ndash;&gt;-->
+<!--<section id="aa-catg-head-banner">-->
+<!--    <img alt="fashion img" height="300" src="/dailyShop/img/slider/4.jpg" style="margin-left: auto; margin-right: auto; display: block;">-->
+<!--    <div class="aa-catg-head-banner-area">-->
+<!--        <div class="container">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; / catg header banner section &ndash;&gt;-->
+
+<div class="section">
+
+    <div class="container">
+        <h2>주문한 상품</h2>
+        <div class="row col-12">
+            <div class="aa-product-catg-content">
+                <div class="aa-product-catg-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr class="danger">
+                                <th>사진</th>
+                                <th>상품 명</th>
+                                <th>상품 금액</th>
+                                <th>수량</th>
+                                <th>배송비</th>
+                                <th>브랜드</th>
+                            </tr>
+                            <tr th:each="orderedItem: ${orderItemList}">
+                                <td class="text-center" style="width:10%;"><img alt="" class="img-responsive" style=""
+                                                                                th:src="@{'/resources/img/'+${orderedItem.imgSrc}}"/></td>
+                                <td th:text="${orderedItem.itemName}"></td>
+                                <td th:text="${orderedItem.price}"></td>
+                                <td th:text="${orderedItem.quantity}"></td>
+                                <td th:text="${orderedItem.deliveryOption}"></td>
+                                <td th:text="${orderedItem.manufacturer}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>배송정보</h2>
+        <div class="row">
+            <div class="col-7 float-left">
+                <div class="aa-product-catg-content">
+                    <div class="aa-product-catg-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr class="danger">
+                                    <th>수령인</th>
+                                    <th>연락처</th>
+                                    <th>배송지</th>
+                                    <th>배송메모</th>
+                                </tr>
+                                <tr th:obejct="${delivery}">
+                                    <td th:text="${delivery.receiverName}"></td>
+                                    <td th:text="${delivery.phoneNumber1}"></td>
+                                    <td th:text="${delivery.address}"></td>
+                                    <td>
+                                        <!--                                        <a class="btn btn-outline-danger" href="/">조회</a>-->
+                                        부재시 경비실에 맡겨주세요.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="float-right" align="right">
+                    <div>
+                        <strong>Total</strong>
+                    </div>
+                    <div>
+                        <strong class="order-total" th:text="${price}"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var paging = [[${paging}]];
+        console.log(paging);
+    });
+</script>
+</body>
+</html>
+

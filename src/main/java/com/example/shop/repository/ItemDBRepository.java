@@ -6,7 +6,7 @@ import com.example.shop.domain.item.Item;
 import com.example.shop.domain.item.ItemRepository;
 import com.example.shop.domain.item.DeliveryOption;
 import com.example.shop.domain.item.DisplayOption;
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,14 +23,20 @@ public class ItemDBRepository implements ItemRepository {
     }
 
     @Override
-    public int findTotalCount() {
-        return itemDao.findTotalCount();
+    public int findTotalCount(PagingSearchAndSort pagingSearchAndSort) {
+        return itemDao.findTotalCount(pagingSearchAndSort);
     }
 
     @Override
-    public List<Item> findAllItems(Paging paging) {
-        List<ItemDto> dtoList = itemDao.findAllItems(paging);
-        return dtoList.stream().map(ItemDBRepository::toItem).collect(Collectors.toList());
+    public List<Item> findAllItems(PagingSearchAndSort pagingSearchAndSort) {
+        List<ItemDto> dtoList = itemDao.findAllItems(pagingSearchAndSort);
+        return dtoList.stream().map(this::toItem).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Item> findAllDisplayedItems(PagingSearchAndSort pagingSearchAndSort) {
+        List<ItemDto> dtoList = itemDao.findAllItems(pagingSearchAndSort);
+        return dtoList.stream().map(this::toItem).collect(Collectors.toList());
     }
 
     @Override
@@ -54,7 +60,7 @@ public class ItemDBRepository implements ItemRepository {
         return itemDao.updateStocks(itemDtos);
     }
 
-    private static Item toItem(ItemDto dto) {
+    private Item toItem(ItemDto dto) {
         return Item.builder()
                    .itemSn(dto.getItemSn())
                    .itemName(dto.getItemName())

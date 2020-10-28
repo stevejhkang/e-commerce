@@ -20,6 +20,7 @@ public class Order {
         private LocalDateTime orderDate;
         private OrderStatus orderStatus;
         private BigDecimal price;
+        private int userSn;
+        private int deliverySn;
         private Delivery delivery;
-        private User user;
 }

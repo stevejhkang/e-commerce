@@ -41,17 +41,8 @@ public class OrderDto {
         orderDto.setOrderStatus(order.getOrderStatus().name());
         orderDto.setPrice(order.getPrice());
 
-        orderDto.setDeliverySn(order.getDelivery().getDeliverySn());
-        orderDto.setReceiverName(order.getDelivery().getReceiverName());
-        orderDto.setAddress(order.getDelivery().getAddress());
-        orderDto.setPhoneNumber1(order.getDelivery().getPhoneNumber1());
-
-        orderDto.setUserSn(order.getUser().getUserSn());
-        orderDto.setUserId(order.getUser().getUserId());
-        orderDto.setPassword(order.getUser().getPassword());
-        orderDto.setUserName(order.getUser().getUserName());
-        orderDto.setPhoneNumber(order.getUser().getPhoneNumber());
-        orderDto.setUserType(order.getUser().getUserType().name());
+        orderDto.setUserSn(order.getUserSn());
+        orderDto.setDeliverySn(order.getDeliverySn());
 
         return orderDto;
     }

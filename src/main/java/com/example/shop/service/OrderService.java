@@ -1,20 +1,25 @@
 package com.example.shop.service;
 
 import com.example.shop.controller.order.rqrs.createOrderOneItemRq;
+import com.example.shop.dao.order.OrderDto;
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.delivery.DeliveryRepository;
 import com.example.shop.domain.order.Order;
 import com.example.shop.domain.order.OrderRepository;
 import com.example.shop.domain.order.OrderStatus;
+import com.example.shop.domain.orderItem.OrderItem;
 import com.example.shop.domain.orderItem.OrderItemRepository;
 import com.example.shop.domain.user.User;
+import com.example.shop.domain.user.UserRepository;
 import com.example.shop.util.CommonUtils;
 import com.example.shop.util.Paging;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.google.protobuf.Message;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +38,8 @@ public class OrderService {
     private DeliveryRepository deliveryRepository;
     @Autowired
     private OrderItemRepository orderItemRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private static final int INSERT_NOTHING =0;
 
@@ -49,8 +56,7 @@ public class OrderService {
                            .orderDate(now)
                            .orderStatus(OrderStatus.PAYMENT_COMPLETED)
                            .price((BigDecimal.valueOf(item.getPrice())).multiply(BigDecimal.valueOf(quantity)))
-                           .delivery(delivery)
-                           .user(user).build();
+                           .build();
 
         int result = orderRepository.createOrder(order);
         if (result == SUCCESS) {
@@ -81,9 +87,10 @@ public class OrderService {
                            .orderId(createOrderId(now))
                            .orderDate(now)
                            .orderStatus(OrderStatus.PAYMENT_COMPLETED)
+                           .userSn(user.getUserSn())
+                           .deliverySn(delivery.getDeliverySn())
                            .price(totalPrice)
-                           .delivery(delivery)
-                           .user(user).build();
+                           .build();
 
         int returnOrderSn = orderRepository.createOrder(order);
         log.info(String.valueOf(returnOrderSn));
@@ -102,9 +109,26 @@ public class OrderService {
     public List<Order> findAllOrdersByUserSn(int userSn, Paging paging) {
         int totalCount = findTotalCountByUserSn(userSn);
         paging.setTotalCount(totalCount);
+
         return orderRepository.findAllOrdersByUserSn(userSn, paging);
     }
     public int findTotalCountByUserSn(int userSn){
         return orderRepository.findTotalCountByUserSn(userSn);
+    }
+
+//    public List<OrderItem> findOrderItemList(int orderSn) {
+//        order
+//    }
+
+    public Order findOrderByOrderSn(int orderSn){
+       return orderRepository.findOrderByOrderSn(orderSn);
+    }
+
+    public List<OrderItem> findOrderItemListByOrderSn(int orderSn){
+        return orderItemRepository.findOrderItemListByOrderSn(orderSn);
+    }
+
+    public int confirmOrder(int orderSn) {
+        return orderRepository.confirmOrder(orderSn);
     }
 }

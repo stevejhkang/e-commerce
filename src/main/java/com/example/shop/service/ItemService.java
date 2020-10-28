@@ -6,7 +6,7 @@ import com.example.shop.domain.item.ItemRepository;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
 import com.example.shop.util.FileUtils;
-import com.example.shop.util.Paging;
+import com.example.shop.util.PagingSearchAndSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,14 +43,20 @@ public class ItemService {
         return result;
     }
 
-    public int findTotalCount(){
-        return itemRepository.findTotalCount();
+    public int findTotalCount(PagingSearchAndSort pagingSearchAndSort){
+        return itemRepository.findTotalCount(pagingSearchAndSort);
     }
 
-    public List<Item> findAllItems(Paging paging){
-        int totalCount = findTotalCount();
-        paging.setTotalCount(totalCount);
-        return itemRepository.findAllItems(paging);
+    public List<Item> findAllItems(PagingSearchAndSort pagingSearchAndSort){
+        int totalCount = findTotalCount(pagingSearchAndSort);
+        pagingSearchAndSort.setTotalCount(totalCount);
+        return itemRepository.findAllItems(pagingSearchAndSort);
+    }
+
+    public List<Item> findAllDisplayedItems(PagingSearchAndSort pagingSearchAndSort){
+        int totalCount = findTotalCount(pagingSearchAndSort);
+        pagingSearchAndSort.setTotalCount(totalCount);
+        return itemRepository.findAllDisplayedItems(pagingSearchAndSort);
     }
 
     public Item findItem(int itemSn) {

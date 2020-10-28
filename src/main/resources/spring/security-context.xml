@@ -69,6 +69,7 @@
             authentication-success-handler-ref="userAuthSuccessHandler"
                     authentication-failure-url="/user/login"
         />
+
         <logout
                 logout-url="/logoutAction"
                 invalidate-session="true"

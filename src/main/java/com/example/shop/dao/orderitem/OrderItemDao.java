@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,5 +21,9 @@ public class OrderItemDao {
         map.put("items",items);
         map.put("orderSn",orderSn);
         return sqlSession.insert(NAMESPACE+"createOrderItems",map);
+    }
+
+    public List<OrderItemDto> findOrderItemListByOrderSn(int orderSn) {
+        return sqlSession.selectList(NAMESPACE+"findOrderItemListByOrderSn",orderSn);
     }
 }
