@@ -23,4 +23,5 @@ public class Order {
         private int userSn;
         private int deliverySn;
         private Delivery delivery;
+
 }

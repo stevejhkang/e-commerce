@@ -14,8 +14,10 @@
 
     <!-- AuthenticationProvider 상속받은 UserAuthenticationProvider를 AuthenticationManager로 등록 -->
     <authentication-manager id="userAuthenticationManager">
-        <authentication-provider ref="userAuthenticationProvider"/>
+        <authentication-provider ref="userAuthenticationProvider">
+        </authentication-provider>
     </authentication-manager>
+    <beans:bean id="userService" class="com.example.shop.service.UserService"/>
     <beans:bean id="userAuthenticationProvider" class="com.example.shop.config.security.user.UserAuthenticationProvider"/>
     <beans:bean id="userLogoutSuccessHandler" class="com.example.shop.config.security.user.UserLogoutSuccessHandler"/>
     <beans:bean id="userAuthSuccessHandler" class="com.example.shop.config.security.user.UserAuthSuccessHandler"/>
@@ -44,9 +46,9 @@
                 invalidate-session="true"
 
         />
-<!--        <session-management invalid-session-url="/login">-->
-<!--            <concurrency-control max-sessions="1" expired-url="/login"/>-->
-<!--        </session-management>-->
+        <session-management invalid-session-url="/login">
+            <concurrency-control max-sessions="1" expired-url="/login"/>
+        </session-management>
 
     </http>
 

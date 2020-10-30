@@ -8,11 +8,14 @@ import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import java.security.Principal;
 
 import static com.example.shop.util.ResponseEntityUtil.failureResponse;
 
@@ -24,12 +27,12 @@ public class OrderRestController {
     private OrderService orderService;
 
     @PostMapping("/createOrder")
-    public ResponseEntity createOrder(HttpServletRequest request, HttpServletResponse response, @RequestBody createOrderOneItemRq data) {
+    public ResponseEntity createOrder(@RequestBody createOrderOneItemRq data, Authentication authentication) {
 
         ResponseEntity entity = null;
 
-        HttpSession session = request.getSession();
-        User user = ((UserSession) session.getAttribute("userSession")).getUser();
+        User user = (User) authentication.getDetails();
+        log.info("logined user: "+user.getUsername());
 
         String result = orderService.createOrder(user,data);
 
@@ -42,6 +45,4 @@ public class OrderRestController {
         }
         return entity;
     }
-
-
 }

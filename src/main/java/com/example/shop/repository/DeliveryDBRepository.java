@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class DeliveryDBRepository implements DeliveryRepository {
+
     @Autowired
     private DeliveryDao deliveryDao;
 
-
     @Override
-    public Delivery findByUserSn(int userSn) {
-        DeliveryDto dto = deliveryDao.findByUserSn(userSn);
+    public Delivery findDeliveryByUserSn(int userSn) {
+        DeliveryDto dto = deliveryDao.findDeliveryByUserSn(userSn);
         return toDelivery(dto);
     }
 
@@ -25,7 +25,7 @@ public class DeliveryDBRepository implements DeliveryRepository {
         User user = User.builder()
             .userSn(deliveryDto.getUserSn())
             .userId(deliveryDto.getUserId())
-            .userName(deliveryDto.getUserName())
+            .name(deliveryDto.getUserName())
             .userType(UserType.valueOf(deliveryDto.getUserType()))
             .password(deliveryDto.getPassword())
             .phoneNumber(deliveryDto.getPhoneNumber())

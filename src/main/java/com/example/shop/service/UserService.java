@@ -3,15 +3,19 @@ package com.example.shop.service;
 import com.example.shop.controller.user.rqrs.createUserRq;
 import com.example.shop.domain.user.User;
 import com.example.shop.domain.user.UserRepository;
+import com.example.shop.domain.user.UserType;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
@@ -23,8 +27,9 @@ public class UserService {
         User user = User.builder()
                         .userId(rq.getUserId())
                         .password(rq.getPassword())
-                        .userName(rq.getUserName())
+                        .name(rq.getUserName())
                         .phoneNumber(rq.getPhoneNumber())
+                        .userType(UserType.ROLE_BUYER)
             .build();
 
         int result = userRepository.createUser(user);
@@ -55,5 +60,12 @@ public class UserService {
 
     public User findByUserSn(int userSn) {
         return userRepository.findByUserSn(userSn);
+    }
+
+    @Override
+    public User loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Optional<User> user = Optional.ofNullable(userRepository.findByName(userName));
+
+        return user.orElseThrow(() -> new UsernameNotFoundException(userName));
     }
 }

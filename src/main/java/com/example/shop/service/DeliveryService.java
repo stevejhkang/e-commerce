@@ -11,6 +11,6 @@ public class DeliveryService {
     DeliveryRepository deliveryRepository;
 
     public Delivery findDeliveryByUserSn(int userSn) {
-        return deliveryRepository.findByUserSn(userSn);
+        return deliveryRepository.findDeliveryByUserSn(userSn);
     }
 }

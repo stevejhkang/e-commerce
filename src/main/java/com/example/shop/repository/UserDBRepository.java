@@ -10,11 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDBRepository implements UserRepository {
+
     @Autowired
     private UserDao userDao;
-
-//    @Autowired
-//    private OrderDao orderDao;
 
     public int createUser(User user){
         return userDao.createUser(UserDto.of(user));
@@ -30,22 +28,22 @@ public class UserDBRepository implements UserRepository {
         return toUser(userDao.findUserByUserSn(userSn));
     }
 
-//    public User findUser(String id ) {
-//         UserDto userDto = userDao.find(id);
-//         OrderDto orderDto = orderDao.find(userDto.getUserId());
-//         return toUser(userDto, orderDto);
-//    }
-//
-//    private User toUser(UserDto userDto, OrderDto orderDto) {
-//        return new User(userDto.get)
-//    }
+    @Override
+    public User findByUserId(String userId) {
+        return toUser(userDao.findUserByUserId(userId));
+    }
+
+    @Override
+    public User findByName(String name) {
+        return toUser(userDao.findUserByName(name));
+    }
 
     public User toUser(UserDto dto){
         return User.builder()
                    .userSn(dto.getUserSn())
                    .userId(dto.getUserId())
                    .password(dto.getPassword())
-                   .userName(dto.getUserName())
+                   .name(dto.getName())
                    .phoneNumber(dto.getPhoneNumber())
                    .deliveryList(dto.getDeliveryList())
                    .orderList(dto.getOrderList())

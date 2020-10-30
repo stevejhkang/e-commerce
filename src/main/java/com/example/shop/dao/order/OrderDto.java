@@ -32,7 +32,7 @@ public class OrderDto {
     public static ModelMapper modelMapper = new ModelMapper();
 
     public static OrderDto of(Order order) {
-//        return modelMapper.map(order, OrderDto.class);
+
         OrderDto orderDto = new OrderDto();
 
         orderDto.setOrderSn(order.getOrderSn());

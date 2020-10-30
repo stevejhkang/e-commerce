@@ -2,129 +2,148 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.shop.ItemMapper">
-    <insert id="insert" parameterType="ItemDto">
-        insert into shop.items(item_name, price,delivery_option, display_option, stock, manufacturer, description, img_src)
-        values (#{itemName}, #{price}, #{deliveryOption}, #{displayOption}, #{stock}, #{manufacturer}, #{description}, #{imgSrc})
+
+    <insert id="createItem" parameterType="ItemDto">
+        INSERT INTO shop.items
+        (
+            item_name
+            , price
+            , delivery_option
+            , display_option
+            , stock
+            , manufacturer
+            , description
+            , img_src
+        )
+        VALUES
+        (
+            #{itemName}
+            , #{price}
+            , #{deliveryOption}
+            , #{displayOption}
+            , #{stock}
+            , #{manufacturer}
+            , #{description}
+            , #{imgSrc}
+        )
     </insert>
 
-    <select id="selectCount" parameterType="PagingSearchAndSort" resultType = "integer">
-        select count(*)
-        from shop.items
+    <select id="findTotalCount" parameterType="PagingSearchAndSort" resultType = "integer">
+        SELECT count(*)
+        FROM shop.items
         <where>
             <if test="searchText !=null and searchText != '' ">
                 <choose>
                     <when test="'itemName'.equals(searchType)">
-                        item_name like concat('%',#{searchText},'%');
+                        item_name LIKE concat('%',#{searchText},'%');
                     </when>
                     <when test="'manufacturer'.equals(searchType)">
-                        manufacturer like concat('%',#{searchText},'%');
+                        manufacturer LIKE concat('%',#{searchText},'%');
                     </when>
                 </choose>
             </if>
         </where>
-
     </select>
 
-    <select id="selectAll" parameterType="PagingSearchAndSort" resultType="ItemDto">
-        select
+    <select id="findAllItems" parameterType="PagingSearchAndSort" resultType="ItemDto">
+        SELECT
             R.RNUM
             , R.*
-        from
+        FROM
         (
-            select
+            SELECT
                 T.*
                 , @ROWNUM := @ROWNUM +1 AS RNUM
-            from
+            FROM
                 (
-                    select *
-                    from shop.items
+                    SELECT *
+                    FROM shop.items
                     <if test="searchText !=null and searchText != ''">
                         <where>
                             <choose>
                                 <when test="'itemName'.equals(searchType)">
-                                    item_name like concat('%',#{searchText},'%')
+                                    item_name LIKE concat('%',#{searchText},'%')
                                 </when>
                                 <when test="'manufacturer'.equals(searchType)">
-                                    manufacturer like concat('%',#{searchText},'%')
+                                    manufacturer LIKE concat('%',#{searchText},'%')
                                 </when>
                             </choose>
                         </where>
                     </if>
 
                 ) T
-                , (select @ROWNUM :=0 ) A
-            order by
+                , (SELECT @ROWNUM :=0 ) A
+            ORDER BY
             <choose>
-                <when test="orderBy eq 'RegisterDate'">T.item_sn desc</when>
+                <when test="orderBy eq 'RegisterDate'">T.item_sn DESC</when>
                 <when test="orderBy eq 'AlphabetASC'">T.item_name</when>
-                <when test="orderBy eq 'AlphabetDESC'">T.item_name desc</when>
+                <when test="orderBy eq 'AlphabetDESC'">T.item_name DESC</when>
                 <when test="orderBy eq 'PriceASC'">T.price</when>
-                <when test="orderBy eq 'PriceDESC'">T.price desc</when>
-                <otherwise>T.item_sn desc</otherwise>
+                <when test="orderBy eq 'PriceDESC'">T.price DESC</when>
+                <otherwise>T.item_sn DESC</otherwise>
             </choose>
         ) R
-
-        where
-            R.RNUM between ${((pageIndex-1) * pageCount) + 1} and ${((pageIndex-1) * pageCount) + pageCount }
+        WHERE
+            R.RNUM BETWEEN ${((pageIndex-1) * pageCount) + 1} AND ${((pageIndex-1) * pageCount) + pageCount }
     </select>
 
-    <select id="selectAllDisplayedItems" parameterType="PagingSearchAndSort" resultType="ItemDto">
-        select
+    <select id="findAllDisplayedItems" parameterType="PagingSearchAndSort" resultType="ItemDto">
+        SELECT
         R.RNUM
         , R.*
-        from
+        FROM
         (
-        select
-        T.*
-        , @ROWNUM := @ROWNUM +1 AS RNUM
-        from
-        (
-        select *
-        from shop.items
-        where
-            display_option = 'DISPLAY'
-        <if test="searchText !=null and searchText != ''">
-           and
-                <choose>
-                    <when test="'itemName'.equals(searchType)">
-                        item_name like concat('%',#{searchText},'%')
-                    </when>
-                    <when test="'manufacturer'.equals(searchType)">
-                        manufacturer like concat('%',#{searchText},'%')
-                    </when>
-                </choose>
-        </if>
-        ) T
-        , (select @ROWNUM :=0 ) A
-        order by
-        <choose>
-            <when test="orderBy eq 'RegisterDate'">T.item_sn desc</when>
-            <when test="orderBy eq 'AlphabetASC'">T.item_name</when>
-            <when test="orderBy eq 'AlphabetDESC'">T.item_name desc</when>
-            <when test="orderBy eq 'PriceASC'">T.price</when>
-            <when test="orderBy eq 'PriceDESC'">T.price desc</when>
-            <otherwise>T.item_sn desc</otherwise>
-        </choose>
+            SELECT
+            T.*
+            , @ROWNUM := @ROWNUM +1 AS RNUM
+            FROM
+            (
+                SELECT *
+                FROM shop.items
+                WHERE
+                    display_option = 'DISPLAY'
+                <if test="searchText !=null and searchText != ''">
+                AND
+                    <choose>
+                        <when test="'itemName'.equals(searchType)">
+                            item_name LIKE concat('%',#{searchText},'%')
+                        </when>
+                        <when test="'manufacturer'.equals(searchType)">
+                            manufacturer LIKE concat('%',#{searchText},'%')
+                        </when>
+                    </choose>
+                </if>
+            ) T
+            , (SELECT @ROWNUM :=0 ) A
+            ORDER BY
+            <choose>
+                <when test="orderBy eq 'RegisterDate'">T.item_sn DESC</when>
+                <when test="orderBy eq 'AlphabetASC'">T.item_name</when>
+                <when test="orderBy eq 'AlphabetDESC'">T.item_name DESC</when>
+                <when test="orderBy eq 'PriceASC'">T.price</when>
+                <when test="orderBy eq 'PriceDESC'">T.price DESC</when>
+                <otherwise>T.item_sn DESC</otherwise>
+            </choose>
         ) R
-
-        where
-        R.RNUM between ${((pageIndex-1) * pageCount) + 1} and ${((pageIndex-1) * pageCount) + pageCount }
+        WHERE
+            R.RNUM BETWEEN ${((pageIndex-1) * pageCount) + 1} AND ${((pageIndex-1) * pageCount) + pageCount }
     </select>
 
-    <select id="selectItem" parameterType="integer" resultType="ItemDto">
-        select
+    <select id="findItemByItemSn" parameterType="integer" resultType="ItemDto">
+        SELECT
             *
-        from
+        FROM
             shop.items
-        where
+        WHERE
             item_sn = #{itemSn}
     </select>
 
     <update id="updateItem" parameterType="ItemDto">
-        update
+        UPDATE
             shop.items
-        set
+        SET
             item_name = #{itemName}
             , price = #{price}
             , delivery_option = #{deliveryOption}
@@ -133,33 +152,26 @@
             , manufacturer = #{manufacturer}
             , description = #{description}
             , img_src = #{imgSrc}
-        where
+        WHERE
             item_sn = #{itemSn}
     </update>
 
     <update id="updateStocks" parameterType="java.util.List">
        <foreach collection="list" item="ItemDto" open="" close="" separator=";" >
-           update
-            shop.items
-           set
-            stock = #{ItemDto.stock}
-           where
-            item_sn = #{ItemDto.itemSn}
+           UPDATE
+                shop.items
+           SET
+                stock = #{ItemDto.stock}
+           WHERE
+                item_sn = #{ItemDto.itemSn}
        </foreach>
     </update>
 
     <delete id="deleteItem" parameterType="integer">
-        delete from
+        DELETE FROM
             shop.items
-        where
+        WHERE
             item_sn = #{id}
     </delete>
 
-    <select id="findOrderByOrderSn" parameterType="integer">
-        select
-            *
-        from shop.orders
-        where
-            order_sn = #{orderSn}
-    </select>
 </mapper>

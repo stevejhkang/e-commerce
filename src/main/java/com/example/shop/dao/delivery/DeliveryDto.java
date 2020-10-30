@@ -12,6 +12,7 @@ public class DeliveryDto {
     private String receiverName;
     private String address;
     private String phoneNumber1;
+
     private int UserSn;
     private String userId;
     private String password;
@@ -34,10 +35,11 @@ public class DeliveryDto {
         deliveryDto.setReceiverName(delivery.getReceiverName());
         deliveryDto.setAddress(delivery.getAddress());
         deliveryDto.setPhoneNumber1(delivery.getPhoneNumber1());
+
         deliveryDto.setUserSn(user.getUserSn());
-        deliveryDto.setUserId(user.getUserName());
+        deliveryDto.setUserId(user.getUserId());
         deliveryDto.setPassword(user.getPassword());
-        deliveryDto.setUserName(user.getUserName());
+        deliveryDto.setUserName(user.getName());
         deliveryDto.setPhoneNumber(user.getPhoneNumber());
         deliveryDto.setUserType(user.getUserType().name());
 

@@ -14,7 +14,7 @@ public class UserDto {
     private int userSn;
     private String userId;
     private String password;
-    private String userName;
+    private String name;
     private String phoneNumber;
     private List<Order> orderList;
     private List<Delivery> deliveryList;

@@ -23,4 +23,12 @@ public class UserDao {
     public UserDto findUserByUserSn(int userSn) {
         return sqlSession.selectOne(NAMESPACE+"findUserByUserSn",userSn);
     }
+
+    public UserDto findUserByUserId(String userId) {
+        return sqlSession.selectOne(NAMESPACE+"findUserByUserId",userId);
+    }
+
+    public UserDto findUserByName(String name) {
+        return sqlSession.selectOne(NAMESPACE+"findUserByName",name);
+    }
 }

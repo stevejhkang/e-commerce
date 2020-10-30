@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/item")
 public class ItemRestController {
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @PostMapping("/createItem")
     public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid createItemRq createItemRq,
@@ -63,8 +63,8 @@ public class ItemRestController {
     @GetMapping("/deleteItem")
     public ResponseEntity deleteItem(@RequestParam("itemNo") int itemNo){
         String result = itemService.deleteItem(itemNo);
-
         String newURL = "/admin/item/list?page=1";
+
         return ResponseEntityUtil.redirectResponse(newURL);
     }
 }

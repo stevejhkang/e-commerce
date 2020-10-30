@@ -19,14 +19,14 @@ import javax.servlet.http.HttpSession;
 public class UserRestController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping("/createUser")
     public ResponseEntity createUser(@ModelAttribute createUserRq rq){
         ResponseEntity<String> entity = null;
 
         String result = userService.createUser(rq);
-        if(result.equals("suceess")){
+        if(result.equals("success")){
             entity= ResponseEntityUtil.successResponse();
         }
         else {
@@ -44,7 +44,7 @@ public class UserRestController {
         HttpSession session = (HttpSession) request.getSession();
         session.setAttribute("islogined",true);
 
-        String url = "/store?page=1";
+        String url = "/store?pageIndex=1";
         entity=ResponseEntityUtil.redirectResponse(url);
 
         return entity;
@@ -57,7 +57,7 @@ public class UserRestController {
         HttpSession session = (HttpSession) request.getSession();
         session.invalidate();
 
-        String url = "/store";
+        String url = "/store?pageIndex=1";
         entity = ResponseEntityUtil.redirectResponse(url);
 
         return entity;

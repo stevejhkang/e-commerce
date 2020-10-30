@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class MainViewController {
-    static final int NUMBER_OF_ITEMS = 9;
+    static final int NUMBER_OF_ITEMS_IN_MAIN_PAGE = 9;
 
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @GetMapping("/")
     public String hello(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
-        return "hello";
+        return "main";
     }
 
     @GetMapping("/store")
@@ -29,7 +29,7 @@ public class MainViewController {
 //    @RequestParam("searchText" String searchText, Model model) {
     public String store(@ModelAttribute("paging") PagingSearchAndSort pagingSearchAndSortParams, Model model) {
 
-        pagingSearchAndSortParams.setPageCount(NUMBER_OF_ITEMS);
+        pagingSearchAndSortParams.setPageCount(NUMBER_OF_ITEMS_IN_MAIN_PAGE);
 
         model.addAttribute("itemlist",itemService.findAllDisplayedItems(pagingSearchAndSortParams));
         model.addAttribute("paging", pagingSearchAndSortParams);

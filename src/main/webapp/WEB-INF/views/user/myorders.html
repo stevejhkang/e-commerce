@@ -68,8 +68,8 @@
                                     <td th:text="${order.orderStatus}"></td>
 
                                     <td>
-                                        <a class="btn btn-outline-success " th:value="${order.orderSn}" th:onclick="|javascript:orderconfirm('${order.orderSn}')|">구매결정</a>
                                         <a class="btn btn-outline-danger" th:href="'/order/orderdetail/'+${order.orderSn}">조회</a>
+                                        <a class="btn btn-outline-success " th:if ="${order.orderStatus.name().equals('DELIVERED')}" th:value="${order.orderSn}" th:onclick="|javascript:orderconfirm('${order.orderSn}')|">구매결정</a>
                                     </td>
                                 </tr>
 

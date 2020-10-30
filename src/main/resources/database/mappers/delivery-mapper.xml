@@ -2,33 +2,35 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.shop.DeliveryMapper">
 
-    <select id="selectByUserSn" parameterType="integer" resultType="DeliveryDto">
-        select
+    <select id="findDeliveryByUserSn" parameterType="integer" resultType="DeliveryDto">
+        SELECT
             u.*
             , d.delivery_sn
             , d.receiver_name
             , d.address
             , d.phone_number1
-        from
+        FROM
             shop.deliveries d
-            inner join shop.users u
-            on d.user_sn = u.user_sn
-        where
-            u.user_sn = #{userSn}
+                INNER JOIN
+            (
+                SELECT *
+                FROM shop.users
+                WHERE
+                    user_sn = #{userSn}
+            ) u
+                ON d.user_sn = u.user_sn
     </select>
 
-
-    <select id="selectBySn" parameterType="integer" resultType="DeliveryDto">
-        select
+    <select id="findDeliveryByDeliverySn" parameterType="integer" resultType="DeliveryDto">
+        SELECT
            *
-        from
+        FROM
             shop.deliveries
-        where
+        WHERE
             delivery_sn = #{deliverySn}
     </select>
-
-
 
 </mapper>

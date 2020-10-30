@@ -1,7 +1,6 @@
 package com.example.shop.service;
 
 import com.example.shop.controller.order.rqrs.createOrderOneItemRq;
-import com.example.shop.dao.order.OrderDto;
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.delivery.DeliveryRepository;
@@ -18,8 +17,6 @@ import com.example.shop.util.Paging;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.google.protobuf.Message;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +29,7 @@ import java.util.Set;
 @Slf4j
 public class OrderService {
     private static final int SUCCESS=1;
+    private static final int FAILURE=0;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -56,14 +54,18 @@ public class OrderService {
                            .orderDate(now)
                            .orderStatus(OrderStatus.PAYMENT_COMPLETED)
                            .price((BigDecimal.valueOf(item.getPrice())).multiply(BigDecimal.valueOf(quantity)))
+                           .userSn(user.getUserSn())
+                           .deliverySn(delivery.getDeliverySn())
+                           .delivery(delivery)
                            .build();
 
         int result = orderRepository.createOrder(order);
-        if (result == SUCCESS) {
-            return "success";
+
+        if (result == FAILURE) {
+            return "failure";
         }
         else {
-            return "failure";
+            return "success";
         }
     }
 
@@ -75,7 +77,7 @@ public class OrderService {
     }
 
     public Delivery getDeliveryInfoByUserSn(int userSn){
-        return deliveryRepository.findByUserSn(userSn);
+        return deliveryRepository.findDeliveryByUserSn(userSn);
     }
 
     public String createOrder(User user, Set<Map.Entry<Item,Integer>> items, BigDecimal totalPrice) {
@@ -115,10 +117,6 @@ public class OrderService {
     public int findTotalCountByUserSn(int userSn){
         return orderRepository.findTotalCountByUserSn(userSn);
     }
-
-//    public List<OrderItem> findOrderItemList(int orderSn) {
-//        order
-//    }
 
     public Order findOrderByOrderSn(int orderSn){
        return orderRepository.findOrderByOrderSn(orderSn);

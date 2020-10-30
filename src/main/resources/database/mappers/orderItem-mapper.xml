@@ -4,19 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.shop.OrderItemMapper">
     <insert id="createOrderItems" parameterType="hashmap">
-        insert into
-            shop.orderitems(item_sn, order_sn, quantity)
-        values
+        INSERT INTO
+            shop.orderitems
+            (
+                item_sn
+                , order_sn
+                , quantity
+            )
+        VALUES
             <foreach item="item" collection="items" index="key" open="(" separator="),(" close=")">
-                #{key},#{orderSn}, #{item}
+                #{key}
+                , #{orderSn}
+                , #{item}
             </foreach>
     </insert>
+
     <select id="findOrderItemListByOrderSn" parameterType="integer" resultType="OrderItemDto">
-        select
+        SELECT
             *
-        from
+        FROM
             shop.orderitems
-        where
+        WHERE
             order_sn = #{orderSn}
     </select>
 </mapper>

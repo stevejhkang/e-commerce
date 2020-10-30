@@ -11,12 +11,12 @@ public class DeliveryDao {
 
     protected static final String NAMESPACE = "com.example.shop.DeliveryMapper.";
 
-    public DeliveryDto findByUserSn(int userSn) {
-        return sqlSession.selectOne(NAMESPACE+"selectByUserSn",userSn);
+    public DeliveryDto findDeliveryByUserSn(int userSn) {
+        return sqlSession.selectOne(NAMESPACE+"findDeliveryByUserSn",userSn);
     }
 
-    public DeliveryDto findBySn(int deliverySn) {
-        return sqlSession.selectOne(NAMESPACE+"selectBySn",deliverySn);
+    public DeliveryDto findDeliveryByDeliverySn(int deliverySn) {
+        return sqlSession.selectOne(NAMESPACE+"findDeliveryByDeliverySn",deliverySn);
     }
 
 }

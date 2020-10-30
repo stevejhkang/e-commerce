@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("item")
 public class ItemViewController {
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @GetMapping("/detail")
     public String product(@RequestParam("itemNo") int itemNo, Model model) {
         model.addAttribute("item", itemService.findItem(itemNo));
-        return "/item/detail";
+        return "/item/itemdetail";
     }
 }

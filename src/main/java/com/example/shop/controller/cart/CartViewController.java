@@ -58,7 +58,6 @@ public class CartViewController {
 
         cartService.checkOut(userSession.getUser());
 
-
         return cartItems();
     }
 }

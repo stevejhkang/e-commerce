@@ -2,9 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.shop.OrderMapper">
+
     <insert id="createOrder" parameterType="OrderDto" useGeneratedKeys="true" keyProperty="orderSn">
-        insert into
+        INSERT INTO
             shop.orders
             (
                 order_id
@@ -14,7 +16,7 @@
                 , delivery_sn
                 , user_sn
             )
-        values
+        VALUES
             (
                 #{orderId}
                 , now()
@@ -26,66 +28,27 @@
     </insert>
 
     <select id="createSequenceNumber">
-        select
+        SELECT
             order_seq.NEXTVAL
-        from
+        FROM
             shop.order_seq;
     </select>
 
     <select id="findTotalCount" parameterType="integer" resultType = "integer">
-        select count(*)
-        from shop.orders
-        where user_sn=#{userSn}
+        SELECT
+            count(*)
+        FROM
+            shop.orders
+        WHERE
+            user_sn=#{userSn}
     </select>
 
-<!--    <select id="findAllOrdersByUserSn" parameterType="hashMap" resultType="OrderDto">-->
-<!--        select-->
-<!--            S.*, S.RNUM-->
-<!--        from-->
-<!--        (-->
-<!--            select-->
-<!--                R.* , @ROWNUM := @ROWNUM - 1 AS RNUM-->
-<!--            from-->
-<!--            (-->
-<!--                select-->
-<!--                    o.*-->
-<!--                    , d.receiver_name-->
-<!--                    , d.address-->
-<!--                    , d.phone_number1-->
-
-<!--                    , u.user_id-->
-<!--                    , u.password-->
-<!--                    , u.user_name-->
-<!--                    , u.phone_number-->
-<!--                    , u.user_type-->
-
-<!--                from-->
-<!--                    shop.orders o-->
-<!--                    inner join-->
-<!--                    shop.deliveries d-->
-<!--                    on o.delivery_sn = d.delivery_sn-->
-<!--                    inner join-->
-<!--                    (select * from shop.users where user_sn=#{userSn}) u-->
-<!--                    on o.user_sn = u.user_sn-->
-
-
-<!--            ) R,-->
-<!--            (-->
-<!--                select-->
-<!--                    @ROWNUM := (select count(*) from orders where user_sn=#{userSn})-->
-<!--            ) A-->
-
-<!--            order by order_sn desc-->
-<!--        ) S-->
-<!--        where-->
-<!--            S.RNUM between ${((paging.pageIndex-1) * paging.pageCount) } and ${((paging.pageIndex-1) * paging.pageCount) + paging.pageCount+1 }-->
-<!--    </select>-->
     <select id="findAllOrdersByUserSn" parameterType="hashMap" resultType="OrderDto">
-            select
+            SELECT
                 R.*
-            from
+            FROM
             (
-                select
+                SELECT
                     o.*
                     , d.receiver_name
                     , d.address
@@ -93,36 +56,46 @@
 
                     , u.user_id
                     , u.password
-                    , u.user_name
+                    , u.name
                     , u.phone_number
                     , u.user_type
 
-                from
+                FROM
                     shop.orders o
-                    inner join
+                        INNER JOIN
                     shop.deliveries d
-                    on o.delivery_sn = d.delivery_sn
-                    inner join
-                    (select * from shop.users where user_sn=#{userSn}) u
-                    on o.user_sn = u.user_sn
+                        ON o.delivery_sn = d.delivery_sn
+
+                        INNER JOIN
+                    (
+                        SELECT
+                            *
+                        FROM
+                            shop.users
+                        WHERE
+                            user_sn=#{userSn}
+                    ) u
+                        ON o.user_sn = u.user_sn
             ) R
-            order by order_sn desc
-            limit #{paging.pageCount} offset ${((paging.pageIndex-1) * paging.pageCount)}
+            ORDER BY order_sn DESC
+            limit #{paging.pageCount} OFFSET ${((paging.pageIndex-1) * paging.pageCount)}
     </select>
 
     <select id="findOrderByOrderSn" parameterType="integer" resultType="OrderDto">
-        select
+        SELECT
             *
-        from shop.orders
-        where
+        FROM
+            shop.orders
+        WHERE
             order_sn=#{orderSn}
     </select>
 
     <update id = "confirmOrder" parameterType="integer">
-        update shop.orders
-        set
+        UPDATE shop.orders
+        SET
             order_status = 'ORDER_CONFIRMED'
-        where
+        WHERE
             order_sn=#{orderSn}
     </update>
+
 </mapper>

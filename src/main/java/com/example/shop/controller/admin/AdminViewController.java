@@ -12,15 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("admin")
-public class adminViewController {
-    private static final int NUMBER_OF_ITEMS_IN_A_PAGE = 20;
+public class AdminViewController {
+
+    private static final int NUMBER_OF_ITEMS_IN_A_ADMIN_PAGE = 20;
+
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @GetMapping("/item/register")
     public String registerItem(Model model) {
-        createItemRq rq = new createItemRq();
-        model.addAttribute("createItemRq", rq);
+//        createItemRq rq = new createItemRq();
+//        model.addAttribute("createItemRq", rq);
 
         return "admin/item/register";
     }
@@ -29,7 +31,7 @@ public class adminViewController {
     public String findItemList(@RequestParam("page") int page, Model model) {
         PagingSearchAndSort pagingSearchAndSort = new PagingSearchAndSort();
         pagingSearchAndSort.setPageIndex(page);
-        pagingSearchAndSort.setPageCount(NUMBER_OF_ITEMS_IN_A_PAGE);
+        pagingSearchAndSort.setPageCount(NUMBER_OF_ITEMS_IN_A_ADMIN_PAGE);
 
         model.addAttribute("paging", pagingSearchAndSort);
         model.addAttribute("itemlist", itemService.findAllItems(pagingSearchAndSort));
@@ -40,12 +42,14 @@ public class adminViewController {
     @GetMapping("/item/detail")
     public String findItem(@RequestParam("itemNo") int itemNo, Model model) {
         model.addAttribute("item", itemService.findItem(itemNo));
+
         return "admin/item/detail";
     }
 
     @GetMapping("/item/edit")
     public String updateItem(@RequestParam("itemNo") int itemNo, Model model) {
         model.addAttribute("item", itemService.findItem(itemNo));
+
         return "admin/item/edit";
     }
 }

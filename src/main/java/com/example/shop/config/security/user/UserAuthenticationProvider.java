@@ -15,12 +15,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private static UserService userService;
+    private UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,7 +29,11 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         String id = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
-        User user = findUser(id,password);
+        User user = findUser(id);
+
+        if(matchPassword(password,user.getPassword())){
+            throw new BadCredentialsException(id);
+        }
 
         List<GrantedAuthority> grantedAuthorityList = Lists.newArrayList();
 
@@ -41,15 +46,17 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         return token;
     }
 
-    private User findUser(String id, String password) {
+    public User findUser(String id) {
         if(userService==null) {
             userService= ApplicationContextUtil.getBean(UserService.class);
         }
-        User user = userService.findUserByIdAndPassword(id, password);
-        if(user==null){
-            throw new BadCredentialsException("아이디 혹은 비밀번호가 틀렸습니다.");
-        }
-        return user;
+        Optional<User> user = Optional.ofNullable(userService.loadUserByUsername(id));
+
+        return user.orElseThrow(() -> new BadCredentialsException(id));
+    }
+
+    public boolean matchPassword(String inputPassword, String password){
+        return inputPassword.equals(password);
     }
 
 

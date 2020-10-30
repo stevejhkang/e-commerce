@@ -1,12 +1,10 @@
 package com.example.shop.repository;
 
 import com.example.shop.dao.item.ItemDao;
-import com.example.shop.dao.order.OrderDto;
 import com.example.shop.dao.orderitem.OrderItemDao;
 import com.example.shop.dao.item.ItemDto;
 import com.example.shop.dao.orderitem.OrderItemDto;
 import com.example.shop.domain.item.Item;
-import com.example.shop.domain.order.Order;
 import com.example.shop.domain.orderItem.OrderItem;
 import com.example.shop.domain.orderItem.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class OrderItemDBRepository implements OrderItemRepository {
+
     @Autowired
     OrderItemDao orderItemDao;
 
@@ -47,7 +46,7 @@ public class OrderItemDBRepository implements OrderItemRepository {
 
 
     private OrderItem toOrderItem(OrderItemDto dto) {
-        ItemDto itemDto = itemDao.findItem(dto.getItemSn());
+        ItemDto itemDto = itemDao.findItemByItemSn(dto.getItemSn());
         return OrderItem.builder()
                         .orderitemSn(dto.getOrderitemSn())
                         .itemSn(dto.getItemSn())

@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class ItemDBRepository implements ItemRepository {
+
     @Autowired
     private ItemDao itemDao;
 
@@ -41,7 +42,7 @@ public class ItemDBRepository implements ItemRepository {
 
     @Override
     public Item findItem(int itemSn) {
-        return toItem(itemDao.findItem(itemSn));
+        return toItem(itemDao.findItemByItemSn(itemSn));
     }
 
     @Override

@@ -5,13 +5,10 @@ import com.example.shop.dao.delivery.DeliveryDto;
 import com.example.shop.dao.order.OrderDao;
 import com.example.shop.dao.order.OrderDto;
 import com.example.shop.dao.user.UserDao;
-import com.example.shop.dao.user.UserDto;
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.order.Order;
 import com.example.shop.domain.order.OrderRepository;
 import com.example.shop.domain.order.OrderStatus;
-import com.example.shop.domain.user.User;
-import com.example.shop.domain.user.UserType;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class OrderDBRepository implements OrderRepository {
+
     @Autowired
     private OrderDao orderDao;
     @Autowired
@@ -62,7 +60,7 @@ public class OrderDBRepository implements OrderRepository {
 
     private Order toOrder(OrderDto orderDto){
 
-        DeliveryDto deliveryDto = deliveryDao.findByUserSn(orderDto.getUserSn());
+        DeliveryDto deliveryDto = deliveryDao.findDeliveryByUserSn(orderDto.getUserSn());
         Delivery delivery = Delivery.builder()
                                     .receiverName(deliveryDto.getReceiverName())
                                     .phoneNumber1(deliveryDto.getPhoneNumber1())
