@@ -4,8 +4,8 @@ import com.example.shop.domain.item.Item;
 import com.example.shop.domain.user.User;
 import com.example.shop.service.CartService;
 import com.example.shop.service.ItemService;
-import com.example.shop.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,10 +53,11 @@ public class CartViewController {
     }
 
     @GetMapping("/checkout")
-    public ModelAndView checkout(HttpServletRequest request) {
-        UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
+    public ModelAndView checkout(Authentication authentication) {
 
-        cartService.checkOut(userSession.getUser());
+        User user = (User) authentication.getDetails();
+
+        cartService.checkOut(user);
 
         return cartItems();
     }

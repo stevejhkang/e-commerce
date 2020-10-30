@@ -3,7 +3,6 @@ package com.example.shop.controller.order;
 import com.example.shop.controller.order.rqrs.createOrderOneItemRq;
 import com.example.shop.domain.user.User;
 import com.example.shop.service.OrderService;
-import com.example.shop.session.UserSession;
 import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

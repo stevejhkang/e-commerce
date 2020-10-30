@@ -6,8 +6,12 @@ import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.delivery.DeliveryRepository;
 import com.example.shop.domain.user.User;
 import com.example.shop.domain.user.UserType;
+import com.example.shop.exception.RestError;
+import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class DeliveryDBRepository implements DeliveryRepository {
@@ -21,7 +25,9 @@ public class DeliveryDBRepository implements DeliveryRepository {
         return toDelivery(dto);
     }
 
-    public static Delivery toDelivery(DeliveryDto deliveryDto) {
+    public static Delivery toDelivery(DeliveryDto dto) {
+        DeliveryDto deliveryDto = Optional.ofNullable(dto).orElseThrow(() -> new RestException(RestError.NO_SUCH_DELIVERY));
+
         User user = User.builder()
             .userSn(deliveryDto.getUserSn())
             .userId(deliveryDto.getUserId())

@@ -6,11 +6,17 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public enum RestError {
-    USER_NOT_EQUAL_CONFIRM_PASSWORD("01-00"),
-    CANNOT_FIND_ACCOUNT("01-01"),
+    NO_SUCH_USER("01-00"),
+    USER_NOT_EQUAL_CONFIRM_PASSWORD("01-01"),
 
     NO_SUCH_ITEM("02-00"),
-    NOT_ENOUGH_ITEM("02-01");
+    NOT_ENOUGH_ITEM("02-01"),
+
+    NO_SUCH_DELIVERY("03-00"),
+
+    NO_SUCH_ORDER("04-00");
+
+
 
     private final HttpStatus status;
     private final String code;

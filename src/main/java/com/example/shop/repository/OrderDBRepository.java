@@ -9,11 +9,14 @@ import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.order.Order;
 import com.example.shop.domain.order.OrderRepository;
 import com.example.shop.domain.order.OrderStatus;
+import com.example.shop.exception.RestError;
+import com.example.shop.exception.RestException;
 import com.example.shop.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -58,9 +61,13 @@ public class OrderDBRepository implements OrderRepository {
         return orderDao.confirmOrder(orderSn);
     }
 
-    private Order toOrder(OrderDto orderDto){
+    private Order toOrder(OrderDto dto){
 
-        DeliveryDto deliveryDto = deliveryDao.findDeliveryByUserSn(orderDto.getUserSn());
+        OrderDto orderDto = Optional.ofNullable(dto).orElseThrow(() -> new RestException(RestError.NO_SUCH_ORDER));
+
+        DeliveryDto deliveryDto = Optional.ofNullable(deliveryDao.findDeliveryByUserSn(orderDto.getUserSn()))
+                                          .orElseThrow(() -> new RestException(RestError.NO_SUCH_DELIVERY));
+
         Delivery delivery = Delivery.builder()
                                     .receiverName(deliveryDto.getReceiverName())
                                     .phoneNumber1(deliveryDto.getPhoneNumber1())

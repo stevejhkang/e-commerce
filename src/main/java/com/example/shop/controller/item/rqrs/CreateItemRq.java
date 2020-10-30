@@ -15,7 +15,7 @@ import javax.validation.constraints.Positive;
 
 @Data
 @ToString
-public class createItemRq {
+public class CreateItemRq {
     @NotBlank
     private String itemName;
     @Positive
@@ -28,7 +28,7 @@ public class createItemRq {
     @Positive
     private int stock;
 
-    public createItemRq() {
+    public CreateItemRq() {
         this.deliveryOption = DeliveryOption.ShippingCostNotInclude;
         this.displayOption = DisplayOption.NONE;
     }

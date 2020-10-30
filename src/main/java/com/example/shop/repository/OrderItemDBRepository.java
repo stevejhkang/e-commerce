@@ -7,13 +7,12 @@ import com.example.shop.dao.orderitem.OrderItemDto;
 import com.example.shop.domain.item.Item;
 import com.example.shop.domain.orderItem.OrderItem;
 import com.example.shop.domain.orderItem.OrderItemRepository;
+import com.example.shop.exception.RestError;
+import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -46,7 +45,10 @@ public class OrderItemDBRepository implements OrderItemRepository {
 
 
     private OrderItem toOrderItem(OrderItemDto dto) {
-        ItemDto itemDto = itemDao.findItemByItemSn(dto.getItemSn());
+
+        ItemDto itemDto = Optional.ofNullable(itemDao.findItemByItemSn(dto.getItemSn()))
+                                  .orElseThrow(() -> new RestException(RestError.NO_SUCH_ITEM));
+
         return OrderItem.builder()
                         .orderitemSn(dto.getOrderitemSn())
                         .itemSn(dto.getItemSn())

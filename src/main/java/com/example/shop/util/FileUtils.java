@@ -7,7 +7,7 @@ import java.io.IOException;
 
 
 public class FileUtils {
-    private static final String filePath = "C:\\ShopMVC\\src\\main\\webapp\\resources\\img\\";
+    private static final String filePath = "C:\\Users\\kjh0120\\Desktop\\e-commerce\\src\\main\\webapp\\resources\\img\\";
 
     public static String uploadToLocalStorage(MultipartFile multipartFile) {
 

@@ -6,11 +6,14 @@ import com.example.shop.domain.item.Item;
 import com.example.shop.domain.item.ItemRepository;
 import com.example.shop.domain.item.DeliveryOption;
 import com.example.shop.domain.item.DisplayOption;
+import com.example.shop.exception.RestError;
+import com.example.shop.exception.RestException;
 import com.example.shop.util.PagingSearchAndSort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -61,7 +64,9 @@ public class ItemDBRepository implements ItemRepository {
         return itemDao.updateStocks(itemDtos);
     }
 
-    private Item toItem(ItemDto dto) {
+    private Item toItem(ItemDto itemDto) {
+        ItemDto dto  = Optional.ofNullable(itemDto).orElseThrow(() -> new RestException(RestError.NO_SUCH_ITEM));
+
         return Item.builder()
                    .itemSn(dto.getItemSn())
                    .itemName(dto.getItemName())

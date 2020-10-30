@@ -31,34 +31,34 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
         User user = findUser(id);
 
-        if(matchPassword(password,user.getPassword())){
-            throw new BadCredentialsException(id);
-        }
+        checkMatchPassword(id, password,user.getPassword());
 
         List<GrantedAuthority> grantedAuthorityList = Lists.newArrayList();
 
         String auth = user.getUserType().name();
-
         grantedAuthorityList.add(new SimpleGrantedAuthority(auth));
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(id, password, grantedAuthorityList);
+
         token.setDetails(user);
 
         return token;
     }
 
     public User findUser(String id) {
-        if(userService==null) {
-            userService= ApplicationContextUtil.getBean(UserService.class);
-        }
+//        if(userService==null) {
+//            userService= ApplicationContextUtil.getBean(UserService.class);
+//        }
         Optional<User> user = Optional.ofNullable(userService.loadUserByUsername(id));
 
         return user.orElseThrow(() -> new BadCredentialsException(id));
     }
 
-    public boolean matchPassword(String inputPassword, String password){
+    public boolean checkMatchPassword(String id, String inputPassword, String password){
+        if(!inputPassword.equals(password)) {
+            throw new BadCredentialsException(id);
+        }
         return inputPassword.equals(password);
     }
-
 
     @Override
     public boolean supports(Class<?> authentication) {

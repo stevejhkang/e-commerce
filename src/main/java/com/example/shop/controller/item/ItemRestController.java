@@ -1,6 +1,6 @@
 package com.example.shop.controller.item;
 
-import com.example.shop.controller.item.rqrs.createItemRq;
+import com.example.shop.controller.item.rqrs.CreateItemRq;
 import com.example.shop.domain.item.Item;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.PagingSearchAndSort;
@@ -25,7 +25,7 @@ public class ItemRestController {
     private ItemService itemService;
 
     @PostMapping("/createItem")
-    public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid createItemRq createItemRq,
+    public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid CreateItemRq createItemRq,
                            @RequestParam("mainImg") MultipartFile mainImg){
 
         int result = itemService.createItem(createItemRq,mainImg);
@@ -46,6 +46,7 @@ public class ItemRestController {
 
     @PostMapping("/itemlist")
     public ResponseEntity findAll(@RequestBody PagingSearchAndSort pagingSearchAndSort, Model model) {
+
         Map<String, Object> map = new HashMap<>();
         map.put("itemlist",itemService.findAllItems(pagingSearchAndSort));
         map.put("paging", pagingSearchAndSort);

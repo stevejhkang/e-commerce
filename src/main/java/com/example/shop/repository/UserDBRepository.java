@@ -5,8 +5,12 @@ import com.example.shop.dao.user.UserDto;
 import com.example.shop.domain.user.User;
 import com.example.shop.domain.user.UserRepository;
 import com.example.shop.domain.user.UserType;
+import com.example.shop.exception.RestError;
+import com.example.shop.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class UserDBRepository implements UserRepository {
@@ -38,7 +42,10 @@ public class UserDBRepository implements UserRepository {
         return toUser(userDao.findUserByName(name));
     }
 
-    public User toUser(UserDto dto){
+    public User toUser(UserDto userDto){
+
+        UserDto dto = Optional.ofNullable(userDto).orElseThrow(() -> new RestException(RestError.NO_SUCH_USER));
+
         return User.builder()
                    .userSn(dto.getUserSn())
                    .userId(dto.getUserId())

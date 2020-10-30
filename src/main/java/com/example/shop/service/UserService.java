@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
 
         Optional<User> result = Optional.ofNullable(userRepository.findUserByIdAndPassword(user));
 
-        return result.orElseThrow(() -> new RestException(RestError.CANNOT_FIND_ACCOUNT));
+        return result.orElseThrow(() -> new RestException(RestError.NO_SUCH_USER));
     }
 
     public User findByUserSn(int userSn) {

@@ -1,6 +1,6 @@
 package com.example.shop.controller.admin;
 
-import com.example.shop.controller.item.rqrs.createItemRq;
+import com.example.shop.controller.item.rqrs.CreateItemRq;
 import com.example.shop.service.ItemService;
 import com.example.shop.util.PagingSearchAndSort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("admin")
 public class AdminViewController {
-
     private static final int NUMBER_OF_ITEMS_IN_A_ADMIN_PAGE = 20;
 
     @Autowired
@@ -21,8 +20,8 @@ public class AdminViewController {
 
     @GetMapping("/item/register")
     public String registerItem(Model model) {
-//        createItemRq rq = new createItemRq();
-//        model.addAttribute("createItemRq", rq);
+        CreateItemRq rq = new CreateItemRq();
+        model.addAttribute("createItemRq", rq);
 
         return "admin/item/register";
     }

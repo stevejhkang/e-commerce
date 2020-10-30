@@ -8,6 +8,7 @@ import com.example.shop.util.ResponseEntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class UserRestController {
         ResponseEntity<String> entity = null;
 
         String result = userService.createUser(rq);
+
         if(result.equals("success")){
             entity= ResponseEntityUtil.successResponse();
         }
@@ -35,27 +37,17 @@ public class UserRestController {
         return entity;
     }
 
-    @PostMapping("/loginAction")
-    public ResponseEntity login(HttpServletRequest request, @ModelAttribute loginUserRq rq){
-        ResponseEntity<String> entity = null;
-
-        User user = userService.findUserByIdAndPassword(rq.getUserId(), rq.getPassword());
-
-        HttpSession session = (HttpSession) request.getSession();
-        session.setAttribute("islogined",true);
-
-        String url = "/store?pageIndex=1";
-        entity=ResponseEntityUtil.redirectResponse(url);
-
-        return entity;
-    }
-
     @GetMapping("/logoutAction")
-    public ResponseEntity logout(HttpServletRequest request, @ModelAttribute loginUserRq rq) {
+    public ResponseEntity logout(HttpServletRequest request, @ModelAttribute loginUserRq rq, Authentication authentication) {
         ResponseEntity<String> entity= null;
 
-        HttpSession session = (HttpSession) request.getSession();
-        session.invalidate();
+        if(authentication!=null && authentication.getDetails()!=null) {
+            try{
+                request.getSession().invalidate();
+            } catch(Exception e) {
+                log.error(e.getMessage());
+            }
+        }
 
         String url = "/store?pageIndex=1";
         entity = ResponseEntityUtil.redirectResponse(url);

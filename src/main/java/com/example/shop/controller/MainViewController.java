@@ -25,10 +25,7 @@ public class MainViewController {
     }
 
     @GetMapping("/store")
-//    public String store()@RequestParam("page") int page, @RequestParam("searchType") String searchType,
-//    @RequestParam("searchText" String searchText, Model model) {
     public String store(@ModelAttribute("paging") PagingSearchAndSort pagingSearchAndSortParams, Model model) {
-
         pagingSearchAndSortParams.setPageCount(NUMBER_OF_ITEMS_IN_MAIN_PAGE);
 
         model.addAttribute("itemlist",itemService.findAllDisplayedItems(pagingSearchAndSortParams));

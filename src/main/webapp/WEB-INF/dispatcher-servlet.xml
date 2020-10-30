@@ -8,8 +8,6 @@
     <context:component-scan base-package="com.example.shop"></context:component-scan> <!-- Component 패키지 지정 -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-
-
     <!-- MultipartResolver 설정 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="100000000"/>
@@ -62,10 +60,5 @@
     </mvc:resources>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**">
     </mvc:resources>
-
-
-
-
-
 
 </beans>

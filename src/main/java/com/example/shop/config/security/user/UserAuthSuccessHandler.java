@@ -1,6 +1,7 @@
 package com.example.shop.config.security.user;
 
 import com.example.shop.domain.user.User;
+//import com.example.shop.session.UserSession;
 import com.example.shop.session.UserSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -24,16 +25,16 @@ public class UserAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
         User user = (User) authentication.getDetails();
 
-        UserSession userSession = new UserSession();
-        userSession.setUser(user);
-        userSession.setLogin(true);
-
-        HttpSession session = httpServletRequest.getSession();
-        session.setMaxInactiveInterval(3600);
-        session.setAttribute("userSession",userSession);
+//        UserSession userSession = new UserSession();
+//        userSession.setUser(user);
+//        userSession.setLogin(true);
+//
+//        HttpSession session = httpServletRequest.getSession();
+//        session.setMaxInactiveInterval(3600);
+//        session.setAttribute("userSession",userSession);
 
         this.handle(httpServletRequest,httpServletResponse, user.getUserType().name());
         this.clearAuthenticationAttributes(httpServletRequest);
@@ -48,6 +49,6 @@ public class UserAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
         else if(userType.equals("ROLE_SELLER")) {
             targetUrl= "/admin/item/list?page=1";
         }
-        redirectStrategy.sendRedirect(request,response,targetUrl);
+        redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 }
