@@ -13,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,9 +46,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     }
 
     public User findUser(String id) {
-//        if(userService==null) {
-//            userService= ApplicationContextUtil.getBean(UserService.class);
-//        }
         Optional<User> user = Optional.ofNullable(userService.loadUserByUsername(id));
 
         return user.orElseThrow(() -> new BadCredentialsException(id));
@@ -63,5 +61,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+    @ExceptionHandler
+    public String userExceptionHandler(Exception e) {
+        return "user exception";
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml","file:src/main/webapp/WEB-INF/dispatcher-servlet.xml",
+@ContextConfiguration(locations = {"file:../../../../../../main/resources/spring/application-context.xml","file:src/main/webapp/WEB-INF/dispatcher-servlet.xml",
     "file:src/main/resources/database/mybatis-config.xml"})
 @WebAppConfiguration
 public class UserServiceTest extends TestCase {

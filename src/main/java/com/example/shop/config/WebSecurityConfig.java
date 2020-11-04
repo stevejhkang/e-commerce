@@ -5,6 +5,4 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-
 }

@@ -1,10 +1,7 @@
 package com.example.shop.service;
 
-import com.example.shop.domain.item.Item;
 import com.example.shop.domain.delivery.DeliveryRepository;
-import com.example.shop.domain.user.User;
 import junit.framework.TestCase;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,7 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/applicationContext.xml","file:src/main/webapp/WEB-INF/dispatcher-servlet.xml",
+@ContextConfiguration(locations = {"file:../../../../../../main/resources/spring/application-context.xml","file:src/main/webapp/WEB-INF/dispatcher-servlet.xml",
     "file:src/main/resources/database/mybatis-config.xml"})
 @WebAppConfiguration
 public class OrderServiceTest extends TestCase {

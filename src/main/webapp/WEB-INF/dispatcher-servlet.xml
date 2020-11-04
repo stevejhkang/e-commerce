@@ -4,11 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mvc:annotation-driven></mvc:annotation-driven> <!-- Annotation 활성화 -->
-    <context:component-scan base-package="com.example.shop"></context:component-scan> <!-- Component 패키지 지정 -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <!-- MultipartResolver 설정 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="100000000"/>
         <property name="maxInMemorySize" value="100000000"/>
@@ -36,26 +33,10 @@
         <property name="characterEncoding" value="UTF-8"/>
         <property name="templateEngine" ref="templateEngine"/>
     </bean>
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/shop?useSSL=false&amp;serverTimezone=UTC&amp;allowMultiQueries=true"/>
-        <!-- logging -->
-        <!--        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>-->
-        <!--        <property name="url" value="jdbc:log4jdbc:mariadb://localhost:3306/shop?useSSL=false&amp;serverTimezone=UTC"/>-->
-        <property name="username" value="developer"/>
-        <property name="password" value="1234"/>
-    </bean>
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:/database/mappers/*-mapper.xml"/>
-        <property name="configLocation" value="classpath:/database/mybatis-config.xml"/>
-    </bean>
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>
-    <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
 
+    <bean id="swagger2Config" class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
     </bean>
+
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html">
     </mvc:resources>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**">
