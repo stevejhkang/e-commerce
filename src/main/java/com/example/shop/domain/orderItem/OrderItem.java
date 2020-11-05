@@ -13,9 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderItem {
     private int orderitemSn;
-//    private Order order;
-
-//    private Item item;
     private int itemSn;
     private String itemName;
     private int price;

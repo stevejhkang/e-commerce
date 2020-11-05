@@ -29,20 +29,20 @@ public class DeliveryDBRepository implements DeliveryRepository {
         DeliveryDto deliveryDto = Optional.ofNullable(dto).orElseThrow(() -> new RestException(RestError.NO_SUCH_DELIVERY));
 
         User user = User.builder()
-            .userSn(deliveryDto.getUserSn())
-            .userId(deliveryDto.getUserId())
-            .name(deliveryDto.getUserName())
-            .userType(UserType.valueOf(deliveryDto.getUserType()))
-            .password(deliveryDto.getPassword())
-            .phoneNumber(deliveryDto.getPhoneNumber())
-            .build();
+                        .userSn(deliveryDto.getUserSn())
+                        .userId(deliveryDto.getUserId())
+                        .name(deliveryDto.getUserName())
+                        .userType(UserType.valueOf(deliveryDto.getUserType()))
+                        .password(deliveryDto.getPassword())
+                        .phoneNumber(deliveryDto.getPhoneNumber())
+                        .build();
 
         return Delivery.builder()
-            .deliverySn(deliveryDto.getDeliverySn())
-            .address(deliveryDto.getAddress())
-            .phoneNumber1(deliveryDto.getPhoneNumber1())
-            .receiverName(deliveryDto.getReceiverName())
-            .user(user)
-            .build();
+                       .deliverySn(deliveryDto.getDeliverySn())
+                       .address(deliveryDto.getAddress())
+                       .phoneNumber1(deliveryDto.getPhoneNumber1())
+                       .receiverName(deliveryDto.getReceiverName())
+                       .user(user)
+                       .build();
     }
 }

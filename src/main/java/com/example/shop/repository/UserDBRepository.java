@@ -7,7 +7,9 @@ import com.example.shop.domain.user.UserRepository;
 import com.example.shop.domain.user.UserType;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
+import com.example.shop.exception.UserAuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -18,7 +20,7 @@ public class UserDBRepository implements UserRepository {
     @Autowired
     private UserDao userDao;
 
-    public int createUser(User user){
+    public int createUser(User user) {
         return userDao.createUser(UserDto.of(user));
     }
 
@@ -34,6 +36,7 @@ public class UserDBRepository implements UserRepository {
 
     @Override
     public User findByUserId(String userId) {
+
         return toUser(userDao.findUserByUserId(userId));
     }
 
@@ -42,9 +45,9 @@ public class UserDBRepository implements UserRepository {
         return toUser(userDao.findUserByName(name));
     }
 
-    public User toUser(UserDto userDto){
+    public User toUser(UserDto userDto) {
 
-        UserDto dto = Optional.ofNullable(userDto).orElseThrow(() -> new RestException(RestError.NO_SUCH_USER));
+        UserDto dto = Optional.ofNullable(userDto).orElseThrow(() -> new UserAuthenticationException(RestError.NO_SUCH_USER));
 
         return User.builder()
                    .userSn(dto.getUserSn())

@@ -1,8 +1,6 @@
 package com.example.shop.dao.order;
 
-import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.order.Order;
-import com.example.shop.domain.user.User;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 

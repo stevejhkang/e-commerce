@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,16 +31,16 @@ public class OrderViewController {
     private DeliveryService deliveryService;
 
     @GetMapping("/myorders")
-    public String myOrders(@RequestParam("page") int page, Model model, Authentication authentication) {
+    public String readAllOrders(@RequestParam("page") int page, Model model, Authentication authentication) {
 
         User user = (User) authentication.getDetails();
-        log.info("logined user: "+user.getUsername());
+        log.info("logined user: " + user.getUsername());
 
         Paging paging = new Paging();
         paging.setPageIndex(page);
         paging.setPageCount(NUMBER_OF_ITEMS);
 
-        List<Order> orders =  orderService.findAllOrdersByUserSn(user.getUserSn(),paging);
+        List<Order> orders = orderService.readAllOrdersByUserSn(user.getUserSn(), paging);
 
         model.addAttribute("paging", paging);
         model.addAttribute("orders", orders);
@@ -46,7 +49,7 @@ public class OrderViewController {
     }
 
     @GetMapping("/ordersuccess")
-    public String orderSuccess(){
+    public String orderSuccess() {
         return "order/ordersuccess";
     }
 
@@ -54,38 +57,39 @@ public class OrderViewController {
     public String checkout() { return "order/checkout";}
 
     @GetMapping("/orderdetail/{orderId}")
-    public String orderdetail(@PathVariable("orderId") int orderId, Model model){
+    public String orderdetail(@PathVariable("orderId") int orderId, Model model) {
 
-        Order order = orderService.findOrderByOrderSn(orderId);
+        Order order = orderService.readOrderByOrderSn(orderId);
 
         int userSn = order.getUserSn();
 
 
-        Delivery delivery = deliveryService.findDeliveryByUserSn(userSn);
+        Delivery delivery = deliveryService.readDeliveryByUserSn(userSn);
 
         BigDecimal price = order.getPrice();
 
-        List<OrderItem> orderItemList = orderService.findOrderItemListByOrderSn(orderId);
+        List<OrderItem> orderItemList = orderService.readOrderItemListByOrderSn(orderId);
 
-        model.addAttribute("order",order);
-        model.addAttribute("delivery",delivery);
-        model.addAttribute("price",price);
-        model.addAttribute("orderItemList",orderItemList);
+        model.addAttribute("order", order);
+        model.addAttribute("delivery", delivery);
+        model.addAttribute("price", price);
+        model.addAttribute("orderItemList", orderItemList);
 
         return "order/orderdetail";
     }
+
     @GetMapping("/orderconfirm")
-    public String orderconfirm(@RequestParam("orderId") String orderId, Model model, Authentication authentication){
+    public String confirmOrder(@RequestParam("orderId") String orderId, Model model, Authentication authentication) {
         int result = orderService.confirmOrder(Integer.parseInt(orderId));
 
         User user = (User) authentication.getDetails();
-        log.info("logined user: "+user.getUsername());
+        log.info("logined user: " + user.getUsername());
 
         Paging paging = new Paging();
         paging.setPageIndex(1);
         paging.setPageCount(NUMBER_OF_ITEMS);
 
-        List<Order> orders =  orderService.findAllOrdersByUserSn(user.getUserSn(),paging);
+        List<Order> orders = orderService.readAllOrdersByUserSn(user.getUserSn(), paging);
 
         model.addAttribute("paging", paging);
         model.addAttribute("orders", orders);

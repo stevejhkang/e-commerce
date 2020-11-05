@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RestException extends RuntimeException {
+public class UserAuthenticationException extends AuthenticationException {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private final RestError error;
@@ -19,22 +19,17 @@ public class RestException extends RuntimeException {
     @JsonIgnore
     private final transient Object[] messageParams;
 
-    public RestException(RestError error) {
+    public UserAuthenticationException(RestError error) {
         this(error, "");
     }
 
-    public RestException(RestError error, String exceptionMessage) {
+    public UserAuthenticationException(RestError error, String exceptionMessage) {
         super(exceptionMessage);
         this.error = error;
         this.messageParams = new Object[]{};
     }
 
-    public RestException(RestError error, List<Object> messageParams) {
-        this.error = error;
-        this.messageParams = messageParams.toArray();
-    }
-
-    public RestException(RestError error, String exceptionMessage, List<Object> messageParams) {
+    public UserAuthenticationException(RestError error, String exceptionMessage, List<Object> messageParams) {
         super(exceptionMessage);
         this.error = error;
         this.messageParams = messageParams.toArray();
@@ -52,7 +47,7 @@ public class RestException extends RuntimeException {
         return contexts;
     }
 
-    public RestException addContext(String key, Object value) {
+    public UserAuthenticationException addContext(String key, Object value) {
         contexts.put(key, value);
         return this;
     }

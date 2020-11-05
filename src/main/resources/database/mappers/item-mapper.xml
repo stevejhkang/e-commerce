@@ -151,7 +151,9 @@
             , stock = #{stock}
             , manufacturer = #{manufacturer}
             , description = #{description}
-            , img_src = #{imgSrc}
+            <if test="imgSrc != null">
+                , img_src = #{imgSrc}
+            </if>
         WHERE
             item_sn = #{itemSn}
     </update>

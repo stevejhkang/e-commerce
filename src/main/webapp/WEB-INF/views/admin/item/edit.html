@@ -175,9 +175,8 @@
                                 <h2>재고 / 옵션</h2>
                             </div>
 
-                            <div class="form-row">
-
-                                <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-row">
                                     <label class="text-dark font-weight-medium"></label>
                                     <div class="form-group row">
                                         <div class="col-6 col-md-3 text-left" style="max-width: 200px">
@@ -204,7 +203,6 @@
                                         <input type="number" class="form-control" name="stock" th:placeholder="*{stock}" th:field="*{stock}">
                                     </div>
                                 </div>
-
                             </div>
 
 
@@ -319,7 +317,7 @@
                                         </div>
                                         <div class="col-12 col-md-9 row">
                                             <div class="form-group" style="margin-left: 20px;">
-                                                <input type="file" name="mainImg" class="form-control-file" id="mainImg" >
+                                                <input type="file" name="mainImg" class="form-control-file" id="mainImg" th:text="*{imgSrc}" th:value="*{imgSrc}" >
 
                                             </div>
                                         </div>

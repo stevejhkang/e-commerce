@@ -17,14 +17,14 @@ public enum RestError {
     NO_SUCH_ORDER("04-00");
 
 
-
     private final HttpStatus status;
     private final String code;
 
-    RestError(String code){
+    RestError(String code) {
         this.status = HttpStatus.INTERNAL_SERVER_ERROR;
-        this.code=code;
+        this.code = code;
     }
+
     public static void validate() {
         int uniqueErrorCodesSize = Arrays.stream(RestError.values())
                                          .map(RestError::getCode)
@@ -35,6 +35,8 @@ public enum RestError {
             throw new RuntimeException("RestError code값은 중복될 수 없습니다!");
         }
     }
-   public String getCode(){return code;}
-   public HttpStatus getStatus() { return status;}
+
+    public String getCode() {return code;}
+
+    public HttpStatus getStatus() { return status;}
 }

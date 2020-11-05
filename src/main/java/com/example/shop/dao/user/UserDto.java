@@ -31,7 +31,7 @@ public class UserDto {
                 return anEnum.name();
             }
         });
-        return modelMapper.map(user,UserDto.class);
+        return modelMapper.map(user, UserDto.class);
     }
 
 }

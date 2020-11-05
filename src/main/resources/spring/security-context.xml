@@ -41,7 +41,7 @@
           authentication-manager-ref="userAuthenticationManager">
         <csrf disabled="true"/>
 
-        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SELLE')"/>
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SELLER')"/>
 
         <form-login
                 login-page="/user/login"
@@ -57,8 +57,8 @@
                 invalidate-session="true"
 
         />
-        <session-management invalid-session-url="/login">
-            <concurrency-control max-sessions="1" expired-url="/login"/>
+        <session-management invalid-session-url="/user/login">
+            <concurrency-control max-sessions="1" expired-url="/user/login"/>
         </session-management>
 
     </http>
@@ -80,7 +80,7 @@
             password-parameter="password"
             login-processing-url="/user/loginAction"
             authentication-success-handler-ref="userAuthSuccessHandler"
-                    authentication-failure-url="/user/login"
+                    authentication-failure-handler-ref="userAuthFailureHandler"
         />
 
         <logout

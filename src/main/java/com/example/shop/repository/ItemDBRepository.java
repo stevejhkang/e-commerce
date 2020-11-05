@@ -2,10 +2,10 @@ package com.example.shop.repository;
 
 import com.example.shop.dao.item.ItemDao;
 import com.example.shop.dao.item.ItemDto;
-import com.example.shop.domain.item.Item;
-import com.example.shop.domain.item.ItemRepository;
 import com.example.shop.domain.item.DeliveryOption;
 import com.example.shop.domain.item.DisplayOption;
+import com.example.shop.domain.item.Item;
+import com.example.shop.domain.item.ItemRepository;
 import com.example.shop.exception.RestError;
 import com.example.shop.exception.RestException;
 import com.example.shop.util.PagingSearchAndSort;
@@ -60,12 +60,12 @@ public class ItemDBRepository implements ItemRepository {
 
     @Override
     public int updateStocks(List<Item> items) {
-        List<ItemDto> itemDtos =items.stream().map(ItemDto::of).collect(Collectors.toList());
+        List<ItemDto> itemDtos = items.stream().map(ItemDto::of).collect(Collectors.toList());
         return itemDao.updateStocks(itemDtos);
     }
 
     private Item toItem(ItemDto itemDto) {
-        ItemDto dto  = Optional.ofNullable(itemDto).orElseThrow(() -> new RestException(RestError.NO_SUCH_ITEM));
+        ItemDto dto = Optional.ofNullable(itemDto).orElseThrow(() -> new RestException(RestError.NO_SUCH_ITEM));
 
         return Item.builder()
                    .itemSn(dto.getItemSn())

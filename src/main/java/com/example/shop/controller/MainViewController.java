@@ -19,7 +19,7 @@ public class MainViewController {
     private ItemService itemService;
 
     @GetMapping("/")
-    public String hello(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+    public String hello(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
         return "main";
     }
@@ -28,7 +28,7 @@ public class MainViewController {
     public String store(@ModelAttribute("paging") PagingSearchAndSort pagingSearchAndSortParams, Model model) {
         pagingSearchAndSortParams.setPageCount(NUMBER_OF_ITEMS_IN_MAIN_PAGE);
 
-        model.addAttribute("itemlist",itemService.findAllDisplayedItems(pagingSearchAndSortParams));
+        model.addAttribute("itemlist", itemService.readAllDisplayedItems(pagingSearchAndSortParams));
         model.addAttribute("paging", pagingSearchAndSortParams);
 
         return "store";

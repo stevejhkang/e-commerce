@@ -17,12 +17,12 @@ import java.util.Optional;
 @Service
 public class ItemService {
 
-    private static final int SUCCESS=1;
+    private static final int SUCCESS = 1;
 
     @Autowired
     private ItemRepository itemRepository;
 
-    public int createItem(CreateItemRq rq, MultipartFile mainImg){
+    public String createItem(CreateItemRq rq, MultipartFile mainImg) {
 
         String filePath = FileUtils.uploadToLocalStorage(mainImg);
 
@@ -40,56 +40,57 @@ public class ItemService {
 
         int result = itemRepository.createItem(item);
 
-        return result;
+        return returnMessage(result);
     }
 
-    public int findTotalCount(PagingSearchAndSort pagingSearchAndSort){
+    public int readTotalCount(PagingSearchAndSort pagingSearchAndSort) {
         return itemRepository.findTotalCount(pagingSearchAndSort);
     }
 
-    public List<Item> findAllItems(PagingSearchAndSort pagingSearchAndSort){
-        int totalCount = findTotalCount(pagingSearchAndSort);
+    public List<Item> readAllItems(PagingSearchAndSort pagingSearchAndSort) {
+        int totalCount = readTotalCount(pagingSearchAndSort);
         pagingSearchAndSort.setTotalCount(totalCount);
         return itemRepository.findAllItems(pagingSearchAndSort);
     }
 
-    public List<Item> findAllDisplayedItems(PagingSearchAndSort pagingSearchAndSort){
-        int totalCount = findTotalCount(pagingSearchAndSort);
+    public List<Item> readAllDisplayedItems(PagingSearchAndSort pagingSearchAndSort) {
+        int totalCount = readTotalCount(pagingSearchAndSort);
         pagingSearchAndSort.setTotalCount(totalCount);
         return itemRepository.findAllDisplayedItems(pagingSearchAndSort);
     }
 
-    public Item findItem(int itemSn) {
-        Optional<Item> item =  Optional.ofNullable(itemRepository.findItem(itemSn));
+    public Item readItem(int itemSn) {
+        Optional<Item> item = Optional.ofNullable(itemRepository.findItem(itemSn));
 
         return item.orElseThrow(() -> new RestException(RestError.NO_SUCH_ITEM));
     }
 
     public String updateItem(Item item, MultipartFile mainImg) {
-        String fileName= itemRepository.findItem(item.getItemSn()).getImgSrc();
+        String fileName = itemRepository.findItem(item.getItemSn()).getImgSrc();
         FileUtils.deleteFile(fileName);
 
         String filePath = FileUtils.uploadToLocalStorage(mainImg);
         item.setImgSrc(filePath);
 
         int result = itemRepository.updateItem(item);
-        if(result==SUCCESS){
-            return "success";
-        }
-        else{
-            return "failure";
-        }
+
+        return returnMessage(result);
     }
 
     public String deleteItem(int itemSn) {
-        String fileName= itemRepository.findItem(itemSn).getImgSrc();
+        String fileName = itemRepository.findItem(itemSn).getImgSrc();
         FileUtils.deleteFile(fileName);
 
-        int result= itemRepository.deleteItem(itemSn);
-        if(result==SUCCESS){
+        int result = itemRepository.deleteItem(itemSn);
+
+        return returnMessage(result);
+    }
+
+    public String returnMessage(int result) {
+        if (result == SUCCESS) {
             return "success";
         }
-        else{
+        else {
             return "failure";
         }
     }

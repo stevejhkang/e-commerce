@@ -2,9 +2,7 @@ package com.example.shop.dao.delivery;
 
 import com.example.shop.domain.delivery.Delivery;
 import com.example.shop.domain.user.User;
-import com.example.shop.domain.user.UserType;
 import lombok.Data;
-import org.modelmapper.ModelMapper;
 
 @Data
 public class DeliveryDto {
@@ -29,6 +27,7 @@ public class DeliveryDto {
 
         return deliveryDto;
     }
+
     public static DeliveryDto of(Delivery delivery, User user) {
         DeliveryDto deliveryDto = new DeliveryDto();
         deliveryDto.setDeliverySn(delivery.getDeliverySn());

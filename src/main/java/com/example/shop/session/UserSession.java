@@ -9,6 +9,4 @@ import java.io.Serializable;
 public class UserSession implements Serializable {
     public User user = null;
     public boolean login = false;
-
-
 }

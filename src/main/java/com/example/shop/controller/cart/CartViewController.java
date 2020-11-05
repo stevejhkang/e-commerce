@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-
 import java.util.Map;
 
 @Controller
@@ -24,32 +22,35 @@ public class CartViewController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/cart")
-    public ModelAndView cartItems(){
+    @GetMapping("/mycart")
+    public ModelAndView readCartItems() {
+
         ModelAndView modelAndView = new ModelAndView("/cart/cart");
 
         Map<Item, Integer> items = cartService.getItems();
-        modelAndView.addObject("items",items);
+        modelAndView.addObject("items", items);
         modelAndView.addObject("num_of_items", items.size());
-        modelAndView.addObject("total_price",cartService.getTotal());
+        modelAndView.addObject("total_price", cartService.getTotal());
 
         return modelAndView;
     }
 
-    @GetMapping("/addItem/{itemSn}/{one}")
-    public ModelAndView addItem(@PathVariable("itemSn") int itemSn){
-        Item item = itemService.findItem(itemSn);
-        cartService.addItem(item,1);
+    @GetMapping("/addItem/{itemSn}")
+    public ModelAndView addItemToCart(@PathVariable("itemSn") int itemSn) {
 
-        return cartItems();
+        Item item = itemService.readItem(itemSn);
+        cartService.addItemToCart(item, 1);
+
+        return readCartItems();
     }
 
     @GetMapping("/deleteItem/{itemSn}")
-    public ModelAndView deleteItem(@PathVariable("itemSn") int itemSn){
-        Item item = itemService.findItem(itemSn);
-        cartService.deleteItem(item);
+    public ModelAndView deleteItemToCart(@PathVariable("itemSn") int itemSn) {
 
-        return cartItems();
+        Item item = itemService.readItem(itemSn);
+        cartService.deleteItemInCart(item);
+
+        return readCartItems();
     }
 
     @GetMapping("/checkout")
@@ -59,6 +60,6 @@ public class CartViewController {
 
         cartService.checkOut(user);
 
-        return cartItems();
+        return readCartItems();
     }
 }

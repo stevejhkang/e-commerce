@@ -282,7 +282,7 @@
                         <div class="col-sm-4" th:each="item: ${partition}">
                             <div class="product" >
                                 <div class="product-img">
-                                    <a th:href="@{'/item/detail?itemNo=' + ${item.itemSn}}">
+                                    <a th:href="@{'/item/detail/' + ${item.itemSn}}">
                                         <img alt="" class="img-fluid" th:src="@{'/resources/img/'+${item.imgSrc}}">
                                     </a>
                                     <div class="product-label">
@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a th:href="@{'/item/detail?itemNo=' + ${item.itemSn}}"
+                                    <h3 class="product-name"><a th:href="@{'/item/detail/' + ${item.itemSn}}"
                                                                 th:text="${item.itemName}">product name goes here</a></h3>
                                     <h4 class="product-price" th:text="${#numbers.formatCurrency(item.price)}">$980.00 </h4>
                                     <!--										<del class="product-old-price" >$990.00</del>-->

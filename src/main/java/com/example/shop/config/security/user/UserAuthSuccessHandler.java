@@ -1,8 +1,6 @@
 package com.example.shop.config.security.user;
 
 import com.example.shop.domain.user.User;
-//import com.example.shop.session.UserSession;
-import com.example.shop.session.UserSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -10,10 +8,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Component
@@ -43,11 +39,11 @@ public class UserAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
     protected void handle(HttpServletRequest request, HttpServletResponse response, String userType) throws IOException {
         String targetUrl="";
         if(userType.equals("ROLE_BUYER")) {
-            targetUrl= "/store?pageIndex=1";
+            targetUrl= "/store?page=1";
 
         }
         else if(userType.equals("ROLE_SELLER")) {
-            targetUrl= "/admin/item/list?page=1";
+            targetUrl= "/admin/item/list/1";
         }
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }

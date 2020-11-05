@@ -27,6 +27,7 @@
                         <h1>Login</h1>
                     </div>
                 </div>
+                <div class="mb-6" th:if="msg != null" th:text="${msg}"></div>
                 <form action="#" th:action="@{/user/loginAction}" method="post" name="login">
                     <div class="form-group">
                         <label for="userId">Email address</label>

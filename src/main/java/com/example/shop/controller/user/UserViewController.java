@@ -1,8 +1,10 @@
 package com.example.shop.controller.user;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("user")
@@ -14,6 +16,7 @@ public class UserViewController {
 
     @GetMapping("/login")
     public String login() {
+
         return "user/login";
     }
 }

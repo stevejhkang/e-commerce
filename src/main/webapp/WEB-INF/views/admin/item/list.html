@@ -91,7 +91,7 @@
                             <tbody>
                             <tr th:each="item: ${itemlist}">
                                 <td th:text="${item.itemSn}" th:value="${item.itemSn}"></td>
-                                <td><a th:href="@{'/admin/item/detail?itemNo=' + ${item.itemSn}}" th:text="${item.itemName}"></a></td>
+                                <td><a th:href="@{'/admin/item/detail/' + ${item.itemSn}}" th:text="${item.itemName}"></a></td>
                                 <td th:text="${item.price}"></td>
                                 <td th:text="${item.deliveryOption}"></td>
                                 <td th:text="${item.stock}"></td>
@@ -108,7 +108,7 @@
                                         <ul aria-labelledby="dropdown-recent-order1"
                                             class="dropdown-menu dropdown-menu-right" style="top: 28px;">
                                             <li class="dropdown-item">
-                                                <a th:href="'/admin/item/edit?itemNo='+${item.itemSn}">수정</a>
+                                                <a th:href="'/admin/item/edit/'+${item.itemSn}">수정</a>
                                             </li>
                                             <li class="dropdown-item">
                                                 <a th:href="'/item/deleteItem?itemNo='+${item.itemSn}">제거</a>
@@ -124,19 +124,19 @@
                         <div class="text-center display: d-inline align-middle" align="center">
                             <nav aria-label="Page navigation example"  class="text-center align-middle">
                                 <li class="pagination page-item" style="float: left;" th:value="${paging.prevPageIndex}"><a
-                                        class="page-link" id="prevPage" name="pageNo" th:href="@{'?page=' + ${paging.prevPageIndex}}">Previous</a>
+                                        class="page-link" id="prevPage" name="pageNo" th:href="@{'' + ${paging.prevPageIndex}}">Previous</a>
                                 </li>
                                 <ul class="pagination" style="float: left;"
                                     th:each="page : ${#numbers.sequence(paging.startPageIndex,paging.endPageIndex)} ">
-                                    <li class="page-item" th:value="${page}"><a name="pageNo" th:href="@{'?page=' + ${page}}"
+                                    <li class="page-item" th:value="${page}"><a name="pageNo" th:href="@{'' + ${page}}"
                                                                                 th:text="${page}"></a></li>
                                 </ul>
                                 <li class="pagination page-item" style="float: left;" th:value="${paging.nextPageIndex}"><a
                                         class="page-link" id="nextPage" name="pageNo"
-                                        th:href="@{'?page=' + ${paging.nextPageIndex}}">Next</a></li>
+                                        th:href="@{'' + ${paging.nextPageIndex}}">Next</a></li>
 
                             </nav>
-                            <button class="btn btn-primary col-sm-1 float-right align-middle" th:onclick="location.href='/admin/item/register'" type="button">상품 등록</button>
+                            <button class="btn btn-primary col-sm-1 float-right align-middle" th:onclick="location.href ='/admin/item/register'" type="button">상품 등록</button>
                         </div>
                     </div>
 

@@ -17,7 +17,7 @@ public class FileUtils {
 
         originalFileName = multipartFile.getOriginalFilename();
         originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        storedFileName = CommonUtils.getRandomString()+originalFileExtension;
+        storedFileName = CommonUtils.getRandomString() + originalFileExtension;
 
         File file = new File(filePath + storedFileName);
         try {
@@ -30,15 +30,18 @@ public class FileUtils {
 
         return storedFileName;
     }
-    public static String deleteFile(String fileName){
-        File file = new File(filePath+fileName);
-        if(file.exists()){
-            if(file.delete()) {
+
+    public static String deleteFile(String fileName) {
+        File file = new File(filePath + fileName);
+        if (file.exists()) {
+            if (file.delete()) {
                 return "deleted";
-            } else {
+            }
+            else {
                 return "not deleted";
             }
         }
         return "";
     }
+
 }

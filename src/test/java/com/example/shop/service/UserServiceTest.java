@@ -1,6 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.controller.user.rqrs.createUserRq;
+import com.example.shop.controller.user.rqrs.CreateUserRq;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +30,7 @@ public class UserServiceTest extends TestCase {
 
     @Test
     public void createTest(){
-        createUserRq rq = new createUserRq();
+        CreateUserRq rq = new CreateUserRq();
         rq.setUserId("tes123t");
         rq.setPassword("asd123f");
         rq.setUserName("asdfa123sdf");

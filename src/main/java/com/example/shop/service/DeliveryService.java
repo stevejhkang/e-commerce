@@ -10,7 +10,7 @@ public class DeliveryService {
     @Autowired
     DeliveryRepository deliveryRepository;
 
-    public Delivery findDeliveryByUserSn(int userSn) {
+    public Delivery readDeliveryByUserSn(int userSn) {
         return deliveryRepository.findDeliveryByUserSn(userSn);
     }
 }

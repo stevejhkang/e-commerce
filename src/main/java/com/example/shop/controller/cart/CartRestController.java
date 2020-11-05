@@ -7,7 +7,6 @@ import com.example.shop.util.ResponseEntityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("cart")
@@ -18,9 +17,10 @@ public class CartRestController {
     private ItemService itemService;
 
     @GetMapping("/addItemAction/{itemSn}")
-    public ResponseEntity addItem(@PathVariable("itemSn") int itemSn, @RequestParam("qty") int qty){
-        Item item = itemService.findItem(itemSn);
-        cartService.addItem(item,qty);
+    public ResponseEntity addItemToCart(@PathVariable("itemSn") int itemSn, @RequestParam("qty") int qty) {
+
+        Item item = itemService.readItem(itemSn);
+        cartService.addItemToCart(item, qty);
 
         return ResponseEntityUtil.successResponse();
     }

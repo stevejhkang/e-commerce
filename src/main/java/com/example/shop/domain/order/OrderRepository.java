@@ -8,9 +8,14 @@ import java.util.List;
 @Repository
 public interface OrderRepository {
     public String createSequnceNumber();
+
     public int createOrder(Order order);
+
     public List<Order> findAllOrdersByUserSn(int userSn, Paging paging);
+
     public int findTotalCountByUserSn(int userSn);
+
     public Order findOrderByOrderSn(int orderSn);
+
     public int confirmOrder(int orderSn);
 }

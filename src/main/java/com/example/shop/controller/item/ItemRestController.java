@@ -24,48 +24,47 @@ public class ItemRestController {
     @Autowired
     private ItemService itemService;
 
+    private static final String FIRST_PAGE_URL = "/admin/item/list/1";
+
     @PostMapping("/createItem")
     public ResponseEntity createItem(@ModelAttribute("createItemRq") @Valid CreateItemRq createItemRq,
-                           @RequestParam("mainImg") MultipartFile mainImg){
+                                     @RequestParam("mainImg") MultipartFile mainImg) {
 
-        int result = itemService.createItem(createItemRq,mainImg);
+        String result = itemService.createItem(createItemRq, mainImg);
 
-        String newURL = "/admin/item/list?page=1";
-        return ResponseEntityUtil.redirectResponse(newURL);
+        return ResponseEntityUtil.redirectResponse(FIRST_PAGE_URL);
     }
 
     @PostMapping("/updateItem")
     public ResponseEntity updateItem(@ModelAttribute("item") Item item,
-                          @RequestParam("mainImg") MultipartFile mainImg) {
+                                     @RequestParam("mainImg") MultipartFile mainImg) {
 
         String result = itemService.updateItem(item, mainImg);
 
-        String newURL = "/admin/item/list?page=1";
-        return ResponseEntityUtil.redirectResponse(newURL);
+        return ResponseEntityUtil.redirectResponse(FIRST_PAGE_URL);
     }
 
     @PostMapping("/itemlist")
-    public ResponseEntity findAll(@RequestBody PagingSearchAndSort pagingSearchAndSort, Model model) {
+    public ResponseEntity readAllItems(@RequestBody PagingSearchAndSort pagingSearchAndSort, Model model) {
 
         Map<String, Object> map = new HashMap<>();
-        map.put("itemlist",itemService.findAllItems(pagingSearchAndSort));
+        map.put("itemlist", itemService.readAllItems(pagingSearchAndSort));
         map.put("paging", pagingSearchAndSort);
 
         return ResponseEntityUtil.successResponse(map);
     }
 
     @GetMapping("/itemTotalCount")
-    public ResponseEntity findTotalCount(Model model, PagingSearchAndSort pagingSearchAndSort){
-        model.addAttribute("totalCount", itemService.findTotalCount(pagingSearchAndSort));
+    public ResponseEntity readTotalCount(Model model, PagingSearchAndSort pagingSearchAndSort) {
+
+        model.addAttribute("totalCount", itemService.readTotalCount(pagingSearchAndSort));
         return ResponseEntityUtil.successResponse();
     }
 
-    //deleteItem
     @GetMapping("/deleteItem")
-    public ResponseEntity deleteItem(@RequestParam("itemNo") int itemNo){
+    public ResponseEntity deleteItem(@RequestParam("itemNo") int itemNo) {
         String result = itemService.deleteItem(itemNo);
-        String newURL = "/admin/item/list?page=1";
 
-        return ResponseEntityUtil.redirectResponse(newURL);
+        return ResponseEntityUtil.redirectResponse(FIRST_PAGE_URL);
     }
 }

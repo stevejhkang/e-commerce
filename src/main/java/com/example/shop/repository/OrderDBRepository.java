@@ -61,7 +61,7 @@ public class OrderDBRepository implements OrderRepository {
         return orderDao.confirmOrder(orderSn);
     }
 
-    private Order toOrder(OrderDto dto){
+    private Order toOrder(OrderDto dto) {
 
         OrderDto orderDto = Optional.ofNullable(dto).orElseThrow(() -> new RestException(RestError.NO_SUCH_ORDER));
 

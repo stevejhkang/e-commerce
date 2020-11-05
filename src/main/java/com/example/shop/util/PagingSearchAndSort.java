@@ -7,7 +7,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Optional;
 
 @Data
-public class PagingSearchAndSort extends Paging{
+public class PagingSearchAndSort extends Paging {
     private String searchType;
     private String searchText;
     private String orderBy;
@@ -18,22 +18,22 @@ public class PagingSearchAndSort extends Paging{
     public String makeQueryString(int page) {
         setPageIndex(page);
         Optional<String> searchText = Optional.ofNullable(this.getSearchText());
-        UriComponents uriComponents=null;
-        if(searchText.isPresent()) {
+        UriComponents uriComponents = null;
+        if (searchText.isPresent()) {
             uriComponents = UriComponentsBuilder.newInstance()
-                                                              .queryParam("pageIndex", page)
-                                                              .queryParam("searchType", searchType)
-                                                              .queryParam("searchText", searchText.get())
-                                                              .queryParam("orderBy", orderBy)
-                                                              .build()
-                                                              .encode();
+                                                .queryParam("pageIndex", page)
+                                                .queryParam("searchType", searchType)
+                                                .queryParam("searchText", searchText.get())
+                                                .queryParam("orderBy", orderBy)
+                                                .build()
+                                                .encode();
         }
         else {
             uriComponents = UriComponentsBuilder.newInstance()
-                                                              .queryParam("pageIndex", page)
-                                                              .queryParam("orderBy",orderBy)
-                                                              .build()
-                                                              .encode();
+                                                .queryParam("pageIndex", page)
+                                                .queryParam("orderBy", orderBy)
+                                                .build()
+                                                .encode();
         }
         return uriComponents.toUriString();
     }
