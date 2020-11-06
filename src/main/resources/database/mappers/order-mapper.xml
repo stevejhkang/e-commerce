@@ -43,43 +43,86 @@
             user_sn=#{userSn}
     </select>
 
-    <select id="findAllOrdersByUserSn" parameterType="hashMap" resultType="OrderDto">
+<!--    <select id="findAllOrdersByUserSn" parameterType="hashMap" resultType="OrderDto">-->
+<!--            SELECT-->
+<!--                R.*-->
+<!--            FROM-->
+<!--            (-->
+<!--                SELECT-->
+<!--                    o.*-->
+<!--                    , d.receiver_name-->
+<!--                    , d.address-->
+<!--                    , d.phone_number1-->
+
+<!--                    , u.user_id-->
+<!--                    , u.password-->
+<!--                    , u.name-->
+<!--                    , u.phone_number-->
+<!--                    , u.user_type-->
+
+<!--                FROM-->
+<!--                    shop.orders o-->
+<!--                        INNER JOIN-->
+<!--                    shop.deliveries d-->
+<!--                        ON o.delivery_sn = d.delivery_sn-->
+
+<!--                        INNER JOIN-->
+<!--                    (-->
+<!--                        SELECT-->
+<!--                            *-->
+<!--                        FROM-->
+<!--                            shop.users-->
+<!--                        WHERE-->
+<!--                            user_sn=#{userSn}-->
+<!--                    ) u-->
+<!--                        ON o.user_sn = u.user_sn-->
+<!--            ) R-->
+<!--            ORDER BY order_sn DESC-->
+<!--            where-->
+<!--            limit #{paging.pageCount} OFFSET ${((paging.pageIndex-1) * paging.pageCount)}-->
+<!--    </select>-->
+        <select id="findAllOrdersByUserSn" parameterType="hashMap" resultType="OrderDto">
             SELECT
-                R.*
+                S.*, S.RNUM
             FROM
             (
                 SELECT
-                    o.*
-                    , d.receiver_name
-                    , d.address
-                    , d.phone_number1
-
-                    , u.user_id
-                    , u.password
-                    , u.name
-                    , u.phone_number
-                    , u.user_type
-
+                    R.* , @ROWNUM := @ROWNUM - 1 AS RNUM
                 FROM
-                    shop.orders o
-                        INNER JOIN
-                    shop.deliveries d
-                        ON o.delivery_sn = d.delivery_sn
+                (
+                    SELECT
+                        o.*
+                        , d.receiver_name
+                        , d.address
+                        , d.phone_number1
 
+                        , u.user_id
+                        , u.password
+                        , u.name
+                        , u.phone_number
+                        , u.user_type
+
+                    FROM
+                        shop.orders o
                         INNER JOIN
-                    (
-                        SELECT
-                            *
-                        FROM
-                            shop.users
-                        WHERE
-                            user_sn=#{userSn}
-                    ) u
+                        shop.deliveries d
+                        ON o.delivery_sn = d.delivery_sn
+                        INNER JOIN
+                        (SELECT * FROM shop.users WHERE user_sn=#{userSn}) u
                         ON o.user_sn = u.user_sn
-            ) R
-            ORDER BY order_sn DESC
-            limit #{paging.pageCount} OFFSET ${((paging.pageIndex-1) * paging.pageCount)}
-    </select>
+
+
+                ) R,
+                (
+                    SELECT
+                        @ROWNUM := (SELECT COUNT(*) FROM orders WHERE user_sn=#{userSn})
+                ) A
+
+                ORDER BY order_sn DESC
+            ) S
+            WHERE
+                S.RNUM BETWEEN ${((paging.pageIndex-1) * paging.pageCount) } AND ${((paging.pageIndex-1) * paging.pageCount) + paging.pageCount+1 }
+        </select>
 
     <select id="findOrderByOrderSn" parameterType="integer" resultType="OrderDto">
         SELECT

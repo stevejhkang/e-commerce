@@ -36,7 +36,7 @@ public class OrderService {
     private OrderItemRepository orderItemRepository;
 
     public String createOrders(User user, CreateOrderOneItemRq data) {
-        Delivery delivery = getDeliveryInfoByUserSn(user.getUserSn());
+        Delivery delivery = deliveryRepository.findDeliveryByUserSn(user.getUserSn());
 
         Item item = data.getItem();
         int quantity = data.getQuantity();
@@ -70,12 +70,8 @@ public class OrderService {
         return orderId;
     }
 
-    public Delivery getDeliveryInfoByUserSn(int userSn) {
-        return deliveryRepository.findDeliveryByUserSn(userSn);
-    }
-
     public String createOrders(User user, Set<Map.Entry<Item, Integer>> items, BigDecimal totalPrice) {
-        Delivery delivery = getDeliveryInfoByUserSn(user.getUserSn());
+        Delivery delivery = deliveryRepository.findDeliveryByUserSn(user.getUserSn());
 
         LocalDateTime now = LocalDateTime.now();
 

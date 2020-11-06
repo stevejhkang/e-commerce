@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -21,7 +22,7 @@ public class UserRestController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    public ResponseEntity createUser(@ModelAttribute CreateUserRq rq) {
+    public ResponseEntity createUser(@ModelAttribute @Valid CreateUserRq rq) {
         ResponseEntity<String> entity = null;
 
         String result = userService.createUser(rq);

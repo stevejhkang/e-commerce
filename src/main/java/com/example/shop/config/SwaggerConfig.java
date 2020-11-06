@@ -33,7 +33,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     protected ApiInfo metaData() {
         return new ApiInfo(
-            "My project REST API",
+            "Electro Shopping",
             "Rest API description",
             "1.0.0",
             "Terms of service",
